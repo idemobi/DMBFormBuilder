@@ -1,0 +1,336 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:element name="root" ns1:IsDataSet="true" />
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FormBuilder_Captcha_Image_Error" xml:space="preserve">
+    <value>Captcha nIvnav tu'lu'be'.</value>
+  </data>
+  <data name="FormBuilder_Captcha_Invalid" xml:space="preserve">
+    <value>Captcha qabHa'.</value>
+  </data>
+  <data name="FormBuilder_Captcha_Required" xml:space="preserve">
+    <value>Captcha poQlu'.</value>
+  </data>
+  <data name="FormBuilder_Field_Company" xml:space="preserve">
+    <value>malja'</value>
+  </data>
+  <data name="FormBuilder_Field_Company_Prompt" xml:space="preserve">
+    <value>Acme Studio</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiCode" xml:space="preserve">
+    <value>ASCII mI'</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiCode_Prompt" xml:space="preserve">
+    <value>ASCII-ONLY</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiInvalid" xml:space="preserve">
+    <value>naQvamDaq ASCII mu' cha'lu'laH neH lajlu'.</value>
+  </data>
+  <data name="FormBuilder_Field_AcceptTerms" xml:space="preserve">
+    <value>mu'mey laj</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Ascii" xml:space="preserve">
+    <value>ASCII</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Float" xml:space="preserve">
+    <value>mI' Hutlh</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Numeric" xml:space="preserve">
+    <value>mI'</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_NoHtml" xml:space="preserve">
+    <value>HTML Hutlh</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Unix" xml:space="preserve">
+    <value>Unix</value>
+  </data>
+  <data name="FormBuilder_Field_BoolMustBeFalse" xml:space="preserve">
+    <value>DuHvam wIvbe'lu'nIS.</value>
+  </data>
+  <data name="FormBuilder_Field_BoolMustBeTrue" xml:space="preserve">
+    <value>DuHvam wIvlu'nIS.</value>
+  </data>
+  <data name="FormBuilder_Field_Disabled" xml:space="preserve">
+    <value>mI' ngoq</value>
+  </data>
+  <data name="FormBuilder_Field_Disabled_Prompt" xml:space="preserve">
+    <value>mI' ngoq</value>
+  </data>
+  <data name="FormBuilder_Field_Color" xml:space="preserve">
+    <value>rItlh</value>
+  </data>
+  <data name="FormBuilder_Field_DueDate" xml:space="preserve">
+    <value>jaj ngIl</value>
+  </data>
+  <data name="FormBuilder_Field_DueDate_Prompt" xml:space="preserve">
+    <value>jaj</value>
+  </data>
+  <data name="FormBuilder_Field_DueDateTime" xml:space="preserve">
+    <value>jaj je poH je</value>
+  </data>
+  <data name="FormBuilder_Field_DueDateTime_Prompt" xml:space="preserve">
+    <value>jaj je poH je</value>
+  </data>
+  <data name="FormBuilder_Field_Email" xml:space="preserve">
+    <value>QIn Hom ngon</value>
+  </data>
+  <data name="FormBuilder_Field_EnableNotifications" xml:space="preserve">
+    <value>QInmey QonoS</value>
+  </data>
+  <data name="FormBuilder_Field_EmailInvalid" xml:space="preserve">
+    <value>QIn Hom ngon qabHa'</value>
+  </data>
+  <data name="FormBuilder_Field_EmailOptional" xml:space="preserve">
+    <value>QIn Hom chu'bogh</value>
+  </data>
+  <data name="FormBuilder_Field_EmailOptional_Prompt" xml:space="preserve">
+    <value>contact@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_Email_Prompt" xml:space="preserve">
+    <value>jane@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_FirstName" xml:space="preserve">
+    <value>pong wa'DIch</value>
+  </data>
+  <data name="FormBuilder_Field_FloatValue" xml:space="preserve">
+    <value>mI' Hutlh</value>
+  </data>
+  <data name="FormBuilder_Field_FloatValue_Prompt" xml:space="preserve">
+    <value>12.50</value>
+  </data>
+  <data name="FormBuilder_Field_FormatInvalid" xml:space="preserve">
+    <value>naQ chenmoH qabHa'.</value>
+  </data>
+  <data name="FormBuilder_Field_GroupCode" xml:space="preserve">
+    <value>mI' ghom</value>
+  </data>
+  <data name="FormBuilder_Field_GroupCode_Prompt" xml:space="preserve">
+    <value>AB-123</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenEmail" xml:space="preserve">
+    <value>QIn Hom So'lu'ta'</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenEmail_Prompt" xml:space="preserve">
+    <value>hidden@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_FirstName_Prompt" xml:space="preserve">
+    <value>Jane</value>
+  </data>
+  <data name="FormBuilder_Field_InlineEmail" xml:space="preserve">
+    <value>QIn Hom nIvDaq</value>
+  </data>
+  <data name="FormBuilder_Field_InlineEmail_Prompt" xml:space="preserve">
+    <value>inline@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenLabel" xml:space="preserve">
+    <value>nej mu'</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenLabel_Prompt" xml:space="preserve">
+    <value>nej</value>
+  </data>
+  <data name="FormBuilder_Field_InlineCode" xml:space="preserve">
+    <value>mI' nIvDaq</value>
+  </data>
+  <data name="FormBuilder_Field_InlineCode_Prompt" xml:space="preserve">
+    <value>AB-123</value>
+  </data>
+  <data name="FormBuilder_Field_LeftLabel" xml:space="preserve">
+    <value>pong Dop poS</value>
+  </data>
+  <data name="FormBuilder_Field_Message" xml:space="preserve">
+    <value>QIn</value>
+  </data>
+  <data name="FormBuilder_Field_Message_Prompt" xml:space="preserve">
+    <value>QInlIj</value>
+  </data>
+  <data name="FormBuilder_Field_Month" xml:space="preserve">
+    <value>jar</value>
+  </data>
+  <data name="FormBuilder_Field_Month_Prompt" xml:space="preserve">
+    <value>jar</value>
+  </data>
+  <data name="FormBuilder_Field_Nickname" xml:space="preserve">
+    <value>pong chup</value>
+  </data>
+  <data name="FormBuilder_Field_Nickname_Prompt" xml:space="preserve">
+    <value>potlhbe'</value>
+  </data>
+  <data name="FormBuilder_Field_NoHtmlInvalid" xml:space="preserve">
+    <value>HTML teqmey chaw'be'lu'.</value>
+  </data>
+  <data name="FormBuilder_Field_NumericValue" xml:space="preserve">
+    <value>mI'</value>
+  </data>
+  <data name="FormBuilder_Field_NumericValue_Prompt" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="FormBuilder_Field_Notes" xml:space="preserve">
+    <value>qawHaqmey</value>
+  </data>
+  <data name="FormBuilder_Field_Notes_Prompt" xml:space="preserve">
+    <value>qawHaqmey potlhbe'</value>
+  </data>
+  <data name="FormBuilder_Field_Priority" xml:space="preserve">
+    <value>mu'Daq</value>
+  </data>
+  <data name="FormBuilder_Field_Range" xml:space="preserve">
+    <value>mI' chavlaH paghDaq 'oHbe'.</value>
+  </data>
+  <data name="FormBuilder_Field_Slider" xml:space="preserve">
+    <value>moQHommey choHmoH</value>
+  </data>
+  <data name="FormBuilder_Field_Time" xml:space="preserve">
+    <value>poH</value>
+  </data>
+  <data name="FormBuilder_Field_Time_Prompt" xml:space="preserve">
+    <value>poH</value>
+  </data>
+  <data name="FormBuilder_Field_UnixCode" xml:space="preserve">
+    <value>Unix pong DelwI'</value>
+  </data>
+  <data name="FormBuilder_Field_UnixCode_Prompt" xml:space="preserve">
+    <value>project_token_01</value>
+  </data>
+  <data name="FormBuilder_Field_UnixInvalid" xml:space="preserve">
+    <value>naQvam mu'mey, mI'mey, je '_' neH laj.</value>
+  </data>
+  <data name="FormBuilder_Field_MaxLength" xml:space="preserve">
+    <value>naQvam tIq law'.</value>
+  </data>
+  <data name="FormBuilder_Field_MinLength" xml:space="preserve">
+    <value>naQvam run law'.</value>
+  </data>
+  <data name="FormBuilder_Field_Password" xml:space="preserve">
+    <value>mu'wIj pe'vIl</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordConfirm" xml:space="preserve">
+    <value>chovnatlh</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordConfirm_Prompt" xml:space="preserve">
+    <value>mu'wIj pe'vIl ghItlhqa'</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCompare" xml:space="preserve">
+    <value>mu'wIj pe'vIl rapbe'.</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCurrent" xml:space="preserve">
+    <value>mu'wIj pe'vIl DaH</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCurrent_Prompt" xml:space="preserve">
+    <value>mu'wIj pe'vIl DaHlIj</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordHide" xml:space="preserve">
+    <value>mu'wIj So'</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordInvalid" xml:space="preserve">
+    <value>mu'wIj pe'vIlDaq wa' mu' tIn, wa' mu' mach, wa' mI', je wa' mu' motlhbe' tu'lu'nIS.</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordNew" xml:space="preserve">
+    <value>mu'wIj pe'vIl chu'</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordNew_Prompt" xml:space="preserve">
+    <value>mu'wIj pe'vIl HoSghaj wIv</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordShow" xml:space="preserve">
+    <value>mu'wIj cha'</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordStrength" xml:space="preserve">
+    <value>mu'wIj pe'vIl HoS</value>
+  </data>
+  <data name="FormBuilder_Field_Required" xml:space="preserve">
+    <value>naQ poQlu'bogh</value>
+  </data>
+  <data name="FormBuilder_Form_RequiredLegend" xml:space="preserve">
+    <value>naQ poQlu'bogh</value>
+  </data>
+  <data name="Compare_Password_ErrorMessage" xml:space="preserve">
+    <value>mu'wIj pe'vIl rapbe'.</value>
+  </data>
+  <data name="MaxLengthAttribute_ErrorMessage" xml:space="preserve">
+    <value>naQvam tIq law'.</value>
+  </data>
+  <data name="MinLengthAttribute_ErrorMessage" xml:space="preserve">
+    <value>naQvam run law'.</value>
+  </data>
+  <data name="Password_ErrorMessage" xml:space="preserve">
+    <value>mu'wIj pe'vIlDaq wa' mu' tIn, wa' mu' mach, wa' mI', je wa' mu' motlhbe' tu'lu'nIS.</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>mach</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>motlh</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>tIn</value>
+  </data>
+  <data name="FormBuilder_Field_Admin" xml:space="preserve">
+    <value>ra'wI'</value>
+  </data>
+  <data name="FormBuilder_Field_ApiToken" xml:space="preserve">
+    <value>API token</value>
+  </data>
+  <data name="FormBuilder_Field_ApiToken_Prompt" xml:space="preserve">
+    <value>API token tIlan</value>
+  </data>
+  <data name="FormBuilder_Field_Country" xml:space="preserve">
+    <value>Sep</value>
+  </data>
+  <data name="FormBuilder_Field_Country_Prompt" xml:space="preserve">
+    <value>Sep wIv</value>
+  </data>
+  <data name="FormBuilder_Field_Execute" xml:space="preserve">
+    <value>qaw'</value>
+  </data>
+  <data name="FormBuilder_Field_Internal" xml:space="preserve">
+    <value>qo'</value>
+  </data>
+  <data name="FormBuilder_Field_Permissions" xml:space="preserve">
+    <value>chaw'mey</value>
+  </data>
+  <data name="FormBuilder_Field_PermissionsSelect" xml:space="preserve">
+    <value>wIvmeH chaw'mey</value>
+  </data>
+  <data name="FormBuilder_Field_Private" xml:space="preserve">
+    <value>Dach</value>
+  </data>
+  <data name="FormBuilder_Field_Public" xml:space="preserve">
+    <value>HochvaD</value>
+  </data>
+  <data name="FormBuilder_Field_Read" xml:space="preserve">
+    <value>laD</value>
+  </data>
+  <data name="FormBuilder_Field_ReadOnlyToken" xml:space="preserve">
+    <value>token laD neH</value>
+  </data>
+  <data name="FormBuilder_Field_ReadOnlyToken_Prompt" xml:space="preserve">
+    <value>token Qotlhlu'ta'</value>
+  </data>
+  <data name="FormBuilder_Field_TokenCopy" xml:space="preserve">
+    <value>token ghItlhqa'</value>
+  </data>
+  <data name="FormBuilder_Field_TokenHide" xml:space="preserve">
+    <value>token So'</value>
+  </data>
+  <data name="FormBuilder_Field_TokenShow" xml:space="preserve">
+    <value>token cha'</value>
+  </data>
+  <data name="FormBuilder_Field_Visibility" xml:space="preserve">
+    <value>cha'anglaHghach</value>
+  </data>
+  <data name="FormBuilder_Field_Write" xml:space="preserve">
+    <value>ghItlh</value>
+  </data>
+</root>

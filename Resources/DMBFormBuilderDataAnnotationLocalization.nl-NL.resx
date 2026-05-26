@@ -1,0 +1,336 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:element name="root" ns1:IsDataSet="true" />
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FormBuilder_Captcha_Image_Error" xml:space="preserve">
+    <value>Captcha-afbeelding niet beschikbaar</value>
+  </data>
+  <data name="FormBuilder_Captcha_Invalid" xml:space="preserve">
+    <value>Captcha is ongeldig.</value>
+  </data>
+  <data name="FormBuilder_Captcha_Required" xml:space="preserve">
+    <value>Captcha is verplicht.</value>
+  </data>
+  <data name="FormBuilder_Field_Company" xml:space="preserve">
+    <value>Bedrijf</value>
+  </data>
+  <data name="FormBuilder_Field_Company_Prompt" xml:space="preserve">
+    <value>Acme Studio</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiCode" xml:space="preserve">
+    <value>ASCII-code</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiCode_Prompt" xml:space="preserve">
+    <value>ASCII-ONLY</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiInvalid" xml:space="preserve">
+    <value>Het veld accepteert alleen afdrukbare ASCII-tekens.</value>
+  </data>
+  <data name="FormBuilder_Field_AcceptTerms" xml:space="preserve">
+    <value>Voorwaarden accepteren</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Ascii" xml:space="preserve">
+    <value>ASCII</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Float" xml:space="preserve">
+    <value>Decimaal</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Numeric" xml:space="preserve">
+    <value>Numeriek</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_NoHtml" xml:space="preserve">
+    <value>Geen HTML</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Unix" xml:space="preserve">
+    <value>Unix</value>
+  </data>
+  <data name="FormBuilder_Field_BoolMustBeFalse" xml:space="preserve">
+    <value>Deze optie moet uitgevinkt blijven.</value>
+  </data>
+  <data name="FormBuilder_Field_BoolMustBeTrue" xml:space="preserve">
+    <value>Deze optie moet aangevinkt zijn.</value>
+  </data>
+  <data name="FormBuilder_Field_Disabled" xml:space="preserve">
+    <value>Vergrendelde waarde</value>
+  </data>
+  <data name="FormBuilder_Field_Disabled_Prompt" xml:space="preserve">
+    <value>Vergrendelde waarde</value>
+  </data>
+  <data name="FormBuilder_Field_Color" xml:space="preserve">
+    <value>Kleur</value>
+  </data>
+  <data name="FormBuilder_Field_DueDate" xml:space="preserve">
+    <value>Vervaldatum</value>
+  </data>
+  <data name="FormBuilder_Field_DueDate_Prompt" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="FormBuilder_Field_DueDateTime" xml:space="preserve">
+    <value>Datum en tijd</value>
+  </data>
+  <data name="FormBuilder_Field_DueDateTime_Prompt" xml:space="preserve">
+    <value>Datum en tijd</value>
+  </data>
+  <data name="FormBuilder_Field_Email" xml:space="preserve">
+    <value>E-mailadres</value>
+  </data>
+  <data name="FormBuilder_Field_EnableNotifications" xml:space="preserve">
+    <value>Meldingen inschakelen</value>
+  </data>
+  <data name="FormBuilder_Field_EmailInvalid" xml:space="preserve">
+    <value>Ongeldig e-mailadres</value>
+  </data>
+  <data name="FormBuilder_Field_EmailOptional" xml:space="preserve">
+    <value>Contact-e-mail</value>
+  </data>
+  <data name="FormBuilder_Field_EmailOptional_Prompt" xml:space="preserve">
+    <value>contact@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_Email_Prompt" xml:space="preserve">
+    <value>jane@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_FirstName" xml:space="preserve">
+    <value>Voornaam</value>
+  </data>
+  <data name="FormBuilder_Field_FloatValue" xml:space="preserve">
+    <value>Decimale waarde</value>
+  </data>
+  <data name="FormBuilder_Field_FloatValue_Prompt" xml:space="preserve">
+    <value>12.50</value>
+  </data>
+  <data name="FormBuilder_Field_FormatInvalid" xml:space="preserve">
+    <value>De veldindeling is ongeldig.</value>
+  </data>
+  <data name="FormBuilder_Field_GroupCode" xml:space="preserve">
+    <value>Gegroepeerde code</value>
+  </data>
+  <data name="FormBuilder_Field_GroupCode_Prompt" xml:space="preserve">
+    <value>AB-123</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenEmail" xml:space="preserve">
+    <value>Verborgen e-mail</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenEmail_Prompt" xml:space="preserve">
+    <value>hidden@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_FirstName_Prompt" xml:space="preserve">
+    <value>Jane</value>
+  </data>
+  <data name="FormBuilder_Field_InlineEmail" xml:space="preserve">
+    <value>Inline e-mail</value>
+  </data>
+  <data name="FormBuilder_Field_InlineEmail_Prompt" xml:space="preserve">
+    <value>inline@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenLabel" xml:space="preserve">
+    <value>Zoekterm</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenLabel_Prompt" xml:space="preserve">
+    <value>Zoeken</value>
+  </data>
+  <data name="FormBuilder_Field_InlineCode" xml:space="preserve">
+    <value>Inline code</value>
+  </data>
+  <data name="FormBuilder_Field_InlineCode_Prompt" xml:space="preserve">
+    <value>AB-123</value>
+  </data>
+  <data name="FormBuilder_Field_LeftLabel" xml:space="preserve">
+    <value>Linker label</value>
+  </data>
+  <data name="FormBuilder_Field_Message" xml:space="preserve">
+    <value>Bericht</value>
+  </data>
+  <data name="FormBuilder_Field_Message_Prompt" xml:space="preserve">
+    <value>Je bericht</value>
+  </data>
+  <data name="FormBuilder_Field_Month" xml:space="preserve">
+    <value>Maand</value>
+  </data>
+  <data name="FormBuilder_Field_Month_Prompt" xml:space="preserve">
+    <value>Maand</value>
+  </data>
+  <data name="FormBuilder_Field_Nickname" xml:space="preserve">
+    <value>Bijnaam</value>
+  </data>
+  <data name="FormBuilder_Field_Nickname_Prompt" xml:space="preserve">
+    <value>Optioneel</value>
+  </data>
+  <data name="FormBuilder_Field_NoHtmlInvalid" xml:space="preserve">
+    <value>HTML-tags zijn niet toegestaan.</value>
+  </data>
+  <data name="FormBuilder_Field_NumericValue" xml:space="preserve">
+    <value>Hoeveelheid</value>
+  </data>
+  <data name="FormBuilder_Field_NumericValue_Prompt" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="FormBuilder_Field_Notes" xml:space="preserve">
+    <value>Notities</value>
+  </data>
+  <data name="FormBuilder_Field_Notes_Prompt" xml:space="preserve">
+    <value>Optionele notities</value>
+  </data>
+  <data name="FormBuilder_Field_Priority" xml:space="preserve">
+    <value>Prioriteit</value>
+  </data>
+  <data name="FormBuilder_Field_Range" xml:space="preserve">
+    <value>De waarde valt buiten het toegestane bereik.</value>
+  </data>
+  <data name="FormBuilder_Field_Slider" xml:space="preserve">
+    <value>Schuifregelaar</value>
+  </data>
+  <data name="FormBuilder_Field_Time" xml:space="preserve">
+    <value>Tijd</value>
+  </data>
+  <data name="FormBuilder_Field_Time_Prompt" xml:space="preserve">
+    <value>Tijd</value>
+  </data>
+  <data name="FormBuilder_Field_UnixCode" xml:space="preserve">
+    <value>Unix-id</value>
+  </data>
+  <data name="FormBuilder_Field_UnixCode_Prompt" xml:space="preserve">
+    <value>project_token_01</value>
+  </data>
+  <data name="FormBuilder_Field_UnixInvalid" xml:space="preserve">
+    <value>Het veld accepteert alleen letters, cijfers en underscores.</value>
+  </data>
+  <data name="FormBuilder_Field_MaxLength" xml:space="preserve">
+    <value>Het veld is te lang.</value>
+  </data>
+  <data name="FormBuilder_Field_MinLength" xml:space="preserve">
+    <value>Het veld is te kort.</value>
+  </data>
+  <data name="FormBuilder_Field_Password" xml:space="preserve">
+    <value>Wachtwoord</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordConfirm" xml:space="preserve">
+    <value>Bevestiging</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordConfirm_Prompt" xml:space="preserve">
+    <value>Herhaal het wachtwoord</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCompare" xml:space="preserve">
+    <value>Wachtwoorden komen niet overeen.</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCurrent" xml:space="preserve">
+    <value>Huidig wachtwoord</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCurrent_Prompt" xml:space="preserve">
+    <value>Je huidige wachtwoord</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordHide" xml:space="preserve">
+    <value>Wachtwoord verbergen</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordInvalid" xml:space="preserve">
+    <value>Wachtwoord moet een hoofdletter, een kleine letter, een cijfer en een speciaal teken bevatten.</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordNew" xml:space="preserve">
+    <value>Nieuw wachtwoord</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordNew_Prompt" xml:space="preserve">
+    <value>Kies een sterk wachtwoord</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordShow" xml:space="preserve">
+    <value>Wachtwoord tonen</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordStrength" xml:space="preserve">
+    <value>Wachtwoordsterkte</value>
+  </data>
+  <data name="FormBuilder_Field_Required" xml:space="preserve">
+    <value>Verplicht veld</value>
+  </data>
+  <data name="FormBuilder_Form_RequiredLegend" xml:space="preserve">
+    <value>Verplicht veld</value>
+  </data>
+  <data name="Compare_Password_ErrorMessage" xml:space="preserve">
+    <value>Wachtwoorden komen niet overeen.</value>
+  </data>
+  <data name="MaxLengthAttribute_ErrorMessage" xml:space="preserve">
+    <value>Het veld is te lang.</value>
+  </data>
+  <data name="MinLengthAttribute_ErrorMessage" xml:space="preserve">
+    <value>Het veld is te kort.</value>
+  </data>
+  <data name="Password_ErrorMessage" xml:space="preserve">
+    <value>Wachtwoord moet een hoofdletter, een kleine letter, een cijfer en een speciaal teken bevatten.</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>Laag</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Gemiddeld</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>Hoog</value>
+  </data>
+  <data name="FormBuilder_Field_Admin" xml:space="preserve">
+    <value>Beheerder</value>
+  </data>
+  <data name="FormBuilder_Field_ApiToken" xml:space="preserve">
+    <value>API-token</value>
+  </data>
+  <data name="FormBuilder_Field_ApiToken_Prompt" xml:space="preserve">
+    <value>Plak het API-token</value>
+  </data>
+  <data name="FormBuilder_Field_Country" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="FormBuilder_Field_Country_Prompt" xml:space="preserve">
+    <value>Selecteer een land</value>
+  </data>
+  <data name="FormBuilder_Field_Execute" xml:space="preserve">
+    <value>Uitvoeren</value>
+  </data>
+  <data name="FormBuilder_Field_Internal" xml:space="preserve">
+    <value>Intern</value>
+  </data>
+  <data name="FormBuilder_Field_Permissions" xml:space="preserve">
+    <value>Machtigingen</value>
+  </data>
+  <data name="FormBuilder_Field_PermissionsSelect" xml:space="preserve">
+    <value>Machtigingen als selectie</value>
+  </data>
+  <data name="FormBuilder_Field_Private" xml:space="preserve">
+    <value>Privé</value>
+  </data>
+  <data name="FormBuilder_Field_Public" xml:space="preserve">
+    <value>Openbaar</value>
+  </data>
+  <data name="FormBuilder_Field_Read" xml:space="preserve">
+    <value>Lezen</value>
+  </data>
+  <data name="FormBuilder_Field_ReadOnlyToken" xml:space="preserve">
+    <value>Alleen-lezen token</value>
+  </data>
+  <data name="FormBuilder_Field_ReadOnlyToken_Prompt" xml:space="preserve">
+    <value>Token weergegeven als uitgeschakeld</value>
+  </data>
+  <data name="FormBuilder_Field_TokenCopy" xml:space="preserve">
+    <value>Token kopiëren</value>
+  </data>
+  <data name="FormBuilder_Field_TokenHide" xml:space="preserve">
+    <value>Token verbergen</value>
+  </data>
+  <data name="FormBuilder_Field_TokenShow" xml:space="preserve">
+    <value>Token tonen</value>
+  </data>
+  <data name="FormBuilder_Field_Visibility" xml:space="preserve">
+    <value>Zichtbaarheid</value>
+  </data>
+  <data name="FormBuilder_Field_Write" xml:space="preserve">
+    <value>Schrijven</value>
+  </data>
+</root>

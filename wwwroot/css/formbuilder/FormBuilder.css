@@ -1,0 +1,217 @@
+.dmb-form-field-control {
+    position: relative;
+}
+
+.dmb-form-field-description {
+    color: var(--bs-secondary-color);
+    cursor: help;
+    line-height: 1;
+    text-decoration: none;
+    vertical-align: baseline;
+}
+
+.dmb-form-field-description:hover,
+.dmb-form-field-description:focus {
+    color: var(--bs-primary);
+}
+
+.input-group-text .dmb-form-field-description,
+.dmb-choice-group-label .dmb-form-field-description,
+.dmb-captcha-group-label .dmb-form-field-description {
+    color: inherit;
+}
+
+.form-floating > label .dmb-form-field-description {
+    pointer-events: auto;
+}
+
+.dmb-form-field-badges {
+    align-items: center;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+    justify-content: flex-end;
+    max-width: calc(100% - 1rem);
+    pointer-events: none;
+    position: absolute;
+    right: .75rem;
+    top: 0;
+    transform: translateY(-50%);
+    z-index: 4;
+}
+
+.dmb-form-field-badges .badge {
+    pointer-events: auto;
+}
+
+.dmb-flag-field-options {
+    clear: both;
+}
+
+.dmb-choice-floating-control {
+    min-height: calc(3.5rem + 2px);
+    padding: .5rem .75rem .625rem;
+}
+
+.dmb-choice-floating-label {
+    color: var(--bs-secondary-color);
+    display: block;
+    float: none;
+    font-size: .875rem;
+    line-height: 1.25;
+    margin-bottom: .35rem;
+    width: auto;
+}
+
+.dmb-choice-group-label {
+    align-items: center;
+    display: flex;
+    float: none;
+    margin-bottom: 0;
+    width: auto;
+}
+
+.dmb-choice-group-control {
+    min-width: 0;
+}
+
+.dmb-captcha-floating-control {
+    min-height: calc(3.5rem + 2px);
+    padding: .5rem .75rem .625rem;
+}
+
+.dmb-captcha-floating-label {
+    color: var(--bs-secondary-color);
+    display: block;
+    font-size: .875rem;
+    line-height: 1.25;
+    margin-bottom: .35rem;
+}
+
+.dmb-captcha-group-label {
+    align-items: center;
+    display: flex;
+    float: none;
+    margin-bottom: 0;
+    width: auto;
+}
+
+.dmb-captcha-image {
+    min-width: 6rem;
+}
+
+.dmb-password-field input[aria-disabled="true"],
+.dmb-token-field input[aria-disabled="true"] {
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-secondary-color);
+    opacity: 1;
+}
+
+.dmb-select-quick-group > .form-select,
+.dmb-select-quick-group > .form-floating > .form-select {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.dmb-select-quick-group > [data-dmb-select-value-for] {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.dmb-color-field-input {
+    width: 100%;
+}
+
+.input-group > .dmb-color-field-input {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.dmb-slider-with-text-field {
+    align-items: center;
+    display: flex;
+    gap: .75rem;
+    width: 100%;
+}
+
+.dmb-slider-with-text-field > .dmb-range {
+    flex: 1 1 auto;
+}
+
+.dmb-slider-text-field-control {
+    flex: 0 0 7rem;
+    position: relative;
+}
+
+.dmb-slider-text-field {
+    min-width: 0;
+}
+
+.dmb-slider-floating-control {
+    min-height: calc(3.5rem + 2px);
+    padding: .5rem .75rem .625rem;
+}
+
+.dmb-slider-floating-label {
+    color: var(--bs-secondary-color);
+    display: block;
+    font-size: .875rem;
+    line-height: 1.25;
+    margin-bottom: .35rem;
+}
+
+.dmb-slider-group-control {
+    align-items: center;
+    display: flex;
+    min-width: 0;
+}
+
+.dmb-slider-floating-control > .dmb-range,
+.dmb-slider-group-control > .dmb-range {
+    width: 100%;
+}
+
+input[type="range"].dmb-range {
+    accent-color: var(--dmb-range-color, var(--bs-primary));
+}
+
+input[type="range"].dmb-range::-webkit-slider-thumb {
+    background-color: var(--dmb-range-color, var(--bs-primary));
+}
+
+input[type="range"].dmb-range::-moz-range-thumb {
+    background-color: var(--dmb-range-color, var(--bs-primary));
+    border-color: var(--dmb-range-color, var(--bs-primary));
+}
+
+.dmb-range-primary {
+    --dmb-range-color: var(--bs-primary);
+}
+
+.dmb-range-secondary {
+    --dmb-range-color: var(--bs-secondary);
+}
+
+.dmb-range-success {
+    --dmb-range-color: var(--bs-success);
+}
+
+.dmb-range-danger {
+    --dmb-range-color: var(--bs-danger);
+}
+
+.dmb-range-warning {
+    --dmb-range-color: var(--bs-warning);
+}
+
+.dmb-range-info {
+    --dmb-range-color: var(--bs-info);
+}
+
+.dmb-range-light {
+    --dmb-range-color: var(--bs-light);
+}
+
+.dmb-range-dark {
+    --dmb-range-color: var(--bs-dark);
+}

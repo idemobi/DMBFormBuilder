@@ -1,0 +1,336 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:element name="root" ns1:IsDataSet="true" />
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FormBuilder_Captcha_Image_Error" xml:space="preserve">
+    <value>캡차 이미지를 사용할 수 없습니다</value>
+  </data>
+  <data name="FormBuilder_Captcha_Invalid" xml:space="preserve">
+    <value>캡차가 올바르지 않습니다.</value>
+  </data>
+  <data name="FormBuilder_Captcha_Required" xml:space="preserve">
+    <value>캡차는 필수입니다.</value>
+  </data>
+  <data name="FormBuilder_Field_Company" xml:space="preserve">
+    <value>회사</value>
+  </data>
+  <data name="FormBuilder_Field_Company_Prompt" xml:space="preserve">
+    <value>Acme Studio</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiCode" xml:space="preserve">
+    <value>ASCII 코드</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiCode_Prompt" xml:space="preserve">
+    <value>ASCII-ONLY</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiInvalid" xml:space="preserve">
+    <value>이 필드는 출력 가능한 ASCII 문자만 허용합니다.</value>
+  </data>
+  <data name="FormBuilder_Field_AcceptTerms" xml:space="preserve">
+    <value>약관 동의</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Ascii" xml:space="preserve">
+    <value>ASCII</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Float" xml:space="preserve">
+    <value>소수</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Numeric" xml:space="preserve">
+    <value>숫자</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_NoHtml" xml:space="preserve">
+    <value>HTML 없음</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Unix" xml:space="preserve">
+    <value>Unix</value>
+  </data>
+  <data name="FormBuilder_Field_BoolMustBeFalse" xml:space="preserve">
+    <value>이 옵션은 체크되지 않은 상태여야 합니다.</value>
+  </data>
+  <data name="FormBuilder_Field_BoolMustBeTrue" xml:space="preserve">
+    <value>이 옵션은 반드시 체크해야 합니다.</value>
+  </data>
+  <data name="FormBuilder_Field_Disabled" xml:space="preserve">
+    <value>잠긴 값</value>
+  </data>
+  <data name="FormBuilder_Field_Disabled_Prompt" xml:space="preserve">
+    <value>잠긴 값</value>
+  </data>
+  <data name="FormBuilder_Field_Color" xml:space="preserve">
+    <value>색상</value>
+  </data>
+  <data name="FormBuilder_Field_DueDate" xml:space="preserve">
+    <value>마감일</value>
+  </data>
+  <data name="FormBuilder_Field_DueDate_Prompt" xml:space="preserve">
+    <value>날짜</value>
+  </data>
+  <data name="FormBuilder_Field_DueDateTime" xml:space="preserve">
+    <value>날짜 및 시간</value>
+  </data>
+  <data name="FormBuilder_Field_DueDateTime_Prompt" xml:space="preserve">
+    <value>날짜 및 시간</value>
+  </data>
+  <data name="FormBuilder_Field_Email" xml:space="preserve">
+    <value>이메일 주소</value>
+  </data>
+  <data name="FormBuilder_Field_EnableNotifications" xml:space="preserve">
+    <value>알림 활성화</value>
+  </data>
+  <data name="FormBuilder_Field_EmailInvalid" xml:space="preserve">
+    <value>유효하지 않은 이메일 주소</value>
+  </data>
+  <data name="FormBuilder_Field_EmailOptional" xml:space="preserve">
+    <value>연락처 이메일</value>
+  </data>
+  <data name="FormBuilder_Field_EmailOptional_Prompt" xml:space="preserve">
+    <value>contact@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_Email_Prompt" xml:space="preserve">
+    <value>jane@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_FirstName" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="FormBuilder_Field_FloatValue" xml:space="preserve">
+    <value>소수 값</value>
+  </data>
+  <data name="FormBuilder_Field_FloatValue_Prompt" xml:space="preserve">
+    <value>12.50</value>
+  </data>
+  <data name="FormBuilder_Field_FormatInvalid" xml:space="preserve">
+    <value>필드 형식이 잘못되었습니다.</value>
+  </data>
+  <data name="FormBuilder_Field_GroupCode" xml:space="preserve">
+    <value>그룹 코드</value>
+  </data>
+  <data name="FormBuilder_Field_GroupCode_Prompt" xml:space="preserve">
+    <value>AB-123</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenEmail" xml:space="preserve">
+    <value>숨김 이메일</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenEmail_Prompt" xml:space="preserve">
+    <value>hidden@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_FirstName_Prompt" xml:space="preserve">
+    <value>Jane</value>
+  </data>
+  <data name="FormBuilder_Field_InlineEmail" xml:space="preserve">
+    <value>인라인 이메일</value>
+  </data>
+  <data name="FormBuilder_Field_InlineEmail_Prompt" xml:space="preserve">
+    <value>inline@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenLabel" xml:space="preserve">
+    <value>검색어</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenLabel_Prompt" xml:space="preserve">
+    <value>검색</value>
+  </data>
+  <data name="FormBuilder_Field_InlineCode" xml:space="preserve">
+    <value>인라인 코드</value>
+  </data>
+  <data name="FormBuilder_Field_InlineCode_Prompt" xml:space="preserve">
+    <value>AB-123</value>
+  </data>
+  <data name="FormBuilder_Field_LeftLabel" xml:space="preserve">
+    <value>왼쪽 라벨</value>
+  </data>
+  <data name="FormBuilder_Field_Message" xml:space="preserve">
+    <value>메시지</value>
+  </data>
+  <data name="FormBuilder_Field_Message_Prompt" xml:space="preserve">
+    <value>메시지를 입력하세요</value>
+  </data>
+  <data name="FormBuilder_Field_Month" xml:space="preserve">
+    <value>월</value>
+  </data>
+  <data name="FormBuilder_Field_Month_Prompt" xml:space="preserve">
+    <value>월</value>
+  </data>
+  <data name="FormBuilder_Field_Nickname" xml:space="preserve">
+    <value>별명</value>
+  </data>
+  <data name="FormBuilder_Field_Nickname_Prompt" xml:space="preserve">
+    <value>선택 사항</value>
+  </data>
+  <data name="FormBuilder_Field_NoHtmlInvalid" xml:space="preserve">
+    <value>HTML 태그는 허용되지 않습니다.</value>
+  </data>
+  <data name="FormBuilder_Field_NumericValue" xml:space="preserve">
+    <value>수량</value>
+  </data>
+  <data name="FormBuilder_Field_NumericValue_Prompt" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="FormBuilder_Field_Notes" xml:space="preserve">
+    <value>메모</value>
+  </data>
+  <data name="FormBuilder_Field_Notes_Prompt" xml:space="preserve">
+    <value>선택 메모</value>
+  </data>
+  <data name="FormBuilder_Field_Priority" xml:space="preserve">
+    <value>우선순위</value>
+  </data>
+  <data name="FormBuilder_Field_Range" xml:space="preserve">
+    <value>값이 허용 범위를 벗어났습니다.</value>
+  </data>
+  <data name="FormBuilder_Field_Slider" xml:space="preserve">
+    <value>슬라이더</value>
+  </data>
+  <data name="FormBuilder_Field_Time" xml:space="preserve">
+    <value>시간</value>
+  </data>
+  <data name="FormBuilder_Field_Time_Prompt" xml:space="preserve">
+    <value>시간</value>
+  </data>
+  <data name="FormBuilder_Field_UnixCode" xml:space="preserve">
+    <value>Unix 식별자</value>
+  </data>
+  <data name="FormBuilder_Field_UnixCode_Prompt" xml:space="preserve">
+    <value>project_token_01</value>
+  </data>
+  <data name="FormBuilder_Field_UnixInvalid" xml:space="preserve">
+    <value>이 필드는 문자, 숫자, 밑줄만 허용합니다.</value>
+  </data>
+  <data name="FormBuilder_Field_MaxLength" xml:space="preserve">
+    <value>필드가 너무 깁니다.</value>
+  </data>
+  <data name="FormBuilder_Field_MinLength" xml:space="preserve">
+    <value>필드가 너무 짧습니다.</value>
+  </data>
+  <data name="FormBuilder_Field_Password" xml:space="preserve">
+    <value>비밀번호</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordConfirm" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordConfirm_Prompt" xml:space="preserve">
+    <value>비밀번호 다시 입력</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCompare" xml:space="preserve">
+    <value>비밀번호가 일치하지 않습니다.</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCurrent" xml:space="preserve">
+    <value>현재 비밀번호</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCurrent_Prompt" xml:space="preserve">
+    <value>현재 비밀번호</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordHide" xml:space="preserve">
+    <value>비밀번호 숨기기</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordInvalid" xml:space="preserve">
+    <value>비밀번호에는 대문자, 소문자, 숫자, 특수문자가 각각 1개 이상 포함되어야 합니다.</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordNew" xml:space="preserve">
+    <value>새 비밀번호</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordNew_Prompt" xml:space="preserve">
+    <value>강력한 비밀번호를 선택하세요</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordShow" xml:space="preserve">
+    <value>비밀번호 표시</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordStrength" xml:space="preserve">
+    <value>비밀번호 강도</value>
+  </data>
+  <data name="FormBuilder_Field_Required" xml:space="preserve">
+    <value>필수 항목</value>
+  </data>
+  <data name="FormBuilder_Form_RequiredLegend" xml:space="preserve">
+    <value>필수 항목</value>
+  </data>
+  <data name="Compare_Password_ErrorMessage" xml:space="preserve">
+    <value>비밀번호가 일치하지 않습니다.</value>
+  </data>
+  <data name="MaxLengthAttribute_ErrorMessage" xml:space="preserve">
+    <value>필드가 너무 깁니다.</value>
+  </data>
+  <data name="MinLengthAttribute_ErrorMessage" xml:space="preserve">
+    <value>필드가 너무 짧습니다.</value>
+  </data>
+  <data name="Password_ErrorMessage" xml:space="preserve">
+    <value>비밀번호에는 대문자, 소문자, 숫자, 특수문자가 각각 1개 이상 포함되어야 합니다.</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>낮음</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>중간</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>높음</value>
+  </data>
+  <data name="FormBuilder_Field_Admin" xml:space="preserve">
+    <value>관리자</value>
+  </data>
+  <data name="FormBuilder_Field_ApiToken" xml:space="preserve">
+    <value>API 토큰</value>
+  </data>
+  <data name="FormBuilder_Field_ApiToken_Prompt" xml:space="preserve">
+    <value>API 토큰 붙여넣기</value>
+  </data>
+  <data name="FormBuilder_Field_Country" xml:space="preserve">
+    <value>국가</value>
+  </data>
+  <data name="FormBuilder_Field_Country_Prompt" xml:space="preserve">
+    <value>국가 선택</value>
+  </data>
+  <data name="FormBuilder_Field_Execute" xml:space="preserve">
+    <value>실행</value>
+  </data>
+  <data name="FormBuilder_Field_Internal" xml:space="preserve">
+    <value>내부</value>
+  </data>
+  <data name="FormBuilder_Field_Permissions" xml:space="preserve">
+    <value>권한</value>
+  </data>
+  <data name="FormBuilder_Field_PermissionsSelect" xml:space="preserve">
+    <value>선택형 권한</value>
+  </data>
+  <data name="FormBuilder_Field_Private" xml:space="preserve">
+    <value>비공개</value>
+  </data>
+  <data name="FormBuilder_Field_Public" xml:space="preserve">
+    <value>공개</value>
+  </data>
+  <data name="FormBuilder_Field_Read" xml:space="preserve">
+    <value>읽기</value>
+  </data>
+  <data name="FormBuilder_Field_ReadOnlyToken" xml:space="preserve">
+    <value>읽기 전용 토큰</value>
+  </data>
+  <data name="FormBuilder_Field_ReadOnlyToken_Prompt" xml:space="preserve">
+    <value>토큰이 비활성으로 표시됨</value>
+  </data>
+  <data name="FormBuilder_Field_TokenCopy" xml:space="preserve">
+    <value>토큰 복사</value>
+  </data>
+  <data name="FormBuilder_Field_TokenHide" xml:space="preserve">
+    <value>토큰 숨기기</value>
+  </data>
+  <data name="FormBuilder_Field_TokenShow" xml:space="preserve">
+    <value>토큰 표시</value>
+  </data>
+  <data name="FormBuilder_Field_Visibility" xml:space="preserve">
+    <value>가시성</value>
+  </data>
+  <data name="FormBuilder_Field_Write" xml:space="preserve">
+    <value>쓰기</value>
+  </data>
+</root>

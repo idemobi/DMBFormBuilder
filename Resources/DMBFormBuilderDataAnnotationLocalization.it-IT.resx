@@ -1,0 +1,336 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:schema id="root">
+    <xs:element name="root" ns1:IsDataSet="true" />
+  </xs:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="FormBuilder_Captcha_Image_Error" xml:space="preserve">
+    <value>Immagine captcha non disponibile</value>
+  </data>
+  <data name="FormBuilder_Captcha_Invalid" xml:space="preserve">
+    <value>Captcha non valido.</value>
+  </data>
+  <data name="FormBuilder_Captcha_Required" xml:space="preserve">
+    <value>Captcha obbligatorio.</value>
+  </data>
+  <data name="FormBuilder_Field_Company" xml:space="preserve">
+    <value>Azienda</value>
+  </data>
+  <data name="FormBuilder_Field_Company_Prompt" xml:space="preserve">
+    <value>Acme Studio</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiCode" xml:space="preserve">
+    <value>Codice ASCII</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiCode_Prompt" xml:space="preserve">
+    <value>ASCII-ONLY</value>
+  </data>
+  <data name="FormBuilder_Field_AsciiInvalid" xml:space="preserve">
+    <value>Il campo accetta solo caratteri ASCII stampabili.</value>
+  </data>
+  <data name="FormBuilder_Field_AcceptTerms" xml:space="preserve">
+    <value>Accetta termini</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Ascii" xml:space="preserve">
+    <value>ASCII</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Float" xml:space="preserve">
+    <value>Decimale</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Numeric" xml:space="preserve">
+    <value>Numerico</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_NoHtml" xml:space="preserve">
+    <value>Nessun HTML</value>
+  </data>
+  <data name="FormBuilder_Field_Badge_Unix" xml:space="preserve">
+    <value>Unix</value>
+  </data>
+  <data name="FormBuilder_Field_BoolMustBeFalse" xml:space="preserve">
+    <value>Questa opzione deve rimanere deselezionata.</value>
+  </data>
+  <data name="FormBuilder_Field_BoolMustBeTrue" xml:space="preserve">
+    <value>Questa opzione deve essere selezionata.</value>
+  </data>
+  <data name="FormBuilder_Field_Disabled" xml:space="preserve">
+    <value>Valore bloccato</value>
+  </data>
+  <data name="FormBuilder_Field_Disabled_Prompt" xml:space="preserve">
+    <value>Valore bloccato</value>
+  </data>
+  <data name="FormBuilder_Field_Color" xml:space="preserve">
+    <value>Colore</value>
+  </data>
+  <data name="FormBuilder_Field_DueDate" xml:space="preserve">
+    <value>Data di scadenza</value>
+  </data>
+  <data name="FormBuilder_Field_DueDate_Prompt" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="FormBuilder_Field_DueDateTime" xml:space="preserve">
+    <value>Data e ora</value>
+  </data>
+  <data name="FormBuilder_Field_DueDateTime_Prompt" xml:space="preserve">
+    <value>Data e ora</value>
+  </data>
+  <data name="FormBuilder_Field_Email" xml:space="preserve">
+    <value>Indirizzo email</value>
+  </data>
+  <data name="FormBuilder_Field_EnableNotifications" xml:space="preserve">
+    <value>Abilita notifiche</value>
+  </data>
+  <data name="FormBuilder_Field_EmailInvalid" xml:space="preserve">
+    <value>Indirizzo email non valido</value>
+  </data>
+  <data name="FormBuilder_Field_EmailOptional" xml:space="preserve">
+    <value>Email di contatto</value>
+  </data>
+  <data name="FormBuilder_Field_EmailOptional_Prompt" xml:space="preserve">
+    <value>contact@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_Email_Prompt" xml:space="preserve">
+    <value>jane@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_FirstName" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="FormBuilder_Field_FloatValue" xml:space="preserve">
+    <value>Valore decimale</value>
+  </data>
+  <data name="FormBuilder_Field_FloatValue_Prompt" xml:space="preserve">
+    <value>12.50</value>
+  </data>
+  <data name="FormBuilder_Field_FormatInvalid" xml:space="preserve">
+    <value>Il formato del campo non è valido.</value>
+  </data>
+  <data name="FormBuilder_Field_GroupCode" xml:space="preserve">
+    <value>Codice raggruppato</value>
+  </data>
+  <data name="FormBuilder_Field_GroupCode_Prompt" xml:space="preserve">
+    <value>AB-123</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenEmail" xml:space="preserve">
+    <value>Email nascosta</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenEmail_Prompt" xml:space="preserve">
+    <value>hidden@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_FirstName_Prompt" xml:space="preserve">
+    <value>Jane</value>
+  </data>
+  <data name="FormBuilder_Field_InlineEmail" xml:space="preserve">
+    <value>Email in linea</value>
+  </data>
+  <data name="FormBuilder_Field_InlineEmail_Prompt" xml:space="preserve">
+    <value>inline@example.com</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenLabel" xml:space="preserve">
+    <value>Termine di ricerca</value>
+  </data>
+  <data name="FormBuilder_Field_HiddenLabel_Prompt" xml:space="preserve">
+    <value>Cerca</value>
+  </data>
+  <data name="FormBuilder_Field_InlineCode" xml:space="preserve">
+    <value>Codice in linea</value>
+  </data>
+  <data name="FormBuilder_Field_InlineCode_Prompt" xml:space="preserve">
+    <value>AB-123</value>
+  </data>
+  <data name="FormBuilder_Field_LeftLabel" xml:space="preserve">
+    <value>Etichetta sinistra</value>
+  </data>
+  <data name="FormBuilder_Field_Message" xml:space="preserve">
+    <value>Messaggio</value>
+  </data>
+  <data name="FormBuilder_Field_Message_Prompt" xml:space="preserve">
+    <value>Il tuo messaggio</value>
+  </data>
+  <data name="FormBuilder_Field_Month" xml:space="preserve">
+    <value>Mese</value>
+  </data>
+  <data name="FormBuilder_Field_Month_Prompt" xml:space="preserve">
+    <value>Mese</value>
+  </data>
+  <data name="FormBuilder_Field_Nickname" xml:space="preserve">
+    <value>Soprannome</value>
+  </data>
+  <data name="FormBuilder_Field_Nickname_Prompt" xml:space="preserve">
+    <value>Opzionale</value>
+  </data>
+  <data name="FormBuilder_Field_NoHtmlInvalid" xml:space="preserve">
+    <value>I tag HTML non sono consentiti.</value>
+  </data>
+  <data name="FormBuilder_Field_NumericValue" xml:space="preserve">
+    <value>Quantità</value>
+  </data>
+  <data name="FormBuilder_Field_NumericValue_Prompt" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="FormBuilder_Field_Notes" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="FormBuilder_Field_Notes_Prompt" xml:space="preserve">
+    <value>Note opzionali</value>
+  </data>
+  <data name="FormBuilder_Field_Priority" xml:space="preserve">
+    <value>Priorità</value>
+  </data>
+  <data name="FormBuilder_Field_Range" xml:space="preserve">
+    <value>Il valore è fuori dall'intervallo consentito.</value>
+  </data>
+  <data name="FormBuilder_Field_Slider" xml:space="preserve">
+    <value>Cursore</value>
+  </data>
+  <data name="FormBuilder_Field_Time" xml:space="preserve">
+    <value>Ora</value>
+  </data>
+  <data name="FormBuilder_Field_Time_Prompt" xml:space="preserve">
+    <value>Ora</value>
+  </data>
+  <data name="FormBuilder_Field_UnixCode" xml:space="preserve">
+    <value>Identificatore Unix</value>
+  </data>
+  <data name="FormBuilder_Field_UnixCode_Prompt" xml:space="preserve">
+    <value>project_token_01</value>
+  </data>
+  <data name="FormBuilder_Field_UnixInvalid" xml:space="preserve">
+    <value>Il campo accetta solo lettere, numeri e underscore.</value>
+  </data>
+  <data name="FormBuilder_Field_MaxLength" xml:space="preserve">
+    <value>Il campo è troppo lungo.</value>
+  </data>
+  <data name="FormBuilder_Field_MinLength" xml:space="preserve">
+    <value>Il campo è troppo corto.</value>
+  </data>
+  <data name="FormBuilder_Field_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordConfirm" xml:space="preserve">
+    <value>Conferma</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordConfirm_Prompt" xml:space="preserve">
+    <value>Ripeti la password</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCompare" xml:space="preserve">
+    <value>Le password non corrispondono.</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCurrent" xml:space="preserve">
+    <value>Password attuale</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordCurrent_Prompt" xml:space="preserve">
+    <value>La tua password attuale</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordHide" xml:space="preserve">
+    <value>Nascondi password</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordInvalid" xml:space="preserve">
+    <value>La password deve contenere una maiuscola, una minuscola, un numero e un carattere speciale.</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordNew" xml:space="preserve">
+    <value>Nuova password</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordNew_Prompt" xml:space="preserve">
+    <value>Scegli una password sicura</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordShow" xml:space="preserve">
+    <value>Mostra password</value>
+  </data>
+  <data name="FormBuilder_Field_PasswordStrength" xml:space="preserve">
+    <value>Robustezza password</value>
+  </data>
+  <data name="FormBuilder_Field_Required" xml:space="preserve">
+    <value>Campo obbligatorio</value>
+  </data>
+  <data name="FormBuilder_Form_RequiredLegend" xml:space="preserve">
+    <value>Campo obbligatorio</value>
+  </data>
+  <data name="Compare_Password_ErrorMessage" xml:space="preserve">
+    <value>Le password non corrispondono.</value>
+  </data>
+  <data name="MaxLengthAttribute_ErrorMessage" xml:space="preserve">
+    <value>Il campo è troppo lungo.</value>
+  </data>
+  <data name="MinLengthAttribute_ErrorMessage" xml:space="preserve">
+    <value>Il campo è troppo corto.</value>
+  </data>
+  <data name="Password_ErrorMessage" xml:space="preserve">
+    <value>La password deve contenere una maiuscola, una minuscola, un numero e un carattere speciale.</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>Basso</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Medio</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>Alto</value>
+  </data>
+  <data name="FormBuilder_Field_Admin" xml:space="preserve">
+    <value>Amministratore</value>
+  </data>
+  <data name="FormBuilder_Field_ApiToken" xml:space="preserve">
+    <value>Token API</value>
+  </data>
+  <data name="FormBuilder_Field_ApiToken_Prompt" xml:space="preserve">
+    <value>Incolla il token API</value>
+  </data>
+  <data name="FormBuilder_Field_Country" xml:space="preserve">
+    <value>Paese</value>
+  </data>
+  <data name="FormBuilder_Field_Country_Prompt" xml:space="preserve">
+    <value>Seleziona un paese</value>
+  </data>
+  <data name="FormBuilder_Field_Execute" xml:space="preserve">
+    <value>Esegui</value>
+  </data>
+  <data name="FormBuilder_Field_Internal" xml:space="preserve">
+    <value>Interno</value>
+  </data>
+  <data name="FormBuilder_Field_Permissions" xml:space="preserve">
+    <value>Permessi</value>
+  </data>
+  <data name="FormBuilder_Field_PermissionsSelect" xml:space="preserve">
+    <value>Permessi come selezione</value>
+  </data>
+  <data name="FormBuilder_Field_Private" xml:space="preserve">
+    <value>Privato</value>
+  </data>
+  <data name="FormBuilder_Field_Public" xml:space="preserve">
+    <value>Pubblico</value>
+  </data>
+  <data name="FormBuilder_Field_Read" xml:space="preserve">
+    <value>Lettura</value>
+  </data>
+  <data name="FormBuilder_Field_ReadOnlyToken" xml:space="preserve">
+    <value>Token in sola lettura</value>
+  </data>
+  <data name="FormBuilder_Field_ReadOnlyToken_Prompt" xml:space="preserve">
+    <value>Token mostrato come disattivato</value>
+  </data>
+  <data name="FormBuilder_Field_TokenCopy" xml:space="preserve">
+    <value>Copia token</value>
+  </data>
+  <data name="FormBuilder_Field_TokenHide" xml:space="preserve">
+    <value>Nascondi token</value>
+  </data>
+  <data name="FormBuilder_Field_TokenShow" xml:space="preserve">
+    <value>Mostra token</value>
+  </data>
+  <data name="FormBuilder_Field_Visibility" xml:space="preserve">
+    <value>Visibilità</value>
+  </data>
+  <data name="FormBuilder_Field_Write" xml:space="preserve">
+    <value>Scrittura</value>
+  </data>
+</root>
