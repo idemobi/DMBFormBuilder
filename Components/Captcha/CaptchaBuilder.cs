@@ -176,7 +176,7 @@ namespace DMBFormBuilder
         /// <summary>
         /// Enables or disables the captcha input and refresh control.
         /// </summary>
-        public CaptchaBuilder SetDisabled(bool disabled = true)
+        public new CaptchaBuilder SetDisabled(bool disabled = true)
         {
             _disabled = disabled;
             return this;

@@ -99,8 +99,8 @@ namespace DMBFormBuilder
             return CreateTypedInputBuilderFor(html, expression, "range", value => value switch
             {
                 null => null,
-                IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture),
-                _ => value.ToString()
+                IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture) ?? string.Empty,
+                _ => value.ToString() ?? string.Empty
             }).SetInputAttribute("data-dmb-slider", "true")
                 .SetVariant(DMBPageBuilder.VariantStyle.Primary);
         }
@@ -164,7 +164,7 @@ namespace DMBFormBuilder
             return value switch
             {
                 null => string.Empty,
-                IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture),
+                IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture) ?? string.Empty,
                 _ => value.ToString() ?? string.Empty
             };
         }

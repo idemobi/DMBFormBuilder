@@ -145,7 +145,7 @@ namespace DMBFormBuilder
         /// <summary>
         /// Enables or disables all rendered flag inputs.
         /// </summary>
-        public FlagFieldBuilder SetDisabled(bool disabled = true)
+        public new FlagFieldBuilder SetDisabled(bool disabled = true)
         {
             _disabled = disabled;
             return this;

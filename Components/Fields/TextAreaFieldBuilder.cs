@@ -152,7 +152,7 @@ namespace DMBFormBuilder
         /// <summary>
         /// Enables or disables the rendered textarea.
         /// </summary>
-        public TextAreaFieldBuilder SetDisabled(bool disabled = true)
+        public new TextAreaFieldBuilder SetDisabled(bool disabled = true)
         {
             _disabled = disabled;
             return this;

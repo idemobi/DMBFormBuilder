@@ -206,7 +206,7 @@ namespace DMBFormBuilder
         /// </summary>
         /// <param name="disabled"><see langword="true"/> to render the <c>disabled</c> attribute.</param>
         /// <returns>The current <see cref="TextFieldBuilder"/> instance for fluent chaining.</returns>
-        public TextFieldBuilder SetDisabled(bool disabled = true)
+        public new TextFieldBuilder SetDisabled(bool disabled = true)
         {
             _disabled = disabled;
             return this;

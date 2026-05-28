@@ -136,7 +136,7 @@ namespace DMBFormBuilder
         /// <summary>
         /// Enables or disables the rendered token input.
         /// </summary>
-        public TokenFieldBuilder SetDisabled(bool disabled = true)
+        public new TokenFieldBuilder SetDisabled(bool disabled = true)
         {
             _disabled = disabled;
             return this;

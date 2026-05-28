@@ -175,7 +175,7 @@ namespace DMBFormBuilder
         /// <summary>
         /// Enables or disables the rendered select control.
         /// </summary>
-        public SelectFieldBuilder SetDisabled(bool disabled = true)
+        public new SelectFieldBuilder SetDisabled(bool disabled = true)
         {
             _disabled = disabled;
             return this;

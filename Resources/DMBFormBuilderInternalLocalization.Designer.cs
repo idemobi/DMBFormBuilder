@@ -4,6 +4,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#nullable enable
+
 namespace DMBFormBuilder.Resources
 {
     using System;
@@ -51,43 +53,23 @@ namespace DMBFormBuilder.Resources
         }
 
         /// <summary>
-
-
         /// Gets the localized string for the <c>FormBuilder_Captcha_Invalid_Message</c> resource.
-
-
         /// </summary>
-
         public static string FormBuilder_Captcha_Invalid_Message => ResourceManager.GetString("FormBuilder_Captcha_Invalid_Message", resourceCulture) ?? string.Empty;
 
         /// <summary>
-
-
         /// Gets the localized string for the <c>FormBuilder_Captcha_Invalid_Title</c> resource.
-
-
         /// </summary>
-
         public static string FormBuilder_Captcha_Invalid_Title => ResourceManager.GetString("FormBuilder_Captcha_Invalid_Title", resourceCulture) ?? string.Empty;
 
         /// <summary>
-
-
         /// Gets the localized string for the <c>FormBuilder_Captcha_Valid_Message</c> resource.
-
-
         /// </summary>
-
         public static string FormBuilder_Captcha_Valid_Message => ResourceManager.GetString("FormBuilder_Captcha_Valid_Message", resourceCulture) ?? string.Empty;
 
         /// <summary>
-
-
         /// Gets the localized string for the <c>FormBuilder_Captcha_Valid_Title</c> resource.
-
-
         /// </summary>
-
         public static string FormBuilder_Captcha_Valid_Title => ResourceManager.GetString("FormBuilder_Captcha_Valid_Title", resourceCulture) ?? string.Empty;
     }
 }

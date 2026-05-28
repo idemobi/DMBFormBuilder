@@ -137,7 +137,7 @@ namespace DMBFormBuilder
         private static string ResolveEnumDisplay<TEnum>(TEnum option)
             where TEnum : struct, Enum
         {
-            string optionName = option.ToString();
+            string optionName = option.ToString() ?? string.Empty;
             MemberInfo? member = typeof(TEnum).GetMember(optionName).FirstOrDefault();
             DisplayAttribute? display = member?.GetCustomAttribute<DisplayAttribute>();
             return WebLocalizer.GetDataAnnotation(display?.Name ?? optionName);

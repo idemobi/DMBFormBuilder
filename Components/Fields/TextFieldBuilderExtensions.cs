@@ -187,7 +187,7 @@ namespace DMBFormBuilder
             return value switch
             {
                 null => string.Empty,
-                IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture),
+                IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture) ?? string.Empty,
                 _ => value.ToString() ?? string.Empty
             };
         }

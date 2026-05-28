@@ -129,7 +129,7 @@ namespace DMBFormBuilder
         /// </summary>
         /// <param name="disabled"><see langword="true"/> to render the <c>disabled</c> attribute.</param>
         /// <returns>The current <see cref="BooleanFieldBuilder"/> instance for fluent chaining.</returns>
-        public BooleanFieldBuilder SetDisabled(bool disabled = true)
+        public new BooleanFieldBuilder SetDisabled(bool disabled = true)
         {
             _disabled = disabled;
             return this;

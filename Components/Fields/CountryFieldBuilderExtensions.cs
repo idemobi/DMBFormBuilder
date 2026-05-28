@@ -131,7 +131,7 @@ namespace DMBFormBuilder
 
         private static string? NormalizeEnumCountryCode(Enum enumValue)
         {
-            string enumName = enumValue.ToString();
+            string enumName = enumValue.ToString() ?? string.Empty;
             if (enumName.Length == 2)
             {
                 return enumName.ToUpperInvariant();

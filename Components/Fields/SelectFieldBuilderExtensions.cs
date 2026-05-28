@@ -96,7 +96,7 @@ namespace DMBFormBuilder
 
             foreach (TEnum option in Enum.GetValues<TEnum>())
             {
-                string name = option.ToString();
+                string name = option.ToString() ?? string.Empty;
                 builder.AddOption(name, WebLocalizer.GetDataAnnotation(name));
             }
 

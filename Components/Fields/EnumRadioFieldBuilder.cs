@@ -140,7 +140,7 @@ namespace DMBFormBuilder
         /// <summary>
         /// Enables or disables all rendered radio inputs.
         /// </summary>
-        public EnumRadioFieldBuilder SetDisabled(bool disabled = true)
+        public new EnumRadioFieldBuilder SetDisabled(bool disabled = true)
         {
             _disabled = disabled;
             return this;
