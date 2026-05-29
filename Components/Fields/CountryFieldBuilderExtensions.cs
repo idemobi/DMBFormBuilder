@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj CountryFieldBuilderExtensions.cs create at 2026/05/13
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -15,7 +13,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using DMBFormBuilder.Resources;
 using DMBServerHelper;
-using DMBServerWebHelper;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 #endregion
@@ -23,19 +20,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DMBFormBuilder
 {
     /// <summary>
-    /// Provides Razor helpers for country selection fields based on <see cref="SelectFieldBuilder"/>.
+    ///     Provides Razor helpers for country selection fields based on <see cref="SelectFieldBuilder" />.
     /// </summary>
     public static class CountryFieldBuilderExtensions
     {
+        #region Static methods
+
         /// <summary>
-        /// Creates a localized country selector bound to a model property expression.
+        ///     Creates a localized country selector bound to a model property expression.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <typeparam name="TProperty">The bound property type.</typeparam>
         /// <param name="html">The strongly typed HTML helper.</param>
         /// <param name="expression">A member expression used to derive input metadata, value, label, and validation attributes.</param>
-        /// <returns>A <see cref="SelectFieldBuilder"/> populated with ISO region options and a current-country quick action.</returns>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="expression"/> is not a member expression.</exception>
+        /// <returns>A <see cref="SelectFieldBuilder" /> populated with ISO region options and a current-country quick action.</returns>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="expression" /> is not a member expression.</exception>
         public static SelectFieldBuilder CountryFieldBuilderFor<TModel, TProperty>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression)
         {
             if (expression.Body is not MemberExpression memberExpression)
@@ -98,6 +97,32 @@ namespace DMBFormBuilder
                 .SetDescription(description);
         }
 
+        private static IEnumerable<KeyValuePair<string, string>> GetCountries()
+        {
+            HashSet<string> seen = new(StringComparer.OrdinalIgnoreCase);
+            List<KeyValuePair<string, string>> countries = [];
+
+            foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
+            {
+                try
+                {
+                    RegionInfo region = new(culture.Name);
+                    string code = region.TwoLetterISORegionName.ToUpperInvariant();
+                    if (!seen.Add(code))
+                    {
+                        continue;
+                    }
+
+                    countries.Add(new KeyValuePair<string, string>(code, region.EnglishName));
+                }
+                catch (ArgumentException)
+                {
+                }
+            }
+
+            return countries.OrderBy(x => x.Value, StringComparer.OrdinalIgnoreCase);
+        }
+
         private static string? NormalizeCountryCode(object? rawValue)
         {
             if (rawValue == null)
@@ -152,30 +177,6 @@ namespace DMBFormBuilder
             return null;
         }
 
-        private static IEnumerable<KeyValuePair<string, string>> GetCountries()
-        {
-            HashSet<string> seen = new(StringComparer.OrdinalIgnoreCase);
-            List<KeyValuePair<string, string>> countries = [];
-
-            foreach (CultureInfo culture in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
-            {
-                try
-                {
-                    RegionInfo region = new(culture.Name);
-                    string code = region.TwoLetterISORegionName.ToUpperInvariant();
-                    if (!seen.Add(code))
-                    {
-                        continue;
-                    }
-
-                    countries.Add(new KeyValuePair<string, string>(code, region.EnglishName));
-                }
-                catch (ArgumentException)
-                {
-                }
-            }
-
-            return countries.OrderBy(x => x.Value, StringComparer.OrdinalIgnoreCase);
-        }
+        #endregion
     }
 }

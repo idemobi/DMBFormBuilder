@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj EnumRadioFieldBuilderExtensions.cs create at 2026/05/13
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -21,40 +19,42 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DMBFormBuilder
 {
     /// <summary>
-    /// Provides Razor helper entry points for enum radio groups.
+    ///     Provides Razor helper entry points for enum radio groups.
     /// </summary>
     public static class EnumRadioFieldBuilderExtensions
     {
+        #region Static methods
+
         /// <summary>
-        /// Creates an enum radio field builder for a non-generic Razor view.
+        ///     Creates an enum radio field builder for a non-generic Razor view.
         /// </summary>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>An <see cref="EnumRadioFieldBuilder"/> writing to the current view output.</returns>
+        /// <returns>An <see cref="EnumRadioFieldBuilder" /> writing to the current view output.</returns>
         public static EnumRadioFieldBuilder EnumRadioFieldBuilder(this IHtmlHelper html)
         {
             return new EnumRadioFieldBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates an enum radio field builder for a strongly typed Razor view.
+        ///     Creates an enum radio field builder for a strongly typed Razor view.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>An <see cref="EnumRadioFieldBuilder"/> writing to the current view output.</returns>
+        /// <returns>An <see cref="EnumRadioFieldBuilder" /> writing to the current view output.</returns>
         public static EnumRadioFieldBuilder EnumRadioFieldBuilder<TModel>(this IHtmlHelper<TModel> html)
         {
             return new EnumRadioFieldBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates a radio group bound to an enum model property and populates one radio input per enum value.
+        ///     Creates a radio group bound to an enum model property and populates one radio input per enum value.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <typeparam name="TEnum">The enum type used to populate radio options.</typeparam>
         /// <param name="html">The strongly typed HTML helper.</param>
         /// <param name="expression">A member expression used to derive field metadata, selected value, and validation attributes.</param>
-        /// <returns>A configured <see cref="EnumRadioFieldBuilder"/> for the selected enum property.</returns>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="expression"/> is not a member expression.</exception>
+        /// <returns>A configured <see cref="EnumRadioFieldBuilder" /> for the selected enum property.</returns>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="expression" /> is not a member expression.</exception>
         public static EnumRadioFieldBuilder EnumRadioFieldBuilderFor<TModel, TEnum>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TEnum>> expression)
             where TEnum : struct, Enum
         {
@@ -114,5 +114,7 @@ namespace DMBFormBuilder
             DisplayAttribute? display = member?.GetCustomAttribute<DisplayAttribute>();
             return WebLocalizer.GetDataAnnotation(display?.Name ?? optionName);
         }
+
+        #endregion
     }
 }

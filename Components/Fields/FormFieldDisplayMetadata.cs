@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj FormFieldDisplayMetadata.cs create at 2026/05/17
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -18,6 +16,8 @@ namespace DMBFormBuilder
 {
     internal static class FormFieldDisplayMetadata
     {
+        #region Static methods
+
         internal static string ResolveDescription(DisplayAttribute? display)
         {
             string? description = display?.GetDescription();
@@ -28,5 +28,7 @@ namespace DMBFormBuilder
 
             return WebLocalizer.GetDataAnnotation(description);
         }
+
+        #endregion
     }
 }

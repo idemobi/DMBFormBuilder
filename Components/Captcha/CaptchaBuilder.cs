@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj CaptchaBuilder.cs create at 2026/05/12
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -11,8 +9,8 @@
 
 using System.Text.Encodings.Web;
 using DMBBootstrapBuilder;
-using DMBPageBuilder;
 using DMBFormBuilder.Resources;
+using DMBPageBuilder;
 using DMBServerHelper;
 using DMBServerWebHelper;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,34 +20,70 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DMBFormBuilder
 {
     /// <summary>
-    /// Builds a captcha input group backed by FormBuilder captcha generation and refresh behavior.
+    ///     Builds a captcha input group backed by FormBuilder captcha generation and refresh behavior.
     /// </summary>
     public sealed class CaptchaBuilder :
         HtmlBuilderBase<CaptchaBuilder>,
         ICanUseCustomClasses
     {
-        private const string ScriptPath = "/js/formbuilder/CaptchaBuilder.js";
+        #region Constants
+
         private const string CryptoJsPath = "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js";
+        private const string ScriptPath = "/js/formbuilder/CaptchaBuilder.js";
+
+        #endregion
+
+        #region Static methods
+
+        private static void WriteAttribute(TextWriter writer, HtmlEncoder encoder, string name, string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return;
+            }
+
+            writer.Write(' ');
+            writer.Write(name);
+            writer.Write("=\"");
+            encoder.Encode(writer, value);
+            writer.Write('"');
+        }
+
+        private static void WriteFeedback(TextWriter writer, HtmlEncoder encoder, string requiredMessage)
+        {
+            writer.Write("<div class=\"invalid-feedback\">");
+            encoder.Encode(writer, requiredMessage);
+            writer.Write("</div>");
+        }
+
+        #endregion
+
+        #region Instance fields and properties
+
+        private string _alt = "Captcha";
+        private string _description = string.Empty;
+        private bool _disabled;
+        private int _imageHeight = 30;
 
         private readonly Dictionary<string, string> _inputAttributes = new(StringComparer.OrdinalIgnoreCase);
 
         private string _inputId = "CaptchaValue";
         private string _inputName = "CaptchaValue";
         private string _label = "Captcha";
-        private string _description = string.Empty;
-        private string _placeholder = "Captcha";
-        private string _refreshUrl = "/Captcha/RefreshCaptcha";
-        private string _alt = "Captcha";
-        private int _imageHeight = 30;
-        private bool _disabled;
-        private bool _required = true;
-        private FormLabelPresentation _presentation = FormBuilderConfiguration.Default.LabelPresentation;
         private IconStruct _labelIcon = IconStruct.Empty;
+        private string _placeholder = "Captcha";
+        private FormLabelPresentation _presentation = FormBuilderConfiguration.Default.LabelPresentation;
+        private string _refreshUrl = "/Captcha/RefreshCaptcha";
         private VariantStyle _refreshVariant = VariantStyle.Primary;
         private ButtonVariantMode _refreshVariantMode = ButtonVariantMode.Filled;
+        private bool _required = true;
+
+        #endregion
+
+        #region Instance constructors and destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CaptchaBuilder"/> class.
+        ///     Initializes a new instance of the <see cref="CaptchaBuilder" /> class.
         /// </summary>
         /// <param name="writer">The output writer used by the current Razor view.</param>
         /// <param name="html">The HTML helper that supplies the current view context.</param>
@@ -61,179 +95,24 @@ namespace DMBFormBuilder
             SetData("dmb-captcha", "true");
         }
 
-        /// <summary>
-        /// Sets the captcha input identifier and model binding name.
-        /// </summary>
-        public CaptchaBuilder SetInput(string inputId, string inputName)
-        {
-            if (!string.IsNullOrWhiteSpace(inputId))
-            {
-                _inputId = inputId;
-            }
+        #endregion
 
-            if (!string.IsNullOrWhiteSpace(inputName))
-            {
-                _inputName = inputName;
-            }
+        #region Instance methods
 
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the captcha label when a non-empty value is provided.
-        /// </summary>
-        public CaptchaBuilder SetLabel(string? label)
-        {
-            if (!string.IsNullOrWhiteSpace(label))
-            {
-                _label = label;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the optional description rendered as an information popover next to the captcha label.
-        /// </summary>
-        /// <param name="description">The popover content, or an empty value to omit the information trigger.</param>
-        /// <returns>The current <see cref="CaptchaBuilder"/> instance for fluent chaining.</returns>
-        public CaptchaBuilder SetDescription(string? description)
-        {
-            _description = description ?? string.Empty;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets how the captcha label is positioned or hidden.
-        /// </summary>
-        public CaptchaBuilder SetLabelPresentation(FormLabelPresentation presentation)
-        {
-            _presentation = presentation;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the icon rendered with the captcha label.
-        /// </summary>
-        public CaptchaBuilder SetLabelIcon(IconStruct icon)
-        {
-            _labelIcon = icon;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the captcha input placeholder when a non-empty value is provided.
-        /// </summary>
-        public CaptchaBuilder SetPlaceholder(string? placeholder)
-        {
-            if (!string.IsNullOrWhiteSpace(placeholder))
-            {
-                _placeholder = placeholder;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the endpoint URL used by the captcha refresh button.
-        /// </summary>
-        public CaptchaBuilder SetRefreshUrl(string? refreshUrl)
-        {
-            if (!string.IsNullOrWhiteSpace(refreshUrl))
-            {
-                _refreshUrl = refreshUrl;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the captcha image height when the value is greater than zero.
-        /// </summary>
-        public CaptchaBuilder SetImageHeight(int imageHeight)
-        {
-            if (imageHeight > 0)
-            {
-                _imageHeight = imageHeight;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the alternative text rendered on the captcha image.
-        /// </summary>
-        public CaptchaBuilder SetAlt(string? alt)
-        {
-            if (!string.IsNullOrWhiteSpace(alt))
-            {
-                _alt = alt;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Enables or disables the captcha input and refresh control.
-        /// </summary>
-        public new CaptchaBuilder SetDisabled(bool disabled = true)
-        {
-            _disabled = disabled;
-            return this;
-        }
-
-        /// <summary>
-        /// Enables or disables required validation for the captcha input.
-        /// </summary>
-        public CaptchaBuilder SetRequired(bool required = true)
-        {
-            _required = required;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the Bootstrap variant used by the captcha refresh button.
-        /// </summary>
-        public CaptchaBuilder SetRefreshVariant(VariantStyle variant, ButtonVariantMode variantMode = ButtonVariantMode.Filled)
-        {
-            _refreshVariant = variant;
-            _refreshVariantMode = variantMode;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets or replaces an attribute on the rendered captcha input.
-        /// </summary>
-        public CaptchaBuilder SetInputAttribute(string name, string? value)
-        {
-            if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(value))
-            {
-                _inputAttributes[name] = value;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets or replaces multiple attributes on the rendered captcha input.
-        /// </summary>
-        public CaptchaBuilder SetInputAttributes(IEnumerable<KeyValuePair<string, string>> attributes)
-        {
-            foreach (KeyValuePair<string, string> attribute in attributes)
-            {
-                SetInputAttribute(attribute.Key, attribute.Value);
-            }
-
-            return this;
-        }
-
-        /// <inheritdoc/>
+        /// <inheritdoc />
         protected override CaptchaBuilder CreateInstance()
         {
             return new CaptchaBuilder(_textWriter, _htmlHelper);
         }
 
-        /// <inheritdoc/>
+        private void EnsureAssets()
+        {
+            PageInformation page = PageRegistry.GetOrCreatePageInformation(_htmlHelper.ViewContext.HttpContext);
+            page.SetScriptFile(CryptoJsPath, order: -10);
+            page.SetScriptFile(ScriptPath);
+        }
+
+        /// <inheritdoc />
         protected override void InternalClone(CaptchaBuilder source)
         {
             base.InternalClone(source);
@@ -260,92 +139,169 @@ namespace DMBFormBuilder
         }
 
         /// <summary>
-        /// Writes the complete captcha field markup, creates the captcha image payload, and registers client refresh scripts.
+        ///     Sets the alternative text rendered on the captcha image.
         /// </summary>
-        protected override void WriteToCore(TextWriter writer, HtmlEncoder encoder)
+        public CaptchaBuilder SetAlt(string? alt)
         {
-            EnsureAssets();
-
-            string imageBase64 = CaptchaFactory.RandomCaptchaToImage(_htmlHelper.ViewContext.HttpContext, ServerWebHelperConfiguration.Config.CaptchaParameters);
-            string captcha = CaptchaFactory.GetStoredCaptcha(_htmlHelper.ViewContext.HttpContext);
-            string hash = SecurityHashTools.GenerateSha256(captcha);
-            string value = string.Empty;
-            string invalidMessage = WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Captcha_Invalid));
-            string requiredMessage = WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Captcha_Required));
-            string imageErrorMessage = WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Captcha_Image_Error));
-
-#if DEBUG
-            value = captcha;
-#endif
-
-            SetData("dmb-captcha-refresh-url", _refreshUrl);
-
-            writer.Write($"<{_tag}{BuildAttributes()}>");
-            switch (_presentation)
+            if (!string.IsNullOrWhiteSpace(alt))
             {
-                case FormLabelPresentation.Floating:
-                    WriteFloating(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value);
-                    break;
-                case FormLabelPresentation.Hidden:
-                    WriteFieldLabel(writer, encoder, "visually-hidden");
-                    WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: false);
-                    break;
-                case FormLabelPresentation.Inline:
-                    WriteInline(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value);
-                    break;
-                case FormLabelPresentation.Group:
-                    WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: true);
-                    break;
-                case FormLabelPresentation.Normal:
-                default:
-                    WriteFieldLabel(writer, encoder, "form-label");
-                    WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: false);
-                    break;
+                _alt = alt;
             }
-            writer.Write($"</{_tag}>");
+
+            return this;
         }
 
-        private void WriteFloating(TextWriter writer, HtmlEncoder encoder, string imageBase64, string imageErrorMessage, string hash, string invalidMessage, string requiredMessage, string value)
+        /// <summary>
+        ///     Sets the optional description rendered as an information popover next to the captcha label.
+        /// </summary>
+        /// <param name="description">The popover content, or an empty value to omit the information trigger.</param>
+        /// <returns>The current <see cref="CaptchaBuilder" /> instance for fluent chaining.</returns>
+        public CaptchaBuilder SetDescription(string? description)
         {
-            writer.Write("<div class=\"form-control dmb-captcha-floating-control\">");
-            WriteFieldLabel(writer, encoder, "dmb-captcha-floating-label");
-            WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: false);
-            writer.Write("</div>");
+            _description = description ?? string.Empty;
+            return this;
         }
 
-        private void WriteInline(TextWriter writer, HtmlEncoder encoder, string imageBase64, string imageErrorMessage, string hash, string invalidMessage, string requiredMessage, string value)
+        /// <summary>
+        ///     Enables or disables the captcha input and refresh control.
+        /// </summary>
+        public new CaptchaBuilder SetDisabled(bool disabled = true)
         {
-            writer.Write("<div class=\"row g-2 align-items-start\">");
-            writer.Write("<div class=\"col-sm-4\">");
-            WriteFieldLabel(writer, encoder, "col-form-label");
-            writer.Write("</div><div class=\"col-sm-8\">");
-            WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: false);
-            writer.Write("</div></div>");
+            _disabled = disabled;
+            return this;
         }
 
-        private void WriteInputGroup(TextWriter writer, HtmlEncoder encoder, string imageBase64, string imageErrorMessage, string hash, string invalidMessage, string requiredMessage, string value, bool includeLabelInGroup)
+        /// <summary>
+        ///     Sets the captcha image height when the value is greater than zero.
+        /// </summary>
+        public CaptchaBuilder SetImageHeight(int imageHeight)
         {
-            writer.Write("<div class=\"input-group has-validation\">");
-            if (includeLabelInGroup)
+            if (imageHeight > 0)
             {
-                WriteFieldLabel(writer, encoder, "input-group-text dmb-captcha-group-label");
+                _imageHeight = imageHeight;
             }
-            WriteImageLabel(writer, encoder, imageBase64, imageErrorMessage);
-            WriteInput(writer, encoder,
-                hash,
-                invalidMessage,
-                requiredMessage,
-                value);
-            WriteRefreshButton(writer, encoder);
-            WriteFeedback(writer, encoder, requiredMessage);
-            writer.Write("</div>");
+
+            return this;
         }
 
-        private void EnsureAssets()
+        /// <summary>
+        ///     Sets the captcha input identifier and model binding name.
+        /// </summary>
+        public CaptchaBuilder SetInput(string inputId, string inputName)
         {
-            PageInformation page = PageRegistry.GetOrCreatePageInformation(_htmlHelper.ViewContext.HttpContext);
-            page.SetScriptFile(CryptoJsPath, order: -10);
-            page.SetScriptFile(ScriptPath);
+            if (!string.IsNullOrWhiteSpace(inputId))
+            {
+                _inputId = inputId;
+            }
+
+            if (!string.IsNullOrWhiteSpace(inputName))
+            {
+                _inputName = inputName;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets or replaces an attribute on the rendered captcha input.
+        /// </summary>
+        public CaptchaBuilder SetInputAttribute(string name, string? value)
+        {
+            if (!string.IsNullOrWhiteSpace(name) && !string.IsNullOrWhiteSpace(value))
+            {
+                _inputAttributes[name] = value;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets or replaces multiple attributes on the rendered captcha input.
+        /// </summary>
+        public CaptchaBuilder SetInputAttributes(IEnumerable<KeyValuePair<string, string>> attributes)
+        {
+            foreach (KeyValuePair<string, string> attribute in attributes)
+            {
+                SetInputAttribute(attribute.Key, attribute.Value);
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the captcha label when a non-empty value is provided.
+        /// </summary>
+        public CaptchaBuilder SetLabel(string? label)
+        {
+            if (!string.IsNullOrWhiteSpace(label))
+            {
+                _label = label;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the icon rendered with the captcha label.
+        /// </summary>
+        public CaptchaBuilder SetLabelIcon(IconStruct icon)
+        {
+            _labelIcon = icon;
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets how the captcha label is positioned or hidden.
+        /// </summary>
+        public CaptchaBuilder SetLabelPresentation(FormLabelPresentation presentation)
+        {
+            _presentation = presentation;
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the captcha input placeholder when a non-empty value is provided.
+        /// </summary>
+        public CaptchaBuilder SetPlaceholder(string? placeholder)
+        {
+            if (!string.IsNullOrWhiteSpace(placeholder))
+            {
+                _placeholder = placeholder;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the endpoint URL used by the captcha refresh button.
+        /// </summary>
+        public CaptchaBuilder SetRefreshUrl(string? refreshUrl)
+        {
+            if (!string.IsNullOrWhiteSpace(refreshUrl))
+            {
+                _refreshUrl = refreshUrl;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the Bootstrap variant used by the captcha refresh button.
+        /// </summary>
+        public CaptchaBuilder SetRefreshVariant(VariantStyle variant, ButtonVariantMode variantMode = ButtonVariantMode.Filled)
+        {
+            _refreshVariant = variant;
+            _refreshVariantMode = variantMode;
+            return this;
+        }
+
+        /// <summary>
+        ///     Enables or disables required validation for the captcha input.
+        /// </summary>
+        public CaptchaBuilder SetRequired(bool required = true)
+        {
+            _required = required;
+            return this;
         }
 
         private void WriteFieldLabel(TextWriter writer, HtmlEncoder encoder, string cssClass)
@@ -361,10 +317,12 @@ namespace DMBFormBuilder
             {
                 writer.Write("<span class=\"text-danger ms-1\" aria-hidden=\"true\">*</span>");
             }
+
             if (!writeDescriptionAfterLabel)
             {
                 FormFieldDescriptionPopoverRenderer.Write(writer, encoder, _description);
             }
+
             writer.Write("</label>");
             if (writeDescriptionAfterLabel)
             {
@@ -372,14 +330,21 @@ namespace DMBFormBuilder
             }
         }
 
-        private void WriteLabelIcon(TextWriter writer, HtmlEncoder encoder)
+        private void WriteFloating(
+            TextWriter writer,
+            HtmlEncoder encoder,
+            string imageBase64,
+            string imageErrorMessage,
+            string hash,
+            string invalidMessage,
+            string requiredMessage,
+            string value
+        )
         {
-            if (_labelIcon.IsEmpty)
-            {
-                return;
-            }
-
-            HtmlLayoutExtensions.IconBuilder(_htmlHelper, _labelIcon, "me-1").WriteTo(writer, encoder);
+            writer.Write("<div class=\"form-control dmb-captcha-floating-control\">");
+            WriteFieldLabel(writer, encoder, "dmb-captcha-floating-label");
+            WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: false);
+            writer.Write("</div>");
         }
 
         private void WriteImageLabel(TextWriter writer, HtmlEncoder encoder, string imageBase64, string imageErrorMessage)
@@ -405,7 +370,33 @@ namespace DMBFormBuilder
             writer.Write("</span>");
         }
 
-        private void WriteInput(TextWriter writer, HtmlEncoder encoder, string hash, string invalidMessage, string requiredMessage, string value)
+        private void WriteInline(
+            TextWriter writer,
+            HtmlEncoder encoder,
+            string imageBase64,
+            string imageErrorMessage,
+            string hash,
+            string invalidMessage,
+            string requiredMessage,
+            string value
+        )
+        {
+            writer.Write("<div class=\"row g-2 align-items-start\">");
+            writer.Write("<div class=\"col-sm-4\">");
+            WriteFieldLabel(writer, encoder, "col-form-label");
+            writer.Write("</div><div class=\"col-sm-8\">");
+            WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: false);
+            writer.Write("</div></div>");
+        }
+
+        private void WriteInput(
+            TextWriter writer,
+            HtmlEncoder encoder,
+            string hash,
+            string invalidMessage,
+            string requiredMessage,
+            string value
+        )
         {
             writer.Write("<input class=\"form-control\" type=\"text\"");
             WriteAttribute(writer, encoder, "id", _inputId);
@@ -445,6 +436,45 @@ namespace DMBFormBuilder
             writer.Write(">");
         }
 
+        private void WriteInputGroup(
+            TextWriter writer,
+            HtmlEncoder encoder,
+            string imageBase64,
+            string imageErrorMessage,
+            string hash,
+            string invalidMessage,
+            string requiredMessage,
+            string value,
+            bool includeLabelInGroup
+        )
+        {
+            writer.Write("<div class=\"input-group has-validation\">");
+            if (includeLabelInGroup)
+            {
+                WriteFieldLabel(writer, encoder, "input-group-text dmb-captcha-group-label");
+            }
+
+            WriteImageLabel(writer, encoder, imageBase64, imageErrorMessage);
+            WriteInput(writer, encoder,
+                hash,
+                invalidMessage,
+                requiredMessage,
+                value);
+            WriteRefreshButton(writer, encoder);
+            WriteFeedback(writer, encoder, requiredMessage);
+            writer.Write("</div>");
+        }
+
+        private void WriteLabelIcon(TextWriter writer, HtmlEncoder encoder)
+        {
+            if (_labelIcon.IsEmpty)
+            {
+                return;
+            }
+
+            HtmlLayoutExtensions.IconBuilder(_htmlHelper, _labelIcon, "me-1").WriteTo(writer, encoder);
+        }
+
         private void WriteRefreshButton(TextWriter writer, HtmlEncoder encoder)
         {
             writer.Write("<button type=\"button\"");
@@ -459,25 +489,53 @@ namespace DMBFormBuilder
             writer.Write("><span class=\"bi bi-arrow-repeat\"></span></button>");
         }
 
-        private static void WriteFeedback(TextWriter writer, HtmlEncoder encoder, string requiredMessage)
+        /// <summary>
+        ///     Writes the complete captcha field markup, creates the captcha image payload, and registers client refresh scripts.
+        /// </summary>
+        protected override void WriteToCore(TextWriter writer, HtmlEncoder encoder)
         {
-            writer.Write("<div class=\"invalid-feedback\">");
-            encoder.Encode(writer, requiredMessage);
-            writer.Write("</div>");
-        }
+            EnsureAssets();
 
-        private static void WriteAttribute(TextWriter writer, HtmlEncoder encoder, string name, string? value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
+            string imageBase64 = CaptchaFactory.RandomCaptchaToImage(_htmlHelper.ViewContext.HttpContext, ServerWebHelperConfiguration.Config.CaptchaParameters);
+            string captcha = CaptchaFactory.GetStoredCaptcha(_htmlHelper.ViewContext.HttpContext);
+            string hash = SecurityHashTools.GenerateSha256(captcha);
+            string value = string.Empty;
+            string invalidMessage = WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Captcha_Invalid));
+            string requiredMessage = WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Captcha_Required));
+            string imageErrorMessage = WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Captcha_Image_Error));
+
+            #if DEBUG
+            value = captcha;
+            #endif
+
+            SetData("dmb-captcha-refresh-url", _refreshUrl);
+
+            writer.Write($"<{_tag}{BuildAttributes()}>");
+            switch (_presentation)
             {
-                return;
+                case FormLabelPresentation.Floating:
+                    WriteFloating(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value);
+                break;
+                case FormLabelPresentation.Hidden:
+                    WriteFieldLabel(writer, encoder, "visually-hidden");
+                    WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: false);
+                break;
+                case FormLabelPresentation.Inline:
+                    WriteInline(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value);
+                break;
+                case FormLabelPresentation.Group:
+                    WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: true);
+                break;
+                case FormLabelPresentation.Normal:
+                default:
+                    WriteFieldLabel(writer, encoder, "form-label");
+                    WriteInputGroup(writer, encoder, imageBase64, imageErrorMessage, hash, invalidMessage, requiredMessage, value, includeLabelInGroup: false);
+                break;
             }
 
-            writer.Write(' ');
-            writer.Write(name);
-            writer.Write("=\"");
-            encoder.Encode(writer, value);
-            writer.Write('"');
+            writer.Write($"</{_tag}>");
         }
+
+        #endregion
     }
 }

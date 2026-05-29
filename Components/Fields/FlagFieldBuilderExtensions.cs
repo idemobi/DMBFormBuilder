@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj FlagFieldBuilderExtensions.cs create at 2026/05/13
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -21,58 +19,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DMBFormBuilder
 {
     /// <summary>
-    /// Provides Razor helper entry points for flags enum fields.
+    ///     Provides Razor helper entry points for flags enum fields.
     /// </summary>
     public static class FlagFieldBuilderExtensions
     {
-        /// <summary>
-        /// Creates a flags field builder for a non-generic Razor view.
-        /// </summary>
-        /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="FlagFieldBuilder"/> writing to the current view output.</returns>
-        public static FlagFieldBuilder FlagFieldBuilder(this IHtmlHelper html)
-        {
-            return new FlagFieldBuilder(html.ViewContext.Writer, html);
-        }
-
-        /// <summary>
-        /// Creates a flags field builder for a strongly typed Razor view.
-        /// </summary>
-        /// <typeparam name="TModel">The Razor view model type.</typeparam>
-        /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="FlagFieldBuilder"/> writing to the current view output.</returns>
-        public static FlagFieldBuilder FlagFieldBuilder<TModel>(this IHtmlHelper<TModel> html)
-        {
-            return new FlagFieldBuilder(html.ViewContext.Writer, html);
-        }
-
-        /// <summary>
-        /// Creates a checkbox flags field bound to an enum model property.
-        /// </summary>
-        /// <typeparam name="TModel">The Razor view model type.</typeparam>
-        /// <typeparam name="TEnum">The flags enum type used to populate options.</typeparam>
-        /// <param name="html">The strongly typed HTML helper.</param>
-        /// <param name="expression">A member expression used to derive field metadata, selected flags, and validation attributes.</param>
-        /// <returns>A configured <see cref="FlagFieldBuilder"/> rendered as a checkbox list.</returns>
-        public static FlagFieldBuilder FlagCheckboxFieldBuilderFor<TModel, TEnum>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TEnum>> expression)
-            where TEnum : struct, Enum
-        {
-            return CreateFlagFieldBuilderFor(html, expression, false);
-        }
-
-        /// <summary>
-        /// Creates a select flags field bound to an enum model property.
-        /// </summary>
-        /// <typeparam name="TModel">The Razor view model type.</typeparam>
-        /// <typeparam name="TEnum">The flags enum type used to populate options.</typeparam>
-        /// <param name="html">The strongly typed HTML helper.</param>
-        /// <param name="expression">A member expression used to derive field metadata, selected flags, and validation attributes.</param>
-        /// <returns>A configured <see cref="FlagFieldBuilder"/> rendered as a select control.</returns>
-        public static FlagFieldBuilder FlagSelectFieldBuilderFor<TModel, TEnum>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TEnum>> expression)
-            where TEnum : struct, Enum
-        {
-            return CreateFlagFieldBuilderFor(html, expression, true);
-        }
+        #region Static methods
 
         private static FlagFieldBuilder CreateFlagFieldBuilderFor<TModel, TEnum>(IHtmlHelper<TModel> html, Expression<Func<TModel, TEnum>> expression, bool asSelect)
             where TEnum : struct, Enum
@@ -134,6 +85,55 @@ namespace DMBFormBuilder
                 .SetDescription(description);
         }
 
+        /// <summary>
+        ///     Creates a checkbox flags field bound to an enum model property.
+        /// </summary>
+        /// <typeparam name="TModel">The Razor view model type.</typeparam>
+        /// <typeparam name="TEnum">The flags enum type used to populate options.</typeparam>
+        /// <param name="html">The strongly typed HTML helper.</param>
+        /// <param name="expression">A member expression used to derive field metadata, selected flags, and validation attributes.</param>
+        /// <returns>A configured <see cref="FlagFieldBuilder" /> rendered as a checkbox list.</returns>
+        public static FlagFieldBuilder FlagCheckboxFieldBuilderFor<TModel, TEnum>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TEnum>> expression)
+            where TEnum : struct, Enum
+        {
+            return CreateFlagFieldBuilderFor(html, expression, false);
+        }
+
+        /// <summary>
+        ///     Creates a flags field builder for a non-generic Razor view.
+        /// </summary>
+        /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
+        /// <returns>A <see cref="FlagFieldBuilder" /> writing to the current view output.</returns>
+        public static FlagFieldBuilder FlagFieldBuilder(this IHtmlHelper html)
+        {
+            return new FlagFieldBuilder(html.ViewContext.Writer, html);
+        }
+
+        /// <summary>
+        ///     Creates a flags field builder for a strongly typed Razor view.
+        /// </summary>
+        /// <typeparam name="TModel">The Razor view model type.</typeparam>
+        /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
+        /// <returns>A <see cref="FlagFieldBuilder" /> writing to the current view output.</returns>
+        public static FlagFieldBuilder FlagFieldBuilder<TModel>(this IHtmlHelper<TModel> html)
+        {
+            return new FlagFieldBuilder(html.ViewContext.Writer, html);
+        }
+
+        /// <summary>
+        ///     Creates a select flags field bound to an enum model property.
+        /// </summary>
+        /// <typeparam name="TModel">The Razor view model type.</typeparam>
+        /// <typeparam name="TEnum">The flags enum type used to populate options.</typeparam>
+        /// <param name="html">The strongly typed HTML helper.</param>
+        /// <param name="expression">A member expression used to derive field metadata, selected flags, and validation attributes.</param>
+        /// <returns>A configured <see cref="FlagFieldBuilder" /> rendered as a select control.</returns>
+        public static FlagFieldBuilder FlagSelectFieldBuilderFor<TModel, TEnum>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TEnum>> expression)
+            where TEnum : struct, Enum
+        {
+            return CreateFlagFieldBuilderFor(html, expression, true);
+        }
+
         private static string ResolveEnumDisplay<TEnum>(TEnum option)
             where TEnum : struct, Enum
         {
@@ -142,5 +142,7 @@ namespace DMBFormBuilder
             DisplayAttribute? display = member?.GetCustomAttribute<DisplayAttribute>();
             return WebLocalizer.GetDataAnnotation(display?.Name ?? optionName);
         }
+
+        #endregion
     }
 }

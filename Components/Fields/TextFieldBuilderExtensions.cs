@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj TextFieldBuilderExtensions.cs create at 2026/05/12
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -22,40 +20,92 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DMBFormBuilder
 {
     /// <summary>
-    /// Provides Razor helper entry points for <see cref="TextFieldBuilder"/>.
+    ///     Provides Razor helper entry points for <see cref="TextFieldBuilder" />.
     /// </summary>
     public static class TextFieldBuilderExtensions
     {
+        #region Static methods
+
+        private static string FormatValue(object? value)
+        {
+            return value switch
+            {
+                null => string.Empty,
+                IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture) ?? string.Empty,
+                _ => value.ToString() ?? string.Empty
+            };
+        }
+
+        private static bool IsDecimalType(Type type)
+        {
+            return type == typeof(float)
+                   || type == typeof(double)
+                   || type == typeof(decimal);
+        }
+
+        private static bool IsNumericType(Type type)
+        {
+            return type == typeof(byte)
+                   || type == typeof(sbyte)
+                   || type == typeof(short)
+                   || type == typeof(ushort)
+                   || type == typeof(int)
+                   || type == typeof(uint)
+                   || type == typeof(long)
+                   || type == typeof(ulong)
+                   || type == typeof(float)
+                   || type == typeof(double)
+                   || type == typeof(decimal);
+        }
+
+        private static string ResolveMessage(string? key, string fallbackKey)
+        {
+            return WebLocalizer.GetDataAnnotation(string.IsNullOrWhiteSpace(key) ? fallbackKey : key);
+        }
+
+        private static string ResolveRequiredMessage(RequiredAttribute required, string label)
+        {
+            if (!string.IsNullOrWhiteSpace(required.ErrorMessage))
+            {
+                return WebLocalizer.GetDataAnnotation(required.ErrorMessage, label);
+            }
+
+            return WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Required));
+        }
+
         /// <summary>
-        /// Creates a text field builder for a non-generic Razor view.
+        ///     Creates a text field builder for a non-generic Razor view.
         /// </summary>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="TextFieldBuilder"/> writing to the current view output.</returns>
+        /// <returns>A <see cref="TextFieldBuilder" /> writing to the current view output.</returns>
         public static TextFieldBuilder TextFieldBuilder(this IHtmlHelper html)
         {
             return new TextFieldBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates a text field builder for a strongly typed Razor view.
+        ///     Creates a text field builder for a strongly typed Razor view.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="TextFieldBuilder"/> writing to the current view output.</returns>
+        /// <returns>A <see cref="TextFieldBuilder" /> writing to the current view output.</returns>
         public static TextFieldBuilder TextFieldBuilder<TModel>(this IHtmlHelper<TModel> html)
         {
             return new TextFieldBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates a text field builder bound to a model property expression.
+        ///     Creates a text field builder bound to a model property expression.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <typeparam name="TProperty">The bound property type.</typeparam>
         /// <param name="html">The strongly typed HTML helper.</param>
-        /// <param name="expression">A member expression used to derive input name, identifier, value, label, prompt, and validation metadata.</param>
-        /// <returns>A configured <see cref="TextFieldBuilder"/> for the selected model property.</returns>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="expression"/> is not a member expression.</exception>
+        /// <param name="expression">
+        ///     A member expression used to derive input name, identifier, value, label, prompt, and
+        ///     validation metadata.
+        /// </param>
+        /// <returns>A configured <see cref="TextFieldBuilder" /> for the selected model property.</returns>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="expression" /> is not a member expression.</exception>
         public static TextFieldBuilder TextFieldBuilderFor<TModel, TProperty>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression)
         {
             if (expression.Body is not MemberExpression memberExpression)
@@ -152,51 +202,6 @@ namespace DMBFormBuilder
                 .SetPlaceholder(placeholder);
         }
 
-        private static string ResolveRequiredMessage(RequiredAttribute required, string label)
-        {
-            if (!string.IsNullOrWhiteSpace(required.ErrorMessage))
-            {
-                return WebLocalizer.GetDataAnnotation(required.ErrorMessage, label);
-            }
-
-            return WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Required));
-        }
-
-        private static string ResolveMessage(string? key, string fallbackKey)
-        {
-            return WebLocalizer.GetDataAnnotation(string.IsNullOrWhiteSpace(key) ? fallbackKey : key);
-        }
-
-        private static bool IsNumericType(Type type)
-        {
-            return type == typeof(byte)
-                   || type == typeof(sbyte)
-                   || type == typeof(short)
-                   || type == typeof(ushort)
-                   || type == typeof(int)
-                   || type == typeof(uint)
-                   || type == typeof(long)
-                   || type == typeof(ulong)
-                   || type == typeof(float)
-                   || type == typeof(double)
-                   || type == typeof(decimal);
-        }
-
-        private static string FormatValue(object? value)
-        {
-            return value switch
-            {
-                null => string.Empty,
-                IFormattable formattable => formattable.ToString(null, CultureInfo.InvariantCulture) ?? string.Empty,
-                _ => value.ToString() ?? string.Empty
-            };
-        }
-
-        private static bool IsDecimalType(Type type)
-        {
-            return type == typeof(float)
-                   || type == typeof(double)
-                   || type == typeof(decimal);
-        }
+        #endregion
     }
 }

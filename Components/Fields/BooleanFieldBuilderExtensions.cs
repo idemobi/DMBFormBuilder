@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj BooleanFieldBuilderExtensions.cs create at 2026/05/12
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -20,74 +18,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DMBFormBuilder
 {
     /// <summary>
-    /// Provides Razor helper entry points for checkbox and switch fields.
+    ///     Provides Razor helper entry points for checkbox and switch fields.
     /// </summary>
     public static class BooleanFieldBuilderExtensions
     {
+        #region Static methods
+
         /// <summary>
-        /// Creates a checkbox field builder for a non-generic Razor view.
+        ///     Creates a checkbox field builder for a non-generic Razor view.
         /// </summary>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="BooleanFieldBuilder"/> configured as a checkbox.</returns>
+        /// <returns>A <see cref="BooleanFieldBuilder" /> configured as a checkbox.</returns>
         public static BooleanFieldBuilder CheckboxFieldBuilder(this IHtmlHelper html)
         {
             return new BooleanFieldBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates a checkbox field builder for a strongly typed Razor view.
+        ///     Creates a checkbox field builder for a strongly typed Razor view.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="BooleanFieldBuilder"/> configured as a checkbox.</returns>
+        /// <returns>A <see cref="BooleanFieldBuilder" /> configured as a checkbox.</returns>
         public static BooleanFieldBuilder CheckboxFieldBuilder<TModel>(this IHtmlHelper<TModel> html)
         {
             return new BooleanFieldBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates a checkbox field builder bound to a Boolean model property.
+        ///     Creates a checkbox field builder bound to a Boolean model property.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <param name="html">The strongly typed HTML helper.</param>
         /// <param name="expression">A member expression used to derive field metadata and value.</param>
-        /// <returns>A configured <see cref="BooleanFieldBuilder"/> for the selected property.</returns>
+        /// <returns>A configured <see cref="BooleanFieldBuilder" /> for the selected property.</returns>
         public static BooleanFieldBuilder CheckboxFieldBuilderFor<TModel>(this IHtmlHelper<TModel> html, Expression<Func<TModel, bool>> expression)
         {
             return CreateBooleanBuilderFor(html, expression, false);
-        }
-
-        /// <summary>
-        /// Creates a switch field builder for a non-generic Razor view.
-        /// </summary>
-        /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="BooleanFieldBuilder"/> configured as a Bootstrap switch.</returns>
-        public static BooleanFieldBuilder SwitchFieldBuilder(this IHtmlHelper html)
-        {
-            return new BooleanFieldBuilder(html.ViewContext.Writer, html).AsSwitch();
-        }
-
-        /// <summary>
-        /// Creates a switch field builder for a strongly typed Razor view.
-        /// </summary>
-        /// <typeparam name="TModel">The Razor view model type.</typeparam>
-        /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="BooleanFieldBuilder"/> configured as a Bootstrap switch.</returns>
-        public static BooleanFieldBuilder SwitchFieldBuilder<TModel>(this IHtmlHelper<TModel> html)
-        {
-            return new BooleanFieldBuilder(html.ViewContext.Writer, html).AsSwitch();
-        }
-
-        /// <summary>
-        /// Creates a switch field builder bound to a Boolean model property.
-        /// </summary>
-        /// <typeparam name="TModel">The Razor view model type.</typeparam>
-        /// <param name="html">The strongly typed HTML helper.</param>
-        /// <param name="expression">A member expression used to derive field metadata and value.</param>
-        /// <returns>A configured <see cref="BooleanFieldBuilder"/> for the selected property.</returns>
-        public static BooleanFieldBuilder SwitchFieldBuilderFor<TModel>(this IHtmlHelper<TModel> html, Expression<Func<TModel, bool>> expression)
-        {
-            return CreateBooleanBuilderFor(html, expression, true);
         }
 
         private static BooleanFieldBuilder CreateBooleanBuilderFor<TModel>(IHtmlHelper<TModel> html, Expression<Func<TModel, bool>> expression, bool switchStyle)
@@ -125,5 +92,40 @@ namespace DMBFormBuilder
                 .SetValue(value)
                 .AsSwitch(switchStyle);
         }
+
+        /// <summary>
+        ///     Creates a switch field builder for a non-generic Razor view.
+        /// </summary>
+        /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
+        /// <returns>A <see cref="BooleanFieldBuilder" /> configured as a Bootstrap switch.</returns>
+        public static BooleanFieldBuilder SwitchFieldBuilder(this IHtmlHelper html)
+        {
+            return new BooleanFieldBuilder(html.ViewContext.Writer, html).AsSwitch();
+        }
+
+        /// <summary>
+        ///     Creates a switch field builder for a strongly typed Razor view.
+        /// </summary>
+        /// <typeparam name="TModel">The Razor view model type.</typeparam>
+        /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
+        /// <returns>A <see cref="BooleanFieldBuilder" /> configured as a Bootstrap switch.</returns>
+        public static BooleanFieldBuilder SwitchFieldBuilder<TModel>(this IHtmlHelper<TModel> html)
+        {
+            return new BooleanFieldBuilder(html.ViewContext.Writer, html).AsSwitch();
+        }
+
+        /// <summary>
+        ///     Creates a switch field builder bound to a Boolean model property.
+        /// </summary>
+        /// <typeparam name="TModel">The Razor view model type.</typeparam>
+        /// <param name="html">The strongly typed HTML helper.</param>
+        /// <param name="expression">A member expression used to derive field metadata and value.</param>
+        /// <returns>A configured <see cref="BooleanFieldBuilder" /> for the selected property.</returns>
+        public static BooleanFieldBuilder SwitchFieldBuilderFor<TModel>(this IHtmlHelper<TModel> html, Expression<Func<TModel, bool>> expression)
+        {
+            return CreateBooleanBuilderFor(html, expression, true);
+        }
+
+        #endregion
     }
 }

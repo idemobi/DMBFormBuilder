@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj EnumRadioFieldBuilder.cs create at 2026/05/13
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -21,34 +19,52 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DMBFormBuilder
 {
     /// <summary>
-    /// Builds a Bootstrap radio group for enum-like option selection.
+    ///     Builds a Bootstrap radio group for enum-like option selection.
     /// </summary>
     public sealed class EnumRadioFieldBuilder :
         HtmlBuilderBase<EnumRadioFieldBuilder>,
         ICanUseCustomClasses
     {
-        /// <summary>
-        /// Represents a radio option rendered by <see cref="EnumRadioFieldBuilder"/>.
-        /// </summary>
-        /// <param name="Value">The option value submitted by the selected radio input.</param>
-        /// <param name="Text">The option text rendered to the user.</param>
-        public sealed record EnumRadioOption(string Value, string Text);
+        #region Static methods
 
-        private readonly List<EnumRadioOption> _options = new();
+        private static void WriteAttribute(TextWriter writer, HtmlEncoder encoder, string name, string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return;
+            }
+
+            writer.Write(' ');
+            writer.Write(name);
+            writer.Write("=\"");
+            encoder.Encode(writer, value);
+            writer.Write('"');
+        }
+
+        #endregion
+
+        #region Instance fields and properties
+
+        private string _description = string.Empty;
+        private bool _disabled;
+        private bool _inline;
         private string _inputId = "EnumRadioField";
         private string _inputName = "EnumRadioField";
         private string _label = "Options";
-        private string _description = string.Empty;
-        private string? _value;
-        private string _requiredMessage = string.Empty;
-        private FormLabelPresentation _presentation = FormBuilderConfiguration.Default.LabelPresentation;
-        private bool _disabled;
-        private bool _required;
         private IconStruct _labelIcon = IconStruct.Empty;
-        private bool _inline;
+
+        private readonly List<EnumRadioOption> _options = new();
+        private FormLabelPresentation _presentation = FormBuilderConfiguration.Default.LabelPresentation;
+        private bool _required;
+        private string _requiredMessage = string.Empty;
+        private string? _value;
+
+        #endregion
+
+        #region Instance constructors and destructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnumRadioFieldBuilder"/> class.
+        ///     Initializes a new instance of the <see cref="EnumRadioFieldBuilder" /> class.
         /// </summary>
         /// <param name="writer">The output writer used by the current Razor view.</param>
         /// <param name="html">The HTML helper that supplies the current view context.</param>
@@ -59,77 +75,12 @@ namespace DMBFormBuilder
             this.AddClasses("dmb-form-field", "dmb-enum-radio-field", "mb-3");
         }
 
-        /// <summary>
-        /// Sets the base radio identifier and shared model binding name.
-        /// </summary>
-        public EnumRadioFieldBuilder SetInput(string inputId, string inputName)
-        {
-            if (!string.IsNullOrWhiteSpace(inputId))
-            {
-                _inputId = inputId;
-            }
+        #endregion
 
-            if (!string.IsNullOrWhiteSpace(inputName))
-            {
-                _inputName = inputName;
-            }
-
-            return this;
-        }
+        #region Instance methods
 
         /// <summary>
-        /// Sets the radio group label when a non-empty value is provided.
-        /// </summary>
-        public EnumRadioFieldBuilder SetLabel(string? label)
-        {
-            if (!string.IsNullOrWhiteSpace(label))
-            {
-                _label = label;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the optional description rendered as an information popover next to the field legend.
-        /// </summary>
-        /// <param name="description">The popover content, or an empty value to omit the information trigger.</param>
-        /// <returns>The current <see cref="EnumRadioFieldBuilder"/> instance for fluent chaining.</returns>
-        public EnumRadioFieldBuilder SetDescription(string? description)
-        {
-            _description = description ?? string.Empty;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the icon rendered with the radio group label.
-        /// </summary>
-        public EnumRadioFieldBuilder SetLabelIcon(IconStruct icon)
-        {
-            _labelIcon = icon;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets how the radio group label is positioned.
-        /// </summary>
-        public EnumRadioFieldBuilder SetLabelPresentation(FormLabelPresentation presentation)
-        {
-            _presentation = presentation;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the selected radio option value.
-        /// </summary>
-        public EnumRadioFieldBuilder SetValue(string? value)
-        {
-            _value = value;
-            return this;
-        }
-
-        /// <summary>
-        /// Adds a radio option to the group.
+        ///     Adds a radio option to the group.
         /// </summary>
         public EnumRadioFieldBuilder AddOption(string value, string text)
         {
@@ -137,45 +88,13 @@ namespace DMBFormBuilder
             return this;
         }
 
-        /// <summary>
-        /// Enables or disables all rendered radio inputs.
-        /// </summary>
-        public new EnumRadioFieldBuilder SetDisabled(bool disabled = true)
-        {
-            _disabled = disabled;
-            return this;
-        }
-
-        /// <summary>
-        /// Adds required validation metadata to the radio group.
-        /// </summary>
-        public EnumRadioFieldBuilder SetRequired(bool required = true, string? message = null)
-        {
-            _required = required;
-            if (!string.IsNullOrWhiteSpace(message))
-            {
-                _requiredMessage = message;
-            }
-
-            return this;
-        }
-
-        /// <summary>
-        /// Renders radio options inline when enabled.
-        /// </summary>
-        public EnumRadioFieldBuilder SetInline(bool inline = true)
-        {
-            _inline = inline;
-            return this;
-        }
-
-        /// <inheritdoc/>
+        /// <inheritdoc />
         protected override EnumRadioFieldBuilder CreateInstance()
         {
             return new EnumRadioFieldBuilder(_textWriter, _htmlHelper);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         protected override void InternalClone(EnumRadioFieldBuilder source)
         {
             base.InternalClone(source);
@@ -195,40 +114,104 @@ namespace DMBFormBuilder
         }
 
         /// <summary>
-        /// Writes the complete radio group markup, including legend, radio inputs, and validation feedback.
+        ///     Sets the optional description rendered as an information popover next to the field legend.
         /// </summary>
-        protected override void WriteToCore(TextWriter writer, HtmlEncoder encoder)
+        /// <param name="description">The popover content, or an empty value to omit the information trigger.</param>
+        /// <returns>The current <see cref="EnumRadioFieldBuilder" /> instance for fluent chaining.</returns>
+        public EnumRadioFieldBuilder SetDescription(string? description)
         {
-            if (string.IsNullOrWhiteSpace(_requiredMessage))
+            _description = description ?? string.Empty;
+            return this;
+        }
+
+        /// <summary>
+        ///     Enables or disables all rendered radio inputs.
+        /// </summary>
+        public new EnumRadioFieldBuilder SetDisabled(bool disabled = true)
+        {
+            _disabled = disabled;
+            return this;
+        }
+
+        /// <summary>
+        ///     Renders radio options inline when enabled.
+        /// </summary>
+        public EnumRadioFieldBuilder SetInline(bool inline = true)
+        {
+            _inline = inline;
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the base radio identifier and shared model binding name.
+        /// </summary>
+        public EnumRadioFieldBuilder SetInput(string inputId, string inputName)
+        {
+            if (!string.IsNullOrWhiteSpace(inputId))
             {
-                _requiredMessage = WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Required));
+                _inputId = inputId;
             }
 
-            writer.Write($"<{_tag}{BuildAttributes()}>");
-            switch (_presentation)
+            if (!string.IsNullOrWhiteSpace(inputName))
             {
-                case FormLabelPresentation.Floating:
-                    WriteFloating(writer, encoder);
-                    break;
-                case FormLabelPresentation.Inline:
-                    WriteInline(writer, encoder);
-                    break;
-                case FormLabelPresentation.Group:
-                    WriteGroup(writer, encoder);
-                    break;
-                case FormLabelPresentation.Hidden:
-                    WriteLegend(writer, encoder, "visually-hidden");
-                    WriteOptions(writer, encoder, inlineOptions: _inline);
-                    WriteValidation(writer, encoder);
-                    break;
-                case FormLabelPresentation.Normal:
-                default:
-                    WriteLegend(writer, encoder, "form-label fs-6");
-                    WriteOptions(writer, encoder, inlineOptions: _inline);
-                    WriteValidation(writer, encoder);
-                    break;
+                _inputName = inputName;
             }
-            writer.Write($"</{_tag}>");
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the radio group label when a non-empty value is provided.
+        /// </summary>
+        public EnumRadioFieldBuilder SetLabel(string? label)
+        {
+            if (!string.IsNullOrWhiteSpace(label))
+            {
+                _label = label;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the icon rendered with the radio group label.
+        /// </summary>
+        public EnumRadioFieldBuilder SetLabelIcon(IconStruct icon)
+        {
+            _labelIcon = icon;
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets how the radio group label is positioned.
+        /// </summary>
+        public EnumRadioFieldBuilder SetLabelPresentation(FormLabelPresentation presentation)
+        {
+            _presentation = presentation;
+            return this;
+        }
+
+        /// <summary>
+        ///     Adds required validation metadata to the radio group.
+        /// </summary>
+        public EnumRadioFieldBuilder SetRequired(bool required = true, string? message = null)
+        {
+            _required = required;
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                _requiredMessage = message;
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///     Sets the selected radio option value.
+        /// </summary>
+        public EnumRadioFieldBuilder SetValue(string? value)
+        {
+            _value = value;
+            return this;
         }
 
         private void WriteFloating(TextWriter writer, HtmlEncoder encoder)
@@ -238,6 +221,17 @@ namespace DMBFormBuilder
             WriteOptions(writer, encoder, inlineOptions: true);
             writer.Write("</div>");
             WriteValidation(writer, encoder);
+        }
+
+        private void WriteGroup(TextWriter writer, HtmlEncoder encoder)
+        {
+            writer.Write("<div class=\"input-group has-validation\">");
+            WriteLegend(writer, encoder, "input-group-text dmb-choice-group-label");
+            writer.Write("<div class=\"form-control dmb-choice-group-control\">");
+            WriteOptions(writer, encoder, inlineOptions: true);
+            writer.Write("</div>");
+            WriteValidation(writer, encoder);
+            writer.Write("</div>");
         }
 
         private void WriteInline(TextWriter writer, HtmlEncoder encoder)
@@ -253,15 +247,14 @@ namespace DMBFormBuilder
             writer.Write("</div></div>");
         }
 
-        private void WriteGroup(TextWriter writer, HtmlEncoder encoder)
+        private void WriteLabelIcon(TextWriter writer, HtmlEncoder encoder)
         {
-            writer.Write("<div class=\"input-group has-validation\">");
-            WriteLegend(writer, encoder, "input-group-text dmb-choice-group-label");
-            writer.Write("<div class=\"form-control dmb-choice-group-control\">");
-            WriteOptions(writer, encoder, inlineOptions: true);
-            writer.Write("</div>");
-            WriteValidation(writer, encoder);
-            writer.Write("</div>");
+            if (_labelIcon.IsEmpty)
+            {
+                return;
+            }
+
+            HtmlLayoutExtensions.IconBuilder(_htmlHelper, _labelIcon, "me-1").WriteTo(writer, encoder);
         }
 
         private void WriteLegend(TextWriter writer, HtmlEncoder encoder, string cssClass)
@@ -279,10 +272,12 @@ namespace DMBFormBuilder
                 encoder.Encode(writer, _requiredMessage);
                 writer.Write("</span>");
             }
+
             if (!writeDescriptionAfterLegend)
             {
                 FormFieldDescriptionPopoverRenderer.Write(writer, encoder, _description);
             }
+
             writer.Write("</legend>");
             if (writeDescriptionAfterLegend)
             {
@@ -301,6 +296,7 @@ namespace DMBFormBuilder
                 {
                     writer.Write(" form-check-inline");
                 }
+
                 writer.Write("\">");
                 writer.Write("<input class=\"form-check-input\" type=\"radio\"");
                 WriteAttribute(writer, encoder, "id", optionId);
@@ -312,14 +308,17 @@ namespace DMBFormBuilder
                     WriteAttribute(writer, encoder, "required", "required");
                     WriteAttribute(writer, encoder, "data-val-required", _requiredMessage);
                 }
+
                 if (string.Equals(option.Value, _value, StringComparison.Ordinal))
                 {
                     writer.Write(" checked");
                 }
+
                 if (_disabled)
                 {
                     writer.Write(" disabled");
                 }
+
                 writer.Write(">");
                 writer.Write("<label class=\"form-check-label\"");
                 WriteAttribute(writer, encoder, "for", optionId);
@@ -327,6 +326,44 @@ namespace DMBFormBuilder
                 encoder.Encode(writer, option.Text);
                 writer.Write("</label></div>");
             }
+        }
+
+        /// <summary>
+        ///     Writes the complete radio group markup, including legend, radio inputs, and validation feedback.
+        /// </summary>
+        protected override void WriteToCore(TextWriter writer, HtmlEncoder encoder)
+        {
+            if (string.IsNullOrWhiteSpace(_requiredMessage))
+            {
+                _requiredMessage = WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Required));
+            }
+
+            writer.Write($"<{_tag}{BuildAttributes()}>");
+            switch (_presentation)
+            {
+                case FormLabelPresentation.Floating:
+                    WriteFloating(writer, encoder);
+                break;
+                case FormLabelPresentation.Inline:
+                    WriteInline(writer, encoder);
+                break;
+                case FormLabelPresentation.Group:
+                    WriteGroup(writer, encoder);
+                break;
+                case FormLabelPresentation.Hidden:
+                    WriteLegend(writer, encoder, "visually-hidden");
+                    WriteOptions(writer, encoder, inlineOptions: _inline);
+                    WriteValidation(writer, encoder);
+                break;
+                case FormLabelPresentation.Normal:
+                default:
+                    WriteLegend(writer, encoder, "form-label fs-6");
+                    WriteOptions(writer, encoder, inlineOptions: _inline);
+                    WriteValidation(writer, encoder);
+                break;
+            }
+
+            writer.Write($"</{_tag}>");
         }
 
         private void WriteValidation(TextWriter writer, HtmlEncoder encoder)
@@ -338,31 +375,21 @@ namespace DMBFormBuilder
             {
                 encoder.Encode(writer, _requiredMessage);
             }
+
             writer.Write("</div>");
         }
 
-        private void WriteLabelIcon(TextWriter writer, HtmlEncoder encoder)
-        {
-            if (_labelIcon.IsEmpty)
-            {
-                return;
-            }
+        #endregion
 
-            HtmlLayoutExtensions.IconBuilder(_htmlHelper, _labelIcon, "me-1").WriteTo(writer, encoder);
-        }
+        #region Nested type: EnumRadioOption
 
-        private static void WriteAttribute(TextWriter writer, HtmlEncoder encoder, string name, string? value)
-        {
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                return;
-            }
+        /// <summary>
+        ///     Represents a radio option rendered by <see cref="EnumRadioFieldBuilder" />.
+        /// </summary>
+        /// <param name="Value">The option value submitted by the selected radio input.</param>
+        /// <param name="Text">The option text rendered to the user.</param>
+        public sealed record EnumRadioOption(string Value, string Text);
 
-            writer.Write(' ');
-            writer.Write(name);
-            writer.Write("=\"");
-            encoder.Encode(writer, value);
-            writer.Write('"');
-        }
+        #endregion
     }
 }

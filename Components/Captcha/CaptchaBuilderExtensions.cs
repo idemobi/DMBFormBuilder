@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj CaptchaBuilderExtensions.cs create at 2026/05/12
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -20,40 +18,42 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DMBFormBuilder
 {
     /// <summary>
-    /// Provides Razor helper entry points for <see cref="CaptchaBuilder"/>.
+    ///     Provides Razor helper entry points for <see cref="CaptchaBuilder" />.
     /// </summary>
     public static class CaptchaBuilderExtensions
     {
+        #region Static methods
+
         /// <summary>
-        /// Creates a captcha builder for a non-generic Razor view.
+        ///     Creates a captcha builder for a non-generic Razor view.
         /// </summary>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="CaptchaBuilder"/> writing to the current view output.</returns>
+        /// <returns>A <see cref="CaptchaBuilder" /> writing to the current view output.</returns>
         public static CaptchaBuilder CaptchaBuilder(this IHtmlHelper html)
         {
             return new CaptchaBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates a captcha builder for a strongly typed Razor view.
+        ///     Creates a captcha builder for a strongly typed Razor view.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="CaptchaBuilder"/> writing to the current view output.</returns>
+        /// <returns>A <see cref="CaptchaBuilder" /> writing to the current view output.</returns>
         public static CaptchaBuilder CaptchaBuilder<TModel>(this IHtmlHelper<TModel> html)
         {
             return new CaptchaBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates a captcha builder bound to a model property expression.
+        ///     Creates a captcha builder bound to a model property expression.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <typeparam name="TProperty">The bound property type.</typeparam>
         /// <param name="html">The strongly typed HTML helper.</param>
         /// <param name="expression">A member expression used to derive input name, identifier, label, and prompt.</param>
-        /// <returns>A configured <see cref="CaptchaBuilder"/> for the selected property.</returns>
-        /// <exception cref="ArgumentException">Thrown when <paramref name="expression"/> is not a member expression.</exception>
+        /// <returns>A configured <see cref="CaptchaBuilder" /> for the selected property.</returns>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="expression" /> is not a member expression.</exception>
         public static CaptchaBuilder CaptchaBuilderFor<TModel, TProperty>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression)
         {
             if (expression.Body is not MemberExpression memberExpression)
@@ -86,5 +86,7 @@ namespace DMBFormBuilder
                 .SetDescription(description)
                 .SetPlaceholder(placeholder);
         }
+
+        #endregion
     }
 }

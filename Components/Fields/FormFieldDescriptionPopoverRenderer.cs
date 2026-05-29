@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj FormFieldDescriptionPopoverRenderer.cs create at 2026/05/17
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -17,6 +15,8 @@ namespace DMBFormBuilder
 {
     internal static class FormFieldDescriptionPopoverRenderer
     {
+        #region Static methods
+
         internal static void Write(TextWriter writer, HtmlEncoder encoder, string? description)
         {
             if (string.IsNullOrWhiteSpace(description))
@@ -50,5 +50,7 @@ namespace DMBFormBuilder
             encoder.Encode(writer, value);
             writer.Write('"');
         }
+
+        #endregion
     }
 }

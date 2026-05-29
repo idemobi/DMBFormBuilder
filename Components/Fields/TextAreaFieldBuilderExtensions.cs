@@ -1,9 +1,7 @@
 #region Copyright
 
-// Game-Data-Forge Solution
-// Written by CONTART Jean-François & BOULOGNE Quentin
-// DMBFormBuilder.csproj TextAreaFieldBuilderExtensions.cs create at 2026/05/12
-// ©2024-2026 idéMobi SARL FRANCE
+// ©2002-2026 idéMobi
+// www.idemobi.com
 
 #endregion
 
@@ -21,39 +19,49 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace DMBFormBuilder
 {
     /// <summary>
-    /// Provides Razor helper entry points for <see cref="TextAreaFieldBuilder"/>.
+    ///     Provides Razor helper entry points for <see cref="TextAreaFieldBuilder" />.
     /// </summary>
     public static class TextAreaFieldBuilderExtensions
     {
+        #region Static methods
+
+        private static string ResolveMessage(string? key, string fallbackKey)
+        {
+            return WebLocalizer.GetDataAnnotation(string.IsNullOrWhiteSpace(key) ? fallbackKey : key);
+        }
+
         /// <summary>
-        /// Creates a textarea field builder for a non-generic Razor view.
+        ///     Creates a textarea field builder for a non-generic Razor view.
         /// </summary>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="TextAreaFieldBuilder"/> writing to the current view output.</returns>
+        /// <returns>A <see cref="TextAreaFieldBuilder" /> writing to the current view output.</returns>
         public static TextAreaFieldBuilder TextAreaFieldBuilder(this IHtmlHelper html)
         {
             return new TextAreaFieldBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates a textarea field builder for a strongly typed Razor view.
+        ///     Creates a textarea field builder for a strongly typed Razor view.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <param name="html">The HTML helper that supplies the current view writer and context.</param>
-        /// <returns>A <see cref="TextAreaFieldBuilder"/> writing to the current view output.</returns>
+        /// <returns>A <see cref="TextAreaFieldBuilder" /> writing to the current view output.</returns>
         public static TextAreaFieldBuilder TextAreaFieldBuilder<TModel>(this IHtmlHelper<TModel> html)
         {
             return new TextAreaFieldBuilder(html.ViewContext.Writer, html);
         }
 
         /// <summary>
-        /// Creates a textarea field builder bound to a model property expression.
+        ///     Creates a textarea field builder bound to a model property expression.
         /// </summary>
         /// <typeparam name="TModel">The Razor view model type.</typeparam>
         /// <typeparam name="TProperty">The bound property type.</typeparam>
         /// <param name="html">The strongly typed HTML helper.</param>
-        /// <param name="expression">A member expression used to derive field metadata, value, label, prompt, and validation attributes.</param>
-        /// <returns>A configured <see cref="TextAreaFieldBuilder"/> for the selected property.</returns>
+        /// <param name="expression">
+        ///     A member expression used to derive field metadata, value, label, prompt, and validation
+        ///     attributes.
+        /// </param>
+        /// <returns>A configured <see cref="TextAreaFieldBuilder" /> for the selected property.</returns>
         public static TextAreaFieldBuilder TextAreaFieldBuilderFor<TModel, TProperty>(this IHtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression)
         {
             if (expression.Body is not MemberExpression memberExpression)
@@ -116,7 +124,6 @@ namespace DMBFormBuilder
                         builder.SetMinLength(stringLength.MinimumLength, ResolveMessage(stringLength.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_MinLength)));
                     }
                 }
-
             }
 
             return builder
@@ -125,9 +132,6 @@ namespace DMBFormBuilder
                 .SetPlaceholder(placeholder);
         }
 
-        private static string ResolveMessage(string? key, string fallbackKey)
-        {
-            return WebLocalizer.GetDataAnnotation(string.IsNullOrWhiteSpace(key) ? fallbackKey : key);
-        }
+        #endregion
     }
 }
