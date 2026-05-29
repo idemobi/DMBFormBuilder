@@ -2,7 +2,7 @@
     <PropertyGroup>
         <RootNamespace>DMBFormBuilder</RootNamespace>
         <Title>DMBFormBuilder</Title>
-        <PackageTags>idemobi Form Builder Bootstrap PageBuilder</PackageTags>
+        <PackageTags>idemobi DMB PageBuilder Bootstrap Forms Validation Razor MVC Captcha</PackageTags>
         <Description>Bootstrap-oriented form and field builder package for MVC/Razor applications and PageBuilder views.</Description>
         <PackageReleaseNotes>note</PackageReleaseNotes>
         <PackageIcon>DMBFormBuilder.png</PackageIcon>
