@@ -85,12 +85,34 @@ namespace DMBFormBuilder
                 }
             }
 
-            return html.CheckboxFieldBuilder()
+            BooleanFieldBuilder builder = html.CheckboxFieldBuilder()
                 .SetInput(propertyName.Replace(".", "_", StringComparison.Ordinal), propertyName)
                 .SetLabel(label)
                 .SetDescription(description)
                 .SetValue(value)
                 .AsSwitch(switchStyle);
+
+            if (propertyInfo != null)
+            {
+                BoolMustBeTrueAttribute? mustBeTrue = propertyInfo.GetCustomAttribute<BoolMustBeTrueAttribute>();
+                if (mustBeTrue != null)
+                {
+                    builder.SetMustBeChecked(ResolveBooleanValidationMessage(mustBeTrue, label));
+                }
+
+                BoolMustBeFalseAttribute? mustBeFalse = propertyInfo.GetCustomAttribute<BoolMustBeFalseAttribute>();
+                if (mustBeFalse != null)
+                {
+                    builder.SetMustBeUnchecked(ResolveBooleanValidationMessage(mustBeFalse, label));
+                }
+            }
+
+            return builder;
+        }
+
+        private static string ResolveBooleanValidationMessage(ValidationAttribute attribute, string label)
+        {
+            return attribute.FormatErrorMessage(label);
         }
 
         /// <summary>

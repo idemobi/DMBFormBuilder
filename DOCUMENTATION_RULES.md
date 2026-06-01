@@ -19,7 +19,7 @@ When copying this file to another PageBuilder ecosystem project, update this sec
 
 - Project name: `DMBFormBuilder`
 - Primary API families: form builders, field builders, captcha builders, Razor helper extensions, form enums, form configuration, localization resources, and embedded static assets.
-- Important types to reference when relevant: `FormBuilder`, `TextFieldBuilder`, `PasswordFieldBuilder`, `TextAreaFieldBuilder`, `SelectFieldBuilder`, `BooleanFieldBuilder`, `EnumRadioFieldBuilder`, `FlagFieldBuilder`, `TokenFieldBuilder`, `CaptchaBuilder`, `FormBuilderConfiguration`, `FormLabelPresentation`, `FormValidationMode`, `FormSubmissionMethod`, and `TextFieldInputKind`.
+- Important types to reference when relevant: `FormBuilder`, `TextFieldBuilder`, `PasswordFieldBuilder`, `TextAreaFieldBuilder`, `SelectFieldBuilder`, `BooleanFieldBuilder`, `BoolMustBeTrueAttribute`, `BoolMustBeFalseAttribute`, `EnumRadioFieldBuilder`, `FlagFieldBuilder`, `TokenFieldBuilder`, `CaptchaBuilder`, `FormBuilderConfiguration`, `FormLabelPresentation`, `FormValidationMode`, `FormSubmissionMethod`, and `TextFieldInputKind`.
 - Publication host: `labs_idemobi_com`
 - Documentation generation strategy: DocumentationBuilder-first; AI prepares content, the developer executes generation.
 

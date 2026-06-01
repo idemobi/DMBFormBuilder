@@ -27,7 +27,8 @@ Check:
 Check:
 
 - the form validation mode,
-- generated `required`, `maxlength`, `minlength`, `pattern`, comparison, or custom validation attributes,
+- generated `required`, `maxlength`, `minlength`, `pattern`, comparison, Boolean, or custom validation attributes,
+- `BoolMustBeTrueAttribute` and `BoolMustBeFalseAttribute` are applied through `CheckboxFieldBuilderFor(...)` or `SwitchFieldBuilderFor(...)`,
 - whether browser validation was disabled,
 - whether server-side model validation is configured in the consuming application.
 

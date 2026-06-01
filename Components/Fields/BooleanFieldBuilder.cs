@@ -25,6 +25,12 @@ namespace DMBFormBuilder
         HtmlBuilderBase<BooleanFieldBuilder>,
         ICanUseCustomClasses
     {
+        #region Constants
+
+        private const string ScriptPath = "/js/formbuilder/FormBuilder.js";
+
+        #endregion
+
         #region Static methods
 
         private static bool IsReservedInputAttribute(string key)
@@ -284,6 +290,23 @@ namespace DMBFormBuilder
             return this;
         }
 
+        private void EnsureValidationAssets()
+        {
+            if (!_expectedValue.HasValue)
+            {
+                return;
+            }
+
+            PageInformation page = PageRegistry.GetOrCreatePageInformation(_htmlHelper.ViewContext.HttpContext);
+            page.SetScriptFile(ScriptPath);
+        }
+
+        /// <inheritdoc />
+        protected void OnBeginRendering()
+        {
+            EnsureValidationAssets();
+        }
+
         private void WriteInput(TextWriter writer, HtmlEncoder encoder)
         {
             writer.Write("<input class=\"form-check-input ");
@@ -372,6 +395,7 @@ namespace DMBFormBuilder
         /// <param name="encoder">The HTML encoder used by the rendering pipeline.</param>
         protected override void WriteToCore(TextWriter writer, HtmlEncoder encoder)
         {
+            EnsureValidationAssets();
             writer.Write($"<{_tag}{BuildAttributes()}>");
             writer.Write("<div class=\"form-check");
             if (_switchStyle)

@@ -34,13 +34,18 @@ When copying this file to another PageBuilder ecosystem project, update this sec
 - `CaptchaBuilder.cs`: captcha field builder.
 - `CaptchaBuilderExtensions.cs`: Razor helper entry points for captcha fields.
 
+## Attributes
+
+- `BoolMustBeTrueAttribute.cs`: DataAnnotation attribute translated by Boolean field helpers into checked validation.
+- `BoolMustBeFalseAttribute.cs`: DataAnnotation attribute translated by Boolean field helpers into unchecked validation.
+
 ## Components/Fields
 
 - `TextFieldBuilder.cs`: text-like input builder.
 - `PasswordFieldBuilder.cs`: password input builder with toggle and strength support.
 - `TextAreaFieldBuilder.cs`: textarea builder.
 - `SelectFieldBuilder.cs`: select builder.
-- `BooleanFieldBuilder.cs`: checkbox/switch builder.
+- `BooleanFieldBuilder.cs`: checkbox/switch builder with on-demand Boolean validation assets.
 - `EnumRadioFieldBuilder.cs`: enum radio option builder.
 - `FlagFieldBuilder.cs`: enum flag field builder.
 - `TokenFieldBuilder.cs`: token input builder with visibility/copy behavior.

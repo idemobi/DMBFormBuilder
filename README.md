@@ -40,6 +40,8 @@ This package does not define low-level HTML primitives, Bootstrap layout primiti
 - `TextAreaFieldBuilder`
 - `SelectFieldBuilder`
 - `BooleanFieldBuilder`
+- `BoolMustBeTrueAttribute`
+- `BoolMustBeFalseAttribute`
 - `EnumRadioFieldBuilder`
 - `FlagFieldBuilder`
 - `TokenFieldBuilder`

@@ -26,7 +26,11 @@ Model-bound helper methods must preserve ASP.NET Core expression-derived input n
 
 ### Keep validation behavior visible
 
-Required, length, pattern, comparison, numeric, ASCII, Unix text, and captcha constraints must be documented as generated HTML attributes or validation behavior.
+Required, length, pattern, comparison, numeric, Boolean, ASCII, Unix text, and captcha constraints must be documented as generated HTML attributes or validation behavior.
+
+### Keep Boolean validation local to FormBuilder
+
+`BoolMustBeTrueAttribute` and `BoolMustBeFalseAttribute` belong to FormBuilder and are translated only by Boolean field helpers. Their JavaScript support should be loaded on demand by the field that emits Boolean validation metadata.
 
 ### Keep visual styling Bootstrap-oriented
 

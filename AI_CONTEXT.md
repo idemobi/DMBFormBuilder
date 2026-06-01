@@ -25,6 +25,7 @@ It provides:
 - model-bound Razor helper extension methods,
 - Bootstrap-oriented field rendering,
 - validation attribute rendering,
+- Boolean validation attributes for FormBuilder checkbox and switch helpers,
 - label presentation control,
 - field variants and accessibility markup,
 - captcha field rendering,
