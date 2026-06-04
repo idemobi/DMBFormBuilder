@@ -82,11 +82,21 @@ Do not edit generated designer files manually unless the generation workflow req
 
 - `DMBFormBuilderLabs.csproj`: non-packable Razor project that exposes FormBuilder presentation pages and examples to `labs_idemobi_com`.
 - `Controllers/FormBuilderController.cs`: MVC controller for FormBuilder documentation and demo routes.
+- `Navigation/DMBFormBuilderLabsNavigationAgent.cs`: reusable navigation fragments consumed by local and final labs hosts.
 - `Models/FormBuilder*ExampleModel.cs`: demo models used by field, validation, and complete form examples.
 - `Views/FormBuilder/*.cshtml`: presentation pages hosted through the Labs application part.
 - `Views/Shared/Examples/Form/**`: executable example partials used by the FormBuilder pages.
 - `Views/Shared/Examples_Raw/Form/**`: raw code partials paired with the executable examples.
 - `Helpers/*.cs`: local view helper extensions copied from the host so Labs views do not reference `labs_idemobi_com`.
+
+## Website
+
+- `DMBFormBuilderWebsite.csproj`: local ASP.NET Core host website for running the FormBuilder Labs pages independently.
+- `Program.cs`: registers the local module configuration, Labs application part, navbar provider, sidebar filter, and default route.
+- `Filters/DMBFormBuilderWebsiteSidebarActionFilter.cs`: injects the local FormBuilder sidebar and breadcrumb.
+- `Providers/DMBFormBuilderWebsiteMenuBarSectionProvider.cs`: exposes the FormBuilder Labs menu group in the local navbar.
+- `Views/Shared/_Layout.cshtml`: minimal PageBuilder-compatible layout.
+- `wwwroot/favicons/**` and `wwwroot/logo/**`: local website branding assets copied from the main labs host.
 
 ## Related projects
 
