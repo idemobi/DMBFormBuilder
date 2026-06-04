@@ -1,0 +1,4 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderEmailFieldExampleModel
+
+@Html.EmailFieldBuilderFor(m => m.GroupEmail).SetLabelPresentation(FormLabelPresentation.Group).SetGroupIcon("bi bi-envelope-at").Render()

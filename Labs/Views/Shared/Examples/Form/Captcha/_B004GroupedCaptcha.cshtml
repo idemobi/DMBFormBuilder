@@ -1,0 +1,9 @@
+@using DMBFormBuilder
+@using DMBPageBuilder
+@(Html.CaptchaBuilder()
+    .SetInput("captchaGrouped", "captchaGrouped")
+    .SetLabel("Captcha")
+    .SetLabelPresentation(FormLabelPresentation.Group)
+    .SetLabelIcon(IconStruct.Bootstrap("bi-shield-check"))
+    .SetPlaceholder("Captcha")
+    .Render())

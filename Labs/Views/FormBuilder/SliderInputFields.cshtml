@@ -1,0 +1,79 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderSliderInputExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Slider Input Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("InputSpecialFieldBuilderExtensions documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "InputSpecialFieldBuilderExtensions" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:SliderFieldBuilderFor renders a range input, maps RangeAttribute values to browser min/max validation, and supports BootstrapBuilder variants for a visible range style.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("SliderInputFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Slider input field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SliderInputFields/_B001Slider", "Slider", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SliderInputFields/_B002FloatingSlider", "Floating slider", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SliderInputFields/_B003InlineSlider", "Inline slider", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SliderInputFields/_B008GroupedSlider", "Grouped slider", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SliderInputFields/_B004DisabledSlider", "Locked slider", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Style Variants", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SliderInputFields/_B005SuccessSlider", "Success slider", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SliderInputFields/_B006WarningSlider", "Warning slider", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SliderInputFields/_B007SliderWithTextField", "Slider + text field", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.SliderFieldBuilderFor(m => m.Slider).Render()\n@Html.SliderFieldBuilderFor(m => m.FloatingSlider).SetLabelPresentation(FormLabelPresentation.Floating).Render()\n@Html.SliderFieldBuilderFor(m => m.InlineSlider).SetLabelPresentation(FormLabelPresentation.Inline).Render()\n@Html.SliderFieldBuilderFor(m => m.GroupSlider).SetLabelPresentation(FormLabelPresentation.Group).SetLabelIcon(IconStruct.Bootstrap(\"bi-sliders\")).Render()\n@Html.SliderFieldBuilderFor(m => m.DisabledSlider).SetDisabled().Render()\n@Html.SliderFieldBuilderFor(m => m.SuccessSlider).SetVariant(VariantStyle.Success).Render()\n@Html.SliderFieldBuilderFor(m => m.WarningSlider).SetVariant(VariantStyle.Warning).Render()\n@Html.SliderFieldBuilderFor(m => m.FineSlider).SetWithTextField().Render()", CodeLanguage.CSharp)
+    .SetTitle("SliderInputFields.cshtml")
+    .SetCopyButton()
+    .Render())

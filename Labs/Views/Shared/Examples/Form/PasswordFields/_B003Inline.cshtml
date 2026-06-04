@@ -1,0 +1,4 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderPasswordFieldExampleModel
+
+@Html.PasswordFieldBuilderFor(m => m.CurrentPassword).SetLabelPresentation(FormLabelPresentation.Inline).Render()

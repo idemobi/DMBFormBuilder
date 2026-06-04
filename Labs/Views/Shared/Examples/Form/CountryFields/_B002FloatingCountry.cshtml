@@ -1,0 +1,4 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderCountryExampleModel
+
+@Html.CountryFieldBuilderFor(m => m.FloatingCountry).SetLabelPresentation(FormLabelPresentation.Floating).Render()

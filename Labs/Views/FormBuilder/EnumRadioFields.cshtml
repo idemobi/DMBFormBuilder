@@ -1,0 +1,75 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderEnumRadioExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Enum Radio Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("EnumRadioFieldBuilder documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "EnumRadioFieldBuilder" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:EnumRadioFieldBuilder renders Bootstrap radio groups from enum values, supports inline layout, disabled state and required validation.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("EnumRadioFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Enum radio field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EnumRadioFields/_B001EnumRadio", "Vertical enum radio", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EnumRadioFields/_B002InlineEnumRadio", "Inline enum radio", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EnumRadioFields/_B006FloatingRadio", "Floating enum radio", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EnumRadioFields/_B007GroupedRadio", "Grouped enum radio", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EnumRadioFields/_B003ManualRadio", "Manual options", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Validation And State", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EnumRadioFields/_B004RequiredRadio", "Required radio", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EnumRadioFields/_B005DisabledRadio", "Locked radio", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.EnumRadioFieldBuilderFor(m => m.Visibility).Render()\n@Html.EnumRadioFieldBuilderFor(m => m.InlineVisibility).SetLabelPresentation(FormLabelPresentation.Inline).Render()\n@Html.EnumRadioFieldBuilderFor(m => m.FloatingVisibility).SetLabelPresentation(FormLabelPresentation.Floating).SetLabelIcon(IconStruct.Bootstrap(\"bi-ui-radios\")).Render()\n@Html.EnumRadioFieldBuilderFor(m => m.GroupVisibility).SetLabelPresentation(FormLabelPresentation.Group).SetLabelIcon(IconStruct.Bootstrap(\"bi-ui-radios\")).Render()\n@Html.EnumRadioFieldBuilder().SetInput(\"ManualVisibility\", \"ManualVisibility\").SetLabel(\"Visibility\").SetValue(Model.ManualVisibility).AddOption(\"Public\", \"Public\").AddOption(\"Private\", \"Private\").AddOption(\"Internal\", \"Internal\").Render()\n@Html.EnumRadioFieldBuilder().SetInput(\"RequiredVisibility\", \"RequiredVisibility\").SetLabel(\"Visibility\").SetRequired().AddOption(\"Public\", \"Public\").AddOption(\"Private\", \"Private\").AddOption(\"Internal\", \"Internal\").Render()\n@Html.EnumRadioFieldBuilderFor(m => m.DisabledVisibility).SetDisabled().Render()", CodeLanguage.CSharp)
+    .SetTitle("EnumRadioFields.cshtml")
+    .SetCopyButton()
+    .Render())

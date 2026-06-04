@@ -1,0 +1,4 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderTokenExampleModel
+
+@Html.TokenFieldBuilderFor(m => m.NoCopyToken).SetToggle().SetCopy(false).Render()

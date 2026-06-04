@@ -1,0 +1,61 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@{
+    Layout = "_Layout";
+}
+
+@Html.TitleBuilder().SetTitle("Using in Razor (cshtml)", TitleLevel.One).Render()
+@Html.TitleBuilder().SetTitle("DMBFormBuilder", TitleLevel.Two).Render()
+
+@using (Html.PB_P().Begin())
+{
+    @:Use
+    @using (Html.PB_Span().AsMonospace().Begin()) {
+                    @:Html.FormBuilder() 
+                }
+    @:when the view needs a form shell that participates in PageBuilder-style HTML composition while keeping Bootstrap-compatible defaults.
+}
+
+@Html.TitleBuilder().SetTitle("Floating labels", TitleLevel.Three).Render()
+
+@using (Html.FormBuilder()
+    .SetAction("#")
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("FormBuilder floating label example")
+    .Begin())
+{
+    @using (Html.BlockBuilder().AddClass("form-floating mb-3").Begin())
+    {
+        <input class="form-control" id="formBuilderEmail" name="email" placeholder="name@example.com" required />
+        <label for="formBuilderEmail">Email</label>
+        @using (Html.BlockBuilder().AddClass("invalid-feedback").Begin())
+        {
+            @:Email is required.
+        }
+    }
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Razor source", TitleLevel.Three).Render()
+@(Html.CodeBlock(@"@@using DMBFormBuilder
+
+@@using (Html.FormBuilder()
+    .SetAction(""#"")
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel(""FormBuilder floating label example"")
+    .Begin())
+{
+    <div class=""form-floating mb-3"">
+        <input class=""form-control"" id=""formBuilderEmail"" name=""email"" placeholder=""name@example.com"" required />
+        <label for=""formBuilderEmail"">Email</label>
+        <div class=""invalid-feedback"">Email is required.</div>
+    </div>
+    <button class=""btn btn-primary"" type=""submit"">Submit</button>
+}", CodeLanguage.CSharp)
+    .SetTitle("FormBuilder/CSHtml.cshtml")
+    .SetCopyButton()
+    .Render())

@@ -1,0 +1,65 @@
+﻿@using DMBBootstrapBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Captcha", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("CaptchaBuilder documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "CaptchaBuilder" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:CaptchaBuilder renders the captcha image, input and refresh action while keeping the existing GDF session-backed validation endpoint.
+}
+
+@Html.TitleBuilder().SetTitle("Presentation Styles", TitleLevel.Three).Render()
+@using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+{
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+    {
+        @await Html.RenderExamplePartialAsync("Examples/Form/Captcha/_B001Captcha", "Normal captcha")
+    }
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+    {
+        @await Html.RenderExamplePartialAsync("Examples/Form/Captcha/_B002FloatingCaptcha", "Floating captcha")
+    }
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+    {
+        @await Html.RenderExamplePartialAsync("Examples/Form/Captcha/_B003InlineCaptcha", "Inline captcha")
+    }
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+    {
+        @await Html.RenderExamplePartialAsync("Examples/Form/Captcha/_B004GroupedCaptcha", "Grouped captcha")
+    }
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("Captcha", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Captcha example")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Interactive Captcha", TitleLevel.Three).Render()
+    @(Html.CaptchaBuilder()
+        .SetInput("captchaValue", "captchaValue")
+        .SetLabel("Captcha")
+        .SetLabelIcon(IconStruct.Bootstrap("bi-shield-check"))
+        .SetPlaceholder("Captcha")
+        .Render())
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.CaptchaBuilder()\n    .SetInput(\"captchaValue\", \"captchaValue\")\n    .SetLabel(\"Captcha\")\n    .SetLabelIcon(IconStruct.Bootstrap(\"bi-shield-check\"))\n    .SetPlaceholder(\"Captcha\")\n    .Render()\n\n@Html.CaptchaBuilder()\n    .SetInput(\"captchaValue\", \"captchaValue\")\n    .SetLabelPresentation(FormLabelPresentation.Floating)\n    .SetImageHeight(40)\n    .SetRefreshVariant(VariantStyle.Success)\n    .Render()\n\n@Html.CaptchaBuilder()\n    .SetInput(\"captchaValue\", \"captchaValue\")\n    .SetLabelPresentation(FormLabelPresentation.Inline)\n    .Render()\n\n@Html.CaptchaBuilder()\n    .SetInput(\"captchaValue\", \"captchaValue\")\n    .SetLabelPresentation(FormLabelPresentation.Group)\n    .SetLabelIcon(IconStruct.Bootstrap(\"bi-shield-check\"))\n    .Render()\n\n[HttpPost]\n[ValidateAntiForgeryToken]\npublic IActionResult Captcha(string captchaValue)\n{\n    if (CaptchaFactory.TestCaptcha(HttpContext, captchaValue))\n    {\n        Page.AddSuccess(WebLocalizer.GetInternal(\"FormBuilder_Captcha_Valid_Title\"), WebLocalizer.GetInternal(\"FormBuilder_Captcha_Valid_Message\"));\n    }\n    else\n    {\n        Page.AddWarning(WebLocalizer.GetInternal(\"FormBuilder_Captcha_Invalid_Title\"), WebLocalizer.GetInternal(\"FormBuilder_Captcha_Invalid_Message\"));\n    }\n\n    return View();\n}", CodeLanguage.CSharp)
+    .SetTitle("Captcha.cshtml")
+    .SetCopyButton()
+    .Render())

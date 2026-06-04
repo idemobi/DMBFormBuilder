@@ -1,0 +1,97 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderBooleanExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Boolean Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("BooleanFieldBuilder documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "BooleanFieldBuilder" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:BooleanFieldBuilder renders checkbox and switch controls with model binding support, hidden fallback values, label positioning and disabled states.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("BooleanFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Boolean field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Checkbox And Switch Styles", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B001Checkbox", "Checkbox", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B002Switch", "Switch", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B003LeftLabel", "Left label", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Label And State Variants", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B004HiddenLabel", "Hidden label", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B005DisabledCheckbox", "Locked checkbox", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B006DisabledSwitch", "Locked switch", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Boolean Constraints", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B007MustBeChecked", "Must be checked", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B008MustBeUnchecked", "Must be unchecked", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Visual Variants", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B009SuccessSwitch", "Success switch", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/BooleanFields/_B010DangerSwitch", "Danger switch", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.CheckboxFieldBuilderFor(m => m.AcceptTerms).Render()\n@Html.SwitchFieldBuilderFor(m => m.EnableNotifications).Render()\n@Html.SwitchFieldBuilderFor(m => m.LeftLabel).LabelOnLeft().Render()\n@Html.CheckboxFieldBuilderFor(m => m.HiddenLabel).HideLabel().Render()\n@Html.CheckboxFieldBuilderFor(m => m.DisabledCheckbox).SetDisabled().Render()\n@Html.SwitchFieldBuilderFor(m => m.DisabledSwitch).SetDisabled().Render()\n@Html.CheckboxFieldBuilderFor(m => m.MustBeChecked).SetMustBeChecked().Render()\n@Html.SwitchFieldBuilderFor(m => m.MustBeUnchecked).SetMustBeUnchecked().Render()\n@Html.SwitchFieldBuilderFor(m => m.SuccessSwitch).SetVariant(VariantStyle.Success).Render()\n@Html.SwitchFieldBuilderFor(m => m.DangerSwitch).SetVariant(VariantStyle.Danger).Render()", CodeLanguage.CSharp)
+    .SetTitle("BooleanFields.cshtml")
+    .SetCopyButton()
+    .Render())

@@ -1,0 +1,83 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderFlagExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Flag Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("FlagFieldBuilder documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "FlagFieldBuilder" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:FlagFieldBuilder renders flags enum values as checkbox groups or multi-select inputs, then keeps a hidden numeric value synchronized for model binding.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("FlagFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Flag field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/FlagFields/_B001CheckboxFlags", "Checkbox flags", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/FlagFields/_B002SelectFlags", "Multi-select flags", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/FlagFields/_B003ManualFlags", "Manual options", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/FlagFields/_B007FloatingFlags", "Floating checkbox flags", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/FlagFields/_B008InlineFlags", "Inline checkbox flags", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/FlagFields/_B009GroupedFlags", "Grouped checkbox flags", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Validation And State", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/FlagFields/_B004RequiredFlags", "Required flags", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/FlagFields/_B005DisabledCheckboxFlags", "Locked checkbox flags", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/FlagFields/_B006DisabledSelectFlags", "Locked multi-select flags", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.FlagCheckboxFieldBuilderFor(m => m.Permissions).Render()\n@Html.FlagSelectFieldBuilderFor(m => m.PermissionsAsSelect).Render()\n@Html.FlagFieldBuilder().SetInput(\"ManualPermissions\", \"ManualPermissions\").SetLabel(\"Permissions\").AddOption(1, \"Read\", true).AddOption(2, \"Write\", false).AddOption(4, \"Execute\", true).Render()\n@Html.FlagCheckboxFieldBuilderFor(m => m.FloatingPermissions).SetLabelPresentation(FormLabelPresentation.Floating).SetLabelIcon(IconStruct.Bootstrap(\"bi-list-check\")).Render()\n@Html.FlagCheckboxFieldBuilderFor(m => m.InlinePermissions).SetLabelPresentation(FormLabelPresentation.Inline).SetLabelIcon(IconStruct.Bootstrap(\"bi-list-check\")).Render()\n@Html.FlagCheckboxFieldBuilderFor(m => m.GroupPermissions).SetLabelPresentation(FormLabelPresentation.Group).SetLabelIcon(IconStruct.Bootstrap(\"bi-list-check\")).Render()\n@Html.FlagCheckboxFieldBuilderFor(m => m.RequiredPermissions).SetRequired().Render()\n@Html.FlagCheckboxFieldBuilderFor(m => m.DisabledPermissions).SetDisabled().Render()\n@Html.FlagSelectFieldBuilderFor(m => m.DisabledPermissionsAsSelect).SetDisabled().Render()", CodeLanguage.CSharp)
+    .SetTitle("FlagFields.cshtml")
+    .SetCopyButton()
+    .Render())

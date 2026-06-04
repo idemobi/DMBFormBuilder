@@ -1,0 +1,11 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderEnumRadioExampleModel
+
+@(Html.EnumRadioFieldBuilder()
+    .SetInput(nameof(Model.ManualVisibility), nameof(Model.ManualVisibility))
+    .SetLabel("Visibility")
+    .SetValue(Model.ManualVisibility)
+    .AddOption(nameof(DMBFormBuilderLabs.Models.FormBuilderSampleVisibility.Public), "Public")
+    .AddOption(nameof(DMBFormBuilderLabs.Models.FormBuilderSampleVisibility.Private), "Private")
+    .AddOption(nameof(DMBFormBuilderLabs.Models.FormBuilderSampleVisibility.Internal), "Internal")
+    .Render())

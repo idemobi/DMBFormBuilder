@@ -1,0 +1,5 @@
+@using DMBFormBuilder
+@using DMBPageBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderFlagExampleModel
+
+@Html.FlagCheckboxFieldBuilderFor(m => m.GroupPermissions).SetLabelPresentation(FormLabelPresentation.Group).SetLabelIcon(IconStruct.Bootstrap("bi-list-check")).Render()

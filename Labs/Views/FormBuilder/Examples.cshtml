@@ -1,0 +1,163 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilderLabs.Models
+@model DMBFormBuilderLabs.Models.FormBuilderCompleteExamplePageModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.BlockBuilder().AddClass("d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3").Begin())
+{
+    @Html.TitleBuilder().SetTitle("Examples", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("FormBuilder documentation", Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "FormBuilder" })).SetIcon(IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AddClass("text-body-secondary mb-4").Begin())
+{
+    @:These examples use the same model and the same complete submission journey. Each page changes the label presentation, posts the form with a captcha, then displays the received model when validation succeeds.
+}
+
+@using (Html.BlockBuilder().AddClass("btn-group flex-wrap mb-4").Begin())
+{
+    @Html.Button(ActionItemFactory.Url("Normal", Url.Action("ExamplesNormal", "FormBuilder")).SetVariant(Model.Kind == FormBuilderCompleteExampleKind.Normal ? VariantStyle.Primary : VariantStyle.Primary).SetOutlined(Model.Kind != FormBuilderCompleteExampleKind.Normal)).Render()
+    @Html.Button(ActionItemFactory.Url("Floating", Url.Action("ExamplesFloating", "FormBuilder")).SetVariant(Model.Kind == FormBuilderCompleteExampleKind.Floating ? VariantStyle.Primary : VariantStyle.Primary).SetOutlined(Model.Kind != FormBuilderCompleteExampleKind.Floating)).Render()
+    @Html.Button(ActionItemFactory.Url("Inline", Url.Action("ExamplesInline", "FormBuilder")).SetVariant(Model.Kind == FormBuilderCompleteExampleKind.Inline ? VariantStyle.Primary : VariantStyle.Primary).SetOutlined(Model.Kind != FormBuilderCompleteExampleKind.Inline)).Render()
+    @Html.Button(ActionItemFactory.Url("Grouped", Url.Action("ExamplesGrouped", "FormBuilder")).SetVariant(Model.Kind == FormBuilderCompleteExampleKind.Grouped ? VariantStyle.Primary : VariantStyle.Primary).SetOutlined(Model.Kind != FormBuilderCompleteExampleKind.Grouped)).Render()
+    @Html.Button(ActionItemFactory.Url("Locked", Url.Action("ExamplesLocked", "FormBuilder")).SetVariant(Model.Kind == FormBuilderCompleteExampleKind.Locked ? VariantStyle.Primary : VariantStyle.Primary).SetOutlined(Model.Kind != FormBuilderCompleteExampleKind.Locked)).Render()
+}
+
+@if (Model.ShowSummary)
+{
+    @Html.TitleBuilder().SetTitle("Received model", TitleLevel.Three).Render()
+    @using (Html.TableBuilder().SetSmall().SetResponsive(TableResponsiveBreakpoint.Always).Begin())
+    {
+        @using (Html.TableBodyBuilder().Begin())
+        {
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:First name 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.FirstName }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Email 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.Email }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Password 
+                }
+                @using (Html.TableCellBuilder().Begin())
+                {
+                    @using (Html.PB_Span().AsMonospace().Begin()) { @(new string('*', Math.Min(Model.Form.Password.Length, 12))) }
+                }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Message 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.Message }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Priority select 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.Priority }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Visibility radio 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.Visibility }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Permissions flags 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.Permissions }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:API token 
+                }
+                @using (Html.TableCellBuilder().Begin())
+                {
+                    @using (Html.PB_Span().AsMonospace().Begin()) { @Model.Form.ApiToken }
+                }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Due date 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.DueDate.ToString("yyyy-MM-dd") }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Due date time 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.DueDateTime.ToString("yyyy-MM-dd HH:mm") }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Reminder time 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.ReminderTime.ToString(@"hh\:mm") }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Color 
+                }
+                @using (Html.TableCellBuilder().Begin())
+                {
+                    @using (Html.PB_Span().AddClass("d-inline-block border rounded-1 align-middle me-2").Begin()) { }
+                    @using (Html.PB_Span().AsMonospace().Begin()) { @Model.Form.Color }
+                }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Completion 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.Completion }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Country 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.Country }
+            }
+            @using (Html.TableRowBuilder().Begin())
+            {
+                @using (Html.TableCellBuilder(isHeader: true).Begin()) {
+                    @:Accept terms 
+                }
+                @using (Html.TableCellBuilder().Begin()) { @Model.Form.AcceptTerms }
+            }
+        }
+    }
+}
+
+@Html.TitleBuilder().SetTitle($"Formulaire {Model.Title}", TitleLevel.Three).Render()
+@await Html.RenderExamplePartialAsync(Model.PartialName, Model.Title, model: Model.Form)
+
+@Html.TitleBuilder().SetTitle("Controller example", TitleLevel.Three).Render()
+@(Html.CodeBlock("[HttpPost]\n[ValidateAntiForgeryToken]\npublic IActionResult ExamplesNormal(FormBuilderCompleteExampleModel form)\n{\n    FormBuilderCompleteExamplePageModel pageModel = PrepareCompleteExamplePage(FormBuilderCompleteExampleKind.Normal, form);\n    bool captchaValid = CaptchaFactory.TestCaptcha(HttpContext, form.CaptchaValue);\n\n    if (!form.AcceptTerms)\n    {\n        ModelState.AddModelError(nameof(FormBuilderCompleteExampleModel.AcceptTerms), WebLocalizer.GetDataAnnotation(\"FormBuilder_Field_BoolMustBeTrue\"));\n    }\n\n    if (!captchaValid)\n    {\n        ModelState.AddModelError(nameof(FormBuilderCompleteExampleModel.CaptchaValue), WebLocalizer.GetDataAnnotation(\"FormBuilder_Captcha_Invalid\"));\n        Page.AddWarning(\n            WebLocalizer.GetInternal(\"FormBuilder_Captcha_Invalid_Title\"),\n            WebLocalizer.GetInternal(\"FormBuilder_Captcha_Invalid_Message\"));\n    }\n\n    if (ModelState.IsValid && captchaValid)\n    {\n        pageModel.ShowSummary = true;\n        Page.AddSuccess(\"Example model valid\", \"The complete example form was submitted successfully.\");\n    }\n    else\n    {\n        Page.AddInvalidModelAlert(ModelState);\n    }\n\n    return View(\"Examples\", pageModel);\n}", CodeLanguage.CSharp)
+    .SetTitle("FormBuilderController.cs")
+    .SetCopyButton()
+    .Render())

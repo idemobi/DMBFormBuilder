@@ -1,0 +1,66 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderEmailFieldExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Email Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("EmailFieldBuilder documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "EmailFieldBuilderExtensions" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:EmailFieldBuilder configures TextFieldBuilder for email inputs with browser semantics, autocomplete, email keyboard hints, model validation and the same label presentations as the standard text fields.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("EmailFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Email field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EmailFields/_B001Normal", "Normal label + field", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EmailFields/_B002Floating", "Floating label", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EmailFields/_B003Inline", "Inline label + field", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EmailFields/_B004Group", "Grouped label + field", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EmailFields/_B005Disabled", "Locked field", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/EmailFields/_B006Hidden", "Hidden label", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.EmailFieldBuilderFor(m => m.Email).Render()\n@Html.EmailFieldBuilderFor(m => m.OptionalEmail).SetLabelPresentation(FormLabelPresentation.Floating).Render()\n@Html.EmailFieldBuilderFor(m => m.InlineEmail).SetLabelPresentation(FormLabelPresentation.Inline).Render()\n@Html.EmailFieldBuilderFor(m => m.GroupEmail).SetLabelPresentation(FormLabelPresentation.Group).SetGroupIcon(\"bi bi-envelope-at\").Render()\n@Html.EmailFieldBuilderFor(m => m.DisabledEmail).SetDisabled().Render()\n@Html.EmailFieldBuilderFor(m => m.HiddenEmail).SetLabelPresentation(FormLabelPresentation.Hidden).Render()", CodeLanguage.CSharp)
+    .SetTitle("EmailFields.cshtml")
+    .SetCopyButton()
+    .Render())

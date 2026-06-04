@@ -1,0 +1,75 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderCountryExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Country Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("CountryFieldBuilderExtensions documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "CountryFieldBuilderExtensions" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:CountryFieldBuilderFor renders the GDF country list through SelectFieldBuilder, with a shortcut button that selects the country detected from the browser request.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("CountryFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Country field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/CountryFields/_B001Country", "Country", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/CountryFields/_B002FloatingCountry", "Floating country", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/CountryFields/_B003InlineCountry", "Inline country", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/CountryFields/_B004GroupCountry", "Grouped country", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/CountryFields/_B005HiddenCountry", "Hidden label", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Validation And State", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/CountryFields/_B006RequiredCountry", "Required country", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/CountryFields/_B007DisabledCountry", "Locked country", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.CountryFieldBuilderFor(m => m.Country).Render()\n@Html.CountryFieldBuilderFor(m => m.FloatingCountry).SetLabelPresentation(FormLabelPresentation.Floating).Render()\n@Html.CountryFieldBuilderFor(m => m.InlineCountry).SetLabelPresentation(FormLabelPresentation.Inline).Render()\n@Html.CountryFieldBuilderFor(m => m.GroupCountry).SetLabelPresentation(FormLabelPresentation.Group).SetGroupIcon(\"bi bi-globe2\").SetQuickSelectVariant(VariantStyle.Success).Render()\n@Html.CountryFieldBuilderFor(m => m.HiddenCountry).SetLabelPresentation(FormLabelPresentation.Hidden).Render()\n@Html.CountryFieldBuilderFor(m => m.RequiredCountry).Render()\n@Html.CountryFieldBuilderFor(m => m.DisabledCountry).SetDisabled().Render()", CodeLanguage.CSharp)
+    .SetTitle("CountryFields.cshtml")
+    .SetCopyButton()
+    .Render())

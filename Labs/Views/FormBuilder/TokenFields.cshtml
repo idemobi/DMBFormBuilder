@@ -1,0 +1,79 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderTokenExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Token Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("TokenFieldBuilder documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "TokenFieldBuilder" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:TokenFieldBuilder renders sensitive text as a protected input with reveal and clipboard actions, while keeping FormBuilder validation behavior.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("TokenFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Token field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TokenFields/_B001Token", "Token", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TokenFields/_B002FloatingToken", "Floating token", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TokenFields/_B003InlineToken", "Inline token", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TokenFields/_B004HiddenToken", "Hidden label", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Validation And State", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TokenFields/_B005RequiredToken", "Required token", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TokenFields/_B006NoCopyToken", "Reveal only", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TokenFields/_B007NoRevealToken", "Copy only", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TokenFields/_B008DisabledToken", "Locked token", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.TokenFieldBuilderFor(m => m.ApiToken).Render()\n@Html.TokenFieldBuilderFor(m => m.FloatingToken).SetLabelPresentation(FormLabelPresentation.Floating).Render()\n@Html.TokenFieldBuilderFor(m => m.InlineToken).SetLabelPresentation(FormLabelPresentation.Inline).Render()\n@Html.TokenFieldBuilderFor(m => m.HiddenToken).SetLabelPresentation(FormLabelPresentation.Hidden).Render()\n@Html.TokenFieldBuilderFor(m => m.RequiredToken).Render()\n@Html.TokenFieldBuilderFor(m => m.NoCopyToken).SetToggle().SetCopy(false).Render()\n@Html.TokenFieldBuilderFor(m => m.NoRevealToken).SetToggle(false).SetCopy().Render()\n@Html.TokenFieldBuilderFor(m => m.ReadOnlyToken).SetDisabled().Render()", CodeLanguage.CSharp)
+    .SetTitle("TokenFields.cshtml")
+    .SetCopyButton()
+    .Render())

@@ -1,0 +1,4 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderSelectExampleModel
+
+@Html.EnumSelectFieldBuilderFor(m => m.FloatingPriority).SetLabelPresentation(FormLabelPresentation.Floating).Render()

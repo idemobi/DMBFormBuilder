@@ -1,0 +1,71 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderColorInputExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Color Input Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("InputSpecialFieldBuilderExtensions documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "InputSpecialFieldBuilderExtensions" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:ColorFieldBuilderFor configures TextFieldBuilder as a browser-native color selector with the same presentation and disabled-state behavior as other fields.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("ColorInputFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Color input field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/ColorInputFields/_B001Color", "Color", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/ColorInputFields/_B002FloatingColor", "Floating color", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/ColorInputFields/_B003InlineColor", "Inline color", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/ColorInputFields/_B004GroupColor", "Grouped color", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/ColorInputFields/_B005HiddenColor", "Hidden label", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("State Variants", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/ColorInputFields/_B006DisabledColor", "Locked color", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.ColorFieldBuilderFor(m => m.Color).Render()\n@Html.ColorFieldBuilderFor(m => m.FloatingColor).SetLabelPresentation(FormLabelPresentation.Floating).Render()\n@Html.ColorFieldBuilderFor(m => m.InlineColor).SetLabelPresentation(FormLabelPresentation.Inline).Render()\n@Html.ColorFieldBuilderFor(m => m.GroupColor).SetLabelPresentation(FormLabelPresentation.Group).SetGroupIcon(\"bi bi-palette\").Render()\n@Html.ColorFieldBuilderFor(m => m.HiddenColor).SetLabelPresentation(FormLabelPresentation.Hidden).Render()\n@Html.ColorFieldBuilderFor(m => m.DisabledColor).SetDisabled().Render()", CodeLanguage.CSharp)
+    .SetTitle("ColorInputFields.cshtml")
+    .SetCopyButton()
+    .Render())

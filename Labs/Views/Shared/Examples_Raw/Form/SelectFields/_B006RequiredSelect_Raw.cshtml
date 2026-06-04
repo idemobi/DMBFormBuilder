@@ -1,0 +1,13 @@
+﻿<div class="dmb-demo-code border rounded-3 overflow-hidden bg-body"><div class="dmb-demo-code-header px-3 py-2 border-bottom bg-body-tertiary d-flex align-items-center"><span class="badge text-bg-secondary font-monospace">C#</span></div><pre class="language-csharp mb-0 border-0 rounded-0"><code class="language-csharp">@@using DMBFormBuilder
+@@model DMBFormBuilderLabs.Models.FormBuilderSelectExampleModel
+
+@@(Html.SelectFieldBuilder()
+    .SetInput(nameof(Model.RequiredPriority), nameof(Model.RequiredPriority))
+    .SetLabel("Priority")
+    .SetValue(Model.RequiredPriority)
+    .SetRequired()
+    .AddOption(string.Empty, "Choose a priority")
+    .AddOption(nameof(DMBFormBuilderLabs.Models.FormBuilderSamplePriority.Low), "Low")
+    .AddOption(nameof(DMBFormBuilderLabs.Models.FormBuilderSamplePriority.Medium), "Medium")
+    .AddOption(nameof(DMBFormBuilderLabs.Models.FormBuilderSamplePriority.High), "High")
+    .Render())</code></pre></div>

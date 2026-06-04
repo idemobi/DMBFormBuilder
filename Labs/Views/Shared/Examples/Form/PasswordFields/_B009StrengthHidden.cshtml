@@ -1,0 +1,4 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderPasswordFieldExampleModel
+
+@Html.PasswordFieldBuilderWithStrengthFor(m => m.StrengthPasswordHidden).SetLabelPresentation(FormLabelPresentation.Hidden).Render()

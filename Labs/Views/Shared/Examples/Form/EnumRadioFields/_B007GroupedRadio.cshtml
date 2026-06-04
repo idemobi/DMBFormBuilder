@@ -1,0 +1,5 @@
+@using DMBFormBuilder
+@using DMBPageBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderEnumRadioExampleModel
+
+@Html.EnumRadioFieldBuilderFor(m => m.GroupVisibility).SetLabelPresentation(FormLabelPresentation.Group).SetLabelIcon(IconStruct.Bootstrap("bi-ui-radios")).Render()

@@ -1,0 +1,79 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderTextFieldExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Text Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("TextFieldBuilder documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "TextFieldBuilder" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:TextFieldBuilder renders standard text inputs with consistent labels, validation feedback, required markers, disabled states and input constraints.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("TextFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Text field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextFields/_B001Normal", "Normal label + field", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextFields/_B002Floating", "Floating label", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextFields/_B003Inline", "Inline label + field", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextFields/_B004Group", "Grouped label + field", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextFields/_B005Disabled", "Locked field", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Input Constraints", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextFields/_B006Unix", "Unix", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextFields/_B007Ascii", "ASCII", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextFields/_B008Numeric", "Numeric", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.TextFieldBuilderFor(m => m.FirstName).Render()\n@Html.TextFieldBuilderFor(m => m.Company).SetLabelPresentation(FormLabelPresentation.Floating).Render()\n@Html.TextFieldBuilderFor(m => m.InlineCode).SetLabelPresentation(FormLabelPresentation.Inline).Render()\n@Html.TextFieldBuilderFor(m => m.GroupCode).SetLabelPresentation(FormLabelPresentation.Group).SetGroupIcon(\"bi bi-hash\").Render()\n@Html.TextFieldBuilderFor(m => m.DisabledValue).SetDisabled().Render()\n@Html.TextFieldBuilderFor(m => m.UnixCode).SetUnixText().Render()\n@Html.TextFieldBuilderFor(m => m.AsciiCode).SetAsciiOnly().Render()\n@Html.TextFieldBuilderFor(m => m.NumericValue).AddBadge(\"0-100\", \"info\").Render()", CodeLanguage.CSharp)
+    .SetTitle("TextFields.cshtml")
+    .SetCopyButton()
+    .Render())

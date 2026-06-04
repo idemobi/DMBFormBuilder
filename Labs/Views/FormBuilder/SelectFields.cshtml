@@ -1,0 +1,75 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderSelectExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Select Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("SelectFieldBuilder documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "SelectFieldBuilder" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:SelectFieldBuilder renders Bootstrap select controls with FormBuilder validation, while EnumSelectFieldBuilderFor maps enum values to localized options.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("SelectFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Select field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SelectFields/_B001Select", "Select", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SelectFields/_B002FloatingSelect", "Floating select", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SelectFields/_B003InlineSelect", "Inline select", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SelectFields/_B004GroupSelect", "Grouped select", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SelectFields/_B005HiddenSelect", "Hidden label", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Validation And State", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SelectFields/_B006RequiredSelect", "Required select", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/SelectFields/_B007DisabledSelect", "Locked select", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.EnumSelectFieldBuilderFor(m => m.Priority).Render()\n@Html.EnumSelectFieldBuilderFor(m => m.FloatingPriority).SetLabelPresentation(FormLabelPresentation.Floating).Render()\n@Html.EnumSelectFieldBuilderFor(m => m.InlinePriority).SetLabelPresentation(FormLabelPresentation.Inline).Render()\n@Html.EnumSelectFieldBuilderFor(m => m.GroupPriority).SetLabelPresentation(FormLabelPresentation.Group).SetGroupIcon(\"bi bi-menu-button-wide\").Render()\n@Html.EnumSelectFieldBuilderFor(m => m.HiddenPriority).SetLabelPresentation(FormLabelPresentation.Hidden).Render()\n@Html.SelectFieldBuilder().SetInput(\"RequiredPriority\", \"RequiredPriority\").SetLabel(\"Priority\").SetValue(Model.RequiredPriority).SetRequired().AddOption(\"\", \"Choose a priority\").AddOption(\"Low\", \"Low\").AddOption(\"Medium\", \"Medium\").AddOption(\"High\", \"High\").Render()\n@Html.EnumSelectFieldBuilderFor(m => m.DisabledPriority).SetDisabled().Render()", CodeLanguage.CSharp)
+    .SetTitle("SelectFields.cshtml")
+    .SetCopyButton()
+    .Render())

@@ -1,0 +1,75 @@
+﻿@using DMBBootstrapBuilder
+@using DMBPageBuilder
+@using DMBComponentBuilder
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderTextAreaExampleModel
+@{
+    Layout = "_Layout";
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Textarea Fields", TitleLevel.One).Render()
+    @Html.Button(ActionItemFactory.Url("TextAreaFieldBuilder documentation", @Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "TextAreaFieldBuilder" }), IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:TextAreaFieldBuilder renders multiline inputs with consistent labels, required markers, validation feedback, row sizing and length constraint badges.
+}
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("TextAreaFields", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Textarea field examples")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TitleBuilder().SetTitle("Presentation Styles And Alerts", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextAreaFields/_B001Normal", "Normal label + field", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextAreaFields/_B002Floating", "Floating label", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextAreaFields/_B003Inline", "Inline label + field", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextAreaFields/_B004Hidden", "Hidden label", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextAreaFields/_B005Disabled", "Locked field", model: Model)
+        }
+    }
+
+    @Html.TitleBuilder().SetTitle("Input Constraints", TitleLevel.Three).Render()
+    @using (Html.RowBuilder().SetGap(Gap.G3).AddClass("mb-4").Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextAreaFields/_B006Length", "Length constraints", model: Model)
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Xl).Begin())
+        {
+            @await Html.RenderExamplePartialAsync("Examples/Form/TextAreaFields/_B007NoHtml", "No HTML", model: Model)
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}
+
+@Html.TitleBuilder().SetTitle("Code Examples", TitleLevel.Three).Render()
+@(Html.CodeBlock("@Html.TextAreaFieldBuilderFor(m => m.Message).SetRows(5).Render()\n@Html.TextAreaFieldBuilderFor(m => m.Notes).SetRows(5).SetLabelPresentation(FormLabelPresentation.Floating).Render()\n@Html.TextAreaFieldBuilderFor(m => m.InlineMessage).SetRows(5).SetLabelPresentation(FormLabelPresentation.Inline).Render()\n@Html.TextAreaFieldBuilderFor(m => m.HiddenNotes).SetRows(5).SetLabelPresentation(FormLabelPresentation.Hidden).Render()\n@Html.TextAreaFieldBuilderFor(m => m.DisabledNotes).SetRows(5).SetDisabled().Render()\n@Html.TextAreaFieldBuilderFor(m => m.ConstrainedMessage).SetRows(4).Render()\n@Html.TextAreaFieldBuilderFor(m => m.NoHtmlMessage).SetRows(4).SetNoHtml().Render()", CodeLanguage.CSharp)
+    .SetTitle("TextAreaFields.cshtml")
+    .SetCopyButton()
+    .Render())

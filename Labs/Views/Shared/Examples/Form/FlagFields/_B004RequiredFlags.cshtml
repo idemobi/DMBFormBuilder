@@ -1,0 +1,4 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderFlagExampleModel
+
+@Html.FlagCheckboxFieldBuilderFor(m => m.RequiredPermissions).SetRequired().Render()

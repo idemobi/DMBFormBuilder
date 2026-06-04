@@ -1,0 +1,54 @@
+@using DMBBootstrapBuilder
+@using DMBFormBuilder
+@using DMBPageBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderCompleteExampleModel
+
+@using (Html.FormBuilder()
+    .SetAction(Url.Action("ExamplesLocked", "FormBuilder"))
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .SetAriaLabel("Complete locked field form")
+    .Begin())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.FirstName)
+    @Html.HiddenFor(m => m.Email)
+    @Html.HiddenFor(m => m.Message)
+    @Html.HiddenFor(m => m.Priority)
+    @Html.HiddenFor(m => m.Visibility)
+    @Html.HiddenFor(m => m.DueDate)
+    @Html.HiddenFor(m => m.DueDateTime)
+    @Html.HiddenFor(m => m.ReminderTime)
+    @Html.HiddenFor(m => m.Color)
+    @Html.HiddenFor(m => m.Completion)
+    @Html.HiddenFor(m => m.Country)
+    @Html.HiddenFor(m => m.AcceptTerms)
+
+    @using (Html.RowBuilder().SetGap(Gap.G3).Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Lg).Begin())
+        {
+            @Html.TextFieldBuilderFor(m => m.FirstName).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-person")).Render()
+            @Html.EmailFieldBuilderFor(m => m.Email).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-envelope-at")).Render()
+            @Html.PasswordFieldBuilderFor(m => m.Password).SetDisabled().SetToggle().SetLabelIcon(IconStruct.Bootstrap("bi-key")).Render()
+            @Html.TokenFieldBuilderFor(m => m.ApiToken).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-fingerprint")).Render()
+            @Html.EnumSelectFieldBuilderFor(m => m.Priority).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-flag")).Render()
+            @Html.EnumRadioFieldBuilderFor(m => m.Visibility).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-ui-radios")).Render()
+            @Html.FlagCheckboxFieldBuilderFor(m => m.Permissions).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-list-check")).Render()
+            @Html.ColorFieldBuilderFor(m => m.Color).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-palette")).Render()
+            @Html.SliderFieldBuilderFor(m => m.Completion).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-sliders")).Render()
+        }
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col6, ResponsiveBreakpoint.Lg).Begin())
+        {
+            @Html.DateFieldBuilderFor(m => m.DueDate).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-calendar-event")).Render()
+            @Html.DateTimeFieldBuilderFor(m => m.DueDateTime).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-calendar2-week")).Render()
+            @Html.TimeFieldBuilderFor(m => m.ReminderTime).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-clock")).Render()
+            @Html.CountryFieldBuilderFor(m => m.Country).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-globe2")).Render()
+            @Html.TextAreaFieldBuilderFor(m => m.Message).SetRows(4).SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-chat-left-text")).Render()
+            @Html.CheckboxFieldBuilderFor(m => m.AcceptTerms).SetMustBeChecked().SetDisabled().SetLabelIcon(IconStruct.Bootstrap("bi-check2-square")).Render()
+            @Html.CaptchaBuilderFor(m => m.CaptchaValue).SetLabelIcon(IconStruct.Bootstrap("bi-shield-check")).SetPlaceholder("Captcha").Render()
+        }
+    }
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+}

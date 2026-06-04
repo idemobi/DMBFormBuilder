@@ -1,0 +1,213 @@
+@using DMBBootstrapBuilder
+@using DMBComponentBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@* ── Hero ── *@
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Architecture — FormBuilder", TitleLevel.One).Render()
+            @using (Html.PB_P().AsLead().Begin())
+            {
+                @:Forms expressed through PageBuilder and BootstrapBuilder conventions.
+            }
+        }
+    }
+}
+
+@using (Html.ContainerBuilder().SetPadding(SpacingSide.Y, SpacingSize.Five).Begin())
+{
+    @using (Html.RowBuilder().Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @* ── 1. Layer Position ── *@
+            @Html.TitleBuilder().SetTitle("1. Layer Position", TitleLevel.Two).AsSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @using (Html.PB_Span().AsBold().Begin())
+                {
+                    @:DMBFormBuilder
+                }
+                @: sits above PageBuilder and BootstrapBuilder. PageBuilder owns HTML composition. BootstrapBuilder provides the design vocabulary. FormBuilder adds business rules specific to forms: validation strategy, label presentation and submission attributes.
+            }
+            @using (Html.RowBuilder().AsPillarGrid().Begin())
+            {
+                @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Md).Begin())
+                {
+                    @using (Html.BlockBuilder().AsPillarCard().Begin())
+                    {
+                        @using (Html.BlockBuilder().AsTopMargin().Begin())
+                        {
+                            @using (Html.PB_Span().AddClass("bi bi-arrow-repeat text-primary me-1").Begin()) { }
+                            @Html.TitleBuilder().SetTitle("PageBuilder", TitleLevel.Five).AsCompact().Render()
+                        }
+                        @using (Html.PB_P().AsSmallMuted().Begin())
+                        {
+                            @:HTML tags, attributes, classes, data attributes and rendering lifecycle.
+                        }
+                        @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                        {
+                            @:HtmlBuilderBase
+                        }
+                    }
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Md).Begin())
+                {
+                    @using (Html.BlockBuilder().AsPillarCard().Begin())
+                    {
+                        @using (Html.BlockBuilder().AsTopMargin().Begin())
+                        {
+                            @using (Html.PB_Span().AddClass("bi bi-bootstrap text-success me-1").Begin()) { }
+                            @Html.TitleBuilder().SetTitle("BootstrapBuilder", TitleLevel.Five).AsCompact().Render()
+                        }
+                        @using (Html.PB_P().AsSmallMuted().Begin())
+                        {
+                            @:Bootstrap naming, variants, spacing and reusable visual conventions.
+                        }
+                        @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                        {
+                            @:VariantStyle
+                        }
+                    }
+                }
+                @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col4, ResponsiveBreakpoint.Md).Begin())
+                {
+                    @using (Html.BlockBuilder().AsPillarCard().Begin())
+                    {
+                        @using (Html.BlockBuilder().AsTopMargin().Begin())
+                        {
+                            @using (Html.PB_Span().AddClass("bi bi-input-cursor-text text-warning me-1").Begin()) { }
+                            @Html.TitleBuilder().SetTitle("FormBuilder", TitleLevel.Five).AsCompact().Render()
+                        }
+                        @using (Html.PB_P().AsSmallMuted().Begin())
+                        {
+                            @:Form shell, validation strategy, submission attributes and future editor/captcha composition.
+                        }
+                        @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                        {
+                            @:Html.FormBuilder()
+                        }
+                    }
+                }
+            }
+
+            @* ── 2. Current Components ── *@
+            @Html.TitleBuilder().SetTitle("2. Current Components", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:FormBuilder is organised around three areas that cover the full form composition lifecycle. The package is designed to keep form shell concerns in
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:FormBuilder
+                }
+                @:, while each field builder carries its own presentation and Bootstrap-compatible validation display.
+            }
+            @(Html.CodeBlock(@"// Form shell with validation and label presentation
+@using (Html.FormBuilder()
+    .SetAction(""/Account/Login"")
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .Begin())
+{
+    @Html.TextFieldBuilderFor(m => m.Email)
+        .SetLabelPresentation(FormLabelPresentation.Floating)
+        .Render()
+}", CodeLanguage.CSharp)
+                .SetTitle("Form shell pattern")
+                .SetCopyButton())
+
+            @* ── 3. Extension Points ── *@
+            @Html.TitleBuilder().SetTitle("3. Extension Points", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:The field API is designed to grow — editors, captcha widgets and custom validation surfaces can be added without changing the form shell.
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:FormLabelPresentation
+                }
+                @: controls view-side label style per field.
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:FormValidationMode
+                }
+                @: declares validation intent at the form level.
+            }
+            @(Html.CodeBlock(@"// FormBuilder key types
+FormBuilder          // Fluent form shell
+FormLabelPresentation // Floating vs. normal labels
+FormValidationMode   // Client, Server, or ClientAndServer", CodeLanguage.CSharp)
+                .SetTitle("Key FormBuilder types")
+                .SetCopyButton())
+
+            @* ── Tech Stack ── *@
+            @using (Html.BlockBuilder().AsInfoCallout().Begin())
+            {
+                @using (Html.FlexBlockBuilder().Begin())
+                {
+                    @using (Html.BlockBuilder().AsCalloutIcon().Begin())
+                    {
+                        @using (Html.PB_Span().AddClass("bi bi-gear-fill fs-2 text-info").Begin()) { }
+                    }
+                    @using (Html.BlockBuilder().Begin())
+                    {
+                        @Html.TitleBuilder().SetTitle("Tech Stack", TitleLevel.Five).AsAlertHeading().Render()
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsBold().Begin())
+                            {
+                                @:Backend:
+                            }
+                            @: .NET 10 / ASP.NET Core
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsBold().Begin())
+                            {
+                                @:UI:
+                            }
+                            @: Bootstrap 5.3 form classes
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsBold().Begin())
+                            {
+                                @:Architecture:
+                            }
+                            @: Fluent API / Builder Pattern
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsBold().Begin())
+                            {
+                                @:Integration:
+                            }
+                            @: PageBuilder + BootstrapBuilder
+                        }
+                    }
+                }
+            }
+
+            @* ── Next Step ── *@
+            @using (Html.BlockBuilder().AsSidebarNote().Begin())
+            {
+                @using (Html.BlockBuilder().AsTextCenter().Begin())
+                {
+                    @Html.TitleBuilder().SetTitle("Explore Further", TitleLevel.Four).Render()
+                    @using (Html.PB_P().AsSmallMuted().Begin())
+                    {
+                        @:Go back to the introduction to review the full FormBuilder overview.
+                    }
+                    @Html.Button(ActionItemFactory.AspRoute("FormBuilder", "Introduction").SetTitle("Introduction").SetIcon(IconStruct.Bootstrap("bi-house")).SetVariant(VariantStyle.Primary)).Render()
+                }
+            }
+        }
+    }
+}

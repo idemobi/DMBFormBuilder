@@ -1,0 +1,4 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderSelectExampleModel
+
+@Html.EnumSelectFieldBuilderFor(m => m.GroupPriority).SetLabelPresentation(FormLabelPresentation.Group).SetGroupIcon("bi bi-menu-button-wide").Render()

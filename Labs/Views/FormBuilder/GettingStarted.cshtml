@@ -1,0 +1,158 @@
+@using DMBBootstrapBuilder
+@using DMBComponentBuilder
+@using DMBEffectBuilder
+@using DMBPageBuilder
+@{
+    Layout = "_Layout";
+}
+
+@* ── Hero ── *@
+@using (Html.SectionBuilder().SetHeight(125, UnitSize.px).BootstrapBackgroundEffect(VariantStyle.Normal).Begin())
+{
+    @using (Html.FlexBlockBuilder().SetAlignItemsCenter().SetJustifyContentCenter().Begin())
+    {
+        @using (Html.BlockBuilder().AsTextCenter().Begin())
+        {
+            @Html.TitleBuilder().SetTitle("Getting Started — FormBuilder", TitleLevel.One).Render()
+            @using (Html.PB_P().AsLead().Begin())
+            {
+                @:Start with the form shell, then migrate editors and captcha into dedicated components.
+            }
+        }
+    }
+}
+
+@using (Html.ContainerBuilder().SetPadding(SpacingSide.Y, SpacingSize.Five).Begin())
+{
+    @using (Html.RowBuilder().Begin())
+    {
+        @using (Html.ColBuilder().SetCol(ColSize.Col12).Begin())
+        {
+            @* ── Step 1 ── *@
+            @Html.TitleBuilder().SetTitle("1. Reference the Package", TitleLevel.Two).AsSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:Add
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:DMBFormBuilder
+                }
+                @: to the project that hosts your form views. It sits above PageBuilder and BootstrapBuilder in the DMB stack.
+            }
+            @(Html.CodeBlock(@"<PackageReference Include=""DMBFormBuilder"" Version=""0.9.0"" />", CodeLanguage.Xml)
+                .SetTitle("Project file (.csproj)")
+                .SetCopyButton())
+
+            @* ── Step 2 ── *@
+            @Html.TitleBuilder().SetTitle("2. Configure Services", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:Register FormBuilder services after PageBuilder and BootstrapBuilder so the form shell has access to the full rendering pipeline.
+            }
+            @(Html.CodeBlock(@"using DMBFormBuilder;
+
+FormBuilderConfiguration.LoadCommonConfig(builder);", CodeLanguage.CSharp)
+                .SetTitle("Program.cs")
+                .SetCopyButton())
+
+            @* ── Step 3 ── *@
+            @Html.TitleBuilder().SetTitle("3. Add the Namespace", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:Add the FormBuilder namespace to
+                @using (Html.PB_Span().AsMonospace().Begin())
+                {
+                    @:_ViewImports.cshtml
+                }
+                @: to make form builders available in all your views.
+            }
+            @(Html.CodeBlock("@using DMBFormBuilder", CodeLanguage.CSharp)
+                .SetTitle("_ViewImports.cshtml")
+                .SetCopyButton())
+
+            @* ── Step 4 ── *@
+            @Html.TitleBuilder().SetTitle("4. Create a Form", TitleLevel.Two).AsSubSectionHeading().Render()
+            @using (Html.PB_P().Begin())
+            {
+                @:Compose a form shell with floating labels. Each field builder carries its own label presentation and Bootstrap-compatible validation display.
+            }
+            @(Html.CodeBlock(@"@using (Html.FormBuilder()
+    .SetAction(""/Account/Login"")
+    .SetValidationMode(FormValidationMode.ClientAndServer)
+    .DisableBrowserValidation()
+    .Begin())
+{
+    @Html.TextFieldBuilderFor(m => m.Email)
+        .SetLabelPresentation(FormLabelPresentation.Floating)
+        .Render()
+}", CodeLanguage.CSharp)
+                .SetTitle("Form with floating label")
+                .SetCopyButton())
+
+            @* ── Key Methods callout ── *@
+            @using (Html.BlockBuilder().AsInfoCallout().Begin())
+            {
+                @using (Html.FlexBlockBuilder().Begin())
+                {
+                    @using (Html.BlockBuilder().AsCalloutIcon().Begin())
+                    {
+                        @using (Html.PB_Span().AddClass("bi bi-collection-fill fs-2 text-info").Begin()) { }
+                    }
+                    @using (Html.BlockBuilder().Begin())
+                    {
+                        @Html.TitleBuilder().SetTitle("Key Methods", TitleLevel.Five).AsAlertHeading().Render()
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:Html.FormBuilder()
+                            }
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:.SetFloatingLabel()
+                            }
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:.SetValidationMode(...)
+                            }
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:.DisableBrowserValidation()
+                            }
+                        }
+                        @using (Html.BlockBuilder().AsSidebarRow().Begin())
+                        {
+                            @using (Html.PB_Span().AsMonospaceSmall().Begin())
+                            {
+                                @:.TextFieldBuilderFor(...)
+                            }
+                        }
+                    }
+                }
+            }
+
+            @* ── Next Step ── *@
+            @using (Html.BlockBuilder().AsSidebarNote().Begin())
+            {
+                @using (Html.BlockBuilder().AsTextCenter().Begin())
+                {
+                    @Html.TitleBuilder().SetTitle("Understand how FormBuilder layers on top of PageBuilder and BootstrapBuilder?", TitleLevel.Four).Render()
+                    @using (Html.PB_P().AsSmallMuted().Begin())
+                    {
+                        @:Check out the architecture guide to understand how FormBuilder is structured and integrates with the rendering lifecycle.
+                    }
+                    @Html.Button(ActionItemFactory.AspRoute("FormBuilder", "Architecture").SetTitle("Architecture").SetIcon(IconStruct.Bootstrap("bi-diagram-3")).SetVariant(VariantStyle.Primary)).Render()
+                }
+            }
+        }
+    }
+}

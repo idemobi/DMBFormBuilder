@@ -1,0 +1,4 @@
+@using DMBFormBuilder
+@model DMBFormBuilderLabs.Models.FormBuilderTextAreaExampleModel
+
+@Html.TextAreaFieldBuilderFor(m => m.Notes).SetRows(5).SetLabelPresentation(FormLabelPresentation.Floating).Render()
