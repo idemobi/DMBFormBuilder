@@ -7,9 +7,6 @@
 
 #region
 
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Encodings.Web;
 using DMBBootstrapBuilder;
 using DMBFormBuilder.Resources;
@@ -116,6 +113,17 @@ namespace DMBFormBuilder
             return new BooleanFieldBuilder(_textWriter, _htmlHelper);
         }
 
+        private void EnsureValidationAssets()
+        {
+            if (!_expectedValue.HasValue)
+            {
+                return;
+            }
+
+            PageInformation page = PageRegistry.GetOrCreatePageInformation(_htmlHelper.ViewContext.HttpContext);
+            page.SetScriptFile(ScriptPath);
+        }
+
         /// <summary>
         ///     Hides the label visually while keeping it available for assistive technologies.
         /// </summary>
@@ -160,6 +168,12 @@ namespace DMBFormBuilder
         {
             _labelOnLeft = value;
             return this;
+        }
+
+        /// <inheritdoc />
+        protected void OnBeginRendering()
+        {
+            EnsureValidationAssets();
         }
 
         /// <summary>
@@ -291,23 +305,6 @@ namespace DMBFormBuilder
         {
             _variant = variant;
             return this;
-        }
-
-        private void EnsureValidationAssets()
-        {
-            if (!_expectedValue.HasValue)
-            {
-                return;
-            }
-
-            PageInformation page = PageRegistry.GetOrCreatePageInformation(_htmlHelper.ViewContext.HttpContext);
-            page.SetScriptFile(ScriptPath);
-        }
-
-        /// <inheritdoc />
-        protected void OnBeginRendering()
-        {
-            EnsureValidationAssets();
         }
 
         private void WriteInput(TextWriter writer, HtmlEncoder encoder)

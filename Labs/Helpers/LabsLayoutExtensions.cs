@@ -185,8 +185,8 @@ namespace DMBFormBuilderLabs
             => builder.AddClass("py-5 overflow-hidden");
 
         /// <summary>
-        /// Full-height flex column with centred content — for StagedReveal center zones and similar overlays.
-        /// Uses gap-3 when <paramref name="largeGap"/> is true, gap-2 otherwise.
+        ///     Full-height flex column with centred content — for StagedReveal center zones and similar overlays.
+        ///     Uses gap-3 when <paramref name="largeGap" /> is true, gap-2 otherwise.
         /// </summary>
         public static BlockBuilder AsFlexCenterColumn(this BlockBuilder builder, bool largeGap = false)
             => builder

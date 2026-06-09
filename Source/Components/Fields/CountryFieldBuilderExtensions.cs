@@ -7,11 +7,8 @@
 
 #region
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using DMBFormBuilder.Resources;

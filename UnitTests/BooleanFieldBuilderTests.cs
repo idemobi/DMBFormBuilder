@@ -7,7 +7,6 @@
 
 #region
 
-using System.IO;
 using DMBFormBuilder;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NUnit.Framework;
@@ -23,13 +22,28 @@ public sealed class BooleanFieldBuilderTests
     {
         #region Instance fields and properties
 
-        [BoolMustBeTrue]
-        public bool AcceptTerms { get; set; }
+        [BoolMustBeTrue] public bool AcceptTerms { get; set; }
 
-        [BoolMustBeFalse]
-        public bool RefuseTracking { get; set; }
+        [BoolMustBeFalse] public bool RefuseTracking { get; set; }
 
         #endregion
+    }
+
+    [Test]
+    public void CheckboxFieldBuilderForAppliesBooleanValidationAttributes()
+    {
+        IHtmlHelper<BooleanAnnotationModel> html = TestHtmlHelperFactory.Create(new BooleanAnnotationModel());
+
+        string acceptMarkup = html.CheckboxFieldBuilderFor(model => model.AcceptTerms).ToHtmlString();
+        string refuseMarkup = html.CheckboxFieldBuilderFor(model => model.RefuseTracking).ToHtmlString();
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(acceptMarkup, Does.Contain("data-val-bool-expected=\"true\""));
+            Assert.That(acceptMarkup, Does.Contain("data-val-bool=\"The AcceptTerms field must be true.\""));
+            Assert.That(refuseMarkup, Does.Contain("data-val-bool-expected=\"false\""));
+            Assert.That(refuseMarkup, Does.Contain("data-val-bool=\"The RefuseTracking field must be false.\""));
+        });
     }
 
     [Test]
@@ -61,23 +75,6 @@ public sealed class BooleanFieldBuilderTests
             Assert.That(markup, Does.Contain("data-formbuilder-ignore-validation=\"true\""));
             Assert.That(markup, Does.Contain("data-test=\"boolean\""));
             Assert.That(markup, Does.Not.Contain("IgnoredValue"));
-        });
-    }
-
-    [Test]
-    public void CheckboxFieldBuilderForAppliesBooleanValidationAttributes()
-    {
-        IHtmlHelper<BooleanAnnotationModel> html = TestHtmlHelperFactory.Create(new BooleanAnnotationModel());
-
-        string acceptMarkup = html.CheckboxFieldBuilderFor(model => model.AcceptTerms).ToHtmlString();
-        string refuseMarkup = html.CheckboxFieldBuilderFor(model => model.RefuseTracking).ToHtmlString();
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(acceptMarkup, Does.Contain("data-val-bool-expected=\"true\""));
-            Assert.That(acceptMarkup, Does.Contain("data-val-bool=\"The AcceptTerms field must be true.\""));
-            Assert.That(refuseMarkup, Does.Contain("data-val-bool-expected=\"false\""));
-            Assert.That(refuseMarkup, Does.Contain("data-val-bool=\"The RefuseTracking field must be false.\""));
         });
     }
 }

@@ -7,7 +7,6 @@
 
 #region
 
-using System.IO;
 using System.Text.Encodings.Web;
 
 #endregion

@@ -7,7 +7,6 @@
 
 #region
 
-using System.IO;
 using DMBFormBuilder;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NUnit.Framework;
