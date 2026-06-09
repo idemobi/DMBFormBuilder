@@ -135,7 +135,7 @@ public static class DMBFormBuilderLabsNavigationAgent
     /// <returns>The configured <see cref="SideBarSectionComponent" />.</returns>
     public static SideBarSectionComponent CreateSidebarSection(string? currentController, string? currentAction)
     {
-        return new SideBarSectionComponent("FormBuilder")
+        return new SideBarSectionComponent("DMBFormBuilder")
             .Add(
                 ActionItemFactory.Group("General", IconStruct.Bootstrap("bi-info-circle"))
                     .AddItems(
