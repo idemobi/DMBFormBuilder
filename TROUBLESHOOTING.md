@@ -32,6 +32,16 @@ Check:
 - whether browser validation was disabled,
 - whether server-side model validation is configured in the consuming application.
 
+For `EmailFieldBuilderFor(...)`, localized `EmailAddressAttribute.ErrorMessage`
+values that contain `{0}` are formatted with the resolved field label before being
+written to `data-val-email`.
+
+For `PasswordFieldBuilderFor(...)`, localized validation messages from
+`RequiredAttribute`, `MinLengthAttribute`, `MaxLengthAttribute`,
+`StringLengthAttribute`, `RegularExpressionAttribute`, and `CompareAttribute` are
+formatted with the resolved field label before being written to the client
+validation attributes.
+
 ## Label or accessibility behavior is wrong
 
 Check:

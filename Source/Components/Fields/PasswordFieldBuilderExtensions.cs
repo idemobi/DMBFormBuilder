@@ -64,41 +64,41 @@ namespace DMBFormBuilder
                 RequiredAttribute? required = propertyInfo.GetCustomAttribute<RequiredAttribute>();
                 if (required != null)
                 {
-                    builder.SetRequired(true, ResolveRequiredMessage(required));
+                    builder.SetRequired(true, ResolveRequiredMessage(required, label));
                 }
 
                 MaxLengthAttribute? maxLength = propertyInfo.GetCustomAttribute<MaxLengthAttribute>();
                 if (maxLength != null)
                 {
-                    builder.SetMaxLength(maxLength.Length, ResolveMessage(maxLength.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_MaxLength)));
+                    builder.SetMaxLength(maxLength.Length, ResolveMessage(maxLength.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_MaxLength), label, maxLength.Length));
                 }
 
                 MinLengthAttribute? minLength = propertyInfo.GetCustomAttribute<MinLengthAttribute>();
                 if (minLength != null)
                 {
-                    builder.SetMinLength(minLength.Length, ResolveMessage(minLength.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_MinLength)));
+                    builder.SetMinLength(minLength.Length, ResolveMessage(minLength.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_MinLength), label, minLength.Length));
                 }
 
                 StringLengthAttribute? stringLength = propertyInfo.GetCustomAttribute<StringLengthAttribute>();
                 if (stringLength != null)
                 {
-                    builder.SetMaxLength(stringLength.MaximumLength, ResolveMessage(stringLength.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_MaxLength)));
+                    builder.SetMaxLength(stringLength.MaximumLength, ResolveMessage(stringLength.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_MaxLength), label, stringLength.MaximumLength));
                     if (stringLength.MinimumLength > 0)
                     {
-                        builder.SetMinLength(stringLength.MinimumLength, ResolveMessage(stringLength.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_MinLength)));
+                        builder.SetMinLength(stringLength.MinimumLength, ResolveMessage(stringLength.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_MinLength), label, stringLength.MinimumLength));
                     }
                 }
 
                 RegularExpressionAttribute? regex = propertyInfo.GetCustomAttribute<RegularExpressionAttribute>();
                 if (regex != null)
                 {
-                    builder.SetPattern(regex.Pattern, ResolveMessage(regex.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_PasswordInvalid)));
+                    builder.SetPattern(regex.Pattern, ResolveMessage(regex.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_PasswordInvalid), label));
                 }
 
                 CompareAttribute? compare = propertyInfo.GetCustomAttribute<CompareAttribute>();
                 if (compare != null)
                 {
-                    builder.SetCompareTo(compare.OtherProperty, ResolveMessage(compare.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_PasswordCompare)));
+                    builder.SetCompareTo(compare.OtherProperty, ResolveMessage(compare.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_PasswordCompare), label, ResolveCompareLabel<TModel>(compare)));
                 }
             }
 
@@ -161,14 +161,34 @@ namespace DMBFormBuilder
             return CreatePasswordFieldBuilderFor(html, expression, true);
         }
 
-        private static string ResolveMessage(string? key, string fallbackKey)
+        private static string ResolveCompareLabel<TModel>(CompareAttribute compare)
         {
-            return WebLocalizer.GetDataAnnotation(string.IsNullOrWhiteSpace(key) ? fallbackKey : key);
+            PropertyInfo? propertyInfo = typeof(TModel).GetProperty(compare.OtherProperty);
+            DisplayAttribute? display = propertyInfo?.GetCustomAttribute<DisplayAttribute>();
+            if (display != null)
+            {
+                return WebLocalizer.GetDataAnnotation(display.Name ?? compare.OtherProperty);
+            }
+
+            return compare.OtherProperty;
         }
 
-        private static string ResolveRequiredMessage(RequiredAttribute required)
+        private static string ResolveMessage(string? key, string fallbackKey, params object[] args)
         {
-            return ResolveMessage(required.ErrorMessage, nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Required));
+            string resolvedKey = string.IsNullOrWhiteSpace(key) ? fallbackKey : key;
+            return args.Length == 0
+                ? WebLocalizer.GetDataAnnotation(resolvedKey)
+                : WebLocalizer.GetDataAnnotation(resolvedKey, args);
+        }
+
+        private static string ResolveRequiredMessage(RequiredAttribute required, string label)
+        {
+            if (!string.IsNullOrWhiteSpace(required.ErrorMessage))
+            {
+                return WebLocalizer.GetDataAnnotation(required.ErrorMessage, label);
+            }
+
+            return WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Required));
         }
 
         #endregion

@@ -79,11 +79,19 @@ namespace DMBFormBuilder
                 return null;
             }
 
-            PropertyInfo? propertyInfo = typeof(TModel).GetProperty(memberExpression.Member.Name);
+            string propertyName = memberExpression.Member.Name;
+            PropertyInfo? propertyInfo = typeof(TModel).GetProperty(propertyName);
             EmailAddressAttribute? emailAddress = propertyInfo?.GetCustomAttribute<EmailAddressAttribute>();
             if (!string.IsNullOrWhiteSpace(emailAddress?.ErrorMessage))
             {
-                return WebLocalizer.GetDataAnnotation(emailAddress.ErrorMessage);
+                string label = propertyName;
+                DisplayAttribute? display = propertyInfo?.GetCustomAttribute<DisplayAttribute>();
+                if (display != null)
+                {
+                    label = WebLocalizer.GetDataAnnotation(display.Name ?? propertyName);
+                }
+
+                return WebLocalizer.GetDataAnnotation(emailAddress.ErrorMessage, label);
             }
 
             return null;
