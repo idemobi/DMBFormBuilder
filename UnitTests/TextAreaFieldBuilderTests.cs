@@ -21,36 +21,6 @@ namespace DMBFormBuilderUnitTest;
 [TestFixture]
 public sealed class TextAreaFieldBuilderTests
 {
-    [Test]
-    public void SetNoHtmlUsesTranslatedBadgeText()
-    {
-        ICombinedStringLocalizer initialLocalizer = WebLocalizer.DataAnnotationLocalizer;
-        CombinedStringLocalizer testLocalizer = new();
-        testLocalizer.InjectResource("FormBuilderTextArea", new DictionaryStringLocalizer(new Dictionary<string, string>
-        {
-            [nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_NoHtmlInvalid)] = "No HTML not accepted.",
-            [nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Badge_NoHtml)] = "No HTML"
-        }));
-
-        WebLocalizer.DataAnnotationLocalizer = testLocalizer;
-
-        try
-        {
-            IHtmlHelper html = TestHtmlHelperFactory.Create();
-            TextAreaFieldBuilder builder = new TextAreaFieldBuilder(new StringWriter(), html)
-                .SetInput("Message", "Message")
-                .SetNoHtml();
-
-            string markup = builder.ToHtmlString();
-
-            Assert.That(markup, Does.Contain(">No HTML<"));
-        }
-        finally
-        {
-            WebLocalizer.DataAnnotationLocalizer = initialLocalizer;
-        }
-    }
-
     private sealed class DictionaryStringLocalizer : IStringLocalizer
     {
         #region Instance fields and properties
@@ -99,5 +69,35 @@ public sealed class TextAreaFieldBuilderTests
         public LocalizedString this[string name, params object[] arguments] => this[name];
 
         #endregion
+    }
+
+    [Test]
+    public void SetNoHtmlUsesTranslatedBadgeText()
+    {
+        ICombinedStringLocalizer initialLocalizer = WebLocalizer.DataAnnotationLocalizer;
+        CombinedStringLocalizer testLocalizer = new();
+        testLocalizer.InjectResource("FormBuilderTextArea", new DictionaryStringLocalizer(new Dictionary<string, string>
+        {
+            [nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_NoHtmlInvalid)] = "No HTML not accepted.",
+            [nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Badge_NoHtml)] = "No HTML"
+        }));
+
+        WebLocalizer.DataAnnotationLocalizer = testLocalizer;
+
+        try
+        {
+            IHtmlHelper html = TestHtmlHelperFactory.Create();
+            TextAreaFieldBuilder builder = new TextAreaFieldBuilder(new StringWriter(), html)
+                .SetInput("Message", "Message")
+                .SetNoHtml();
+
+            string markup = builder.ToHtmlString();
+
+            Assert.That(markup, Does.Contain(">No HTML<"));
+        }
+        finally
+        {
+            WebLocalizer.DataAnnotationLocalizer = initialLocalizer;
+        }
     }
 }
