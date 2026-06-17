@@ -91,7 +91,10 @@ namespace DMBFormBuilder
                     label = WebLocalizer.GetDataAnnotation(display.Name ?? propertyName);
                 }
 
-                return WebLocalizer.GetDataAnnotation(emailAddress.ErrorMessage, label);
+                string localizedMessage = WebLocalizer.GetDataAnnotation(emailAddress.ErrorMessage, label);
+                return localizedMessage.Contains("{0}", StringComparison.Ordinal)
+                    ? emailAddress.FormatErrorMessage(label)
+                    : localizedMessage;
             }
 
             return null;

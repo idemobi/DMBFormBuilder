@@ -8,6 +8,7 @@
 #region
 
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using DMBFormBuilder.Resources;
@@ -173,19 +174,38 @@ namespace DMBFormBuilder
             return compare.OtherProperty;
         }
 
+        private static string FormatUnresolvedPlaceholders(string message, params object[] args)
+        {
+            if (args.Length == 0 || message.Contains('{', StringComparison.Ordinal) == false)
+            {
+                return message;
+            }
+
+            try
+            {
+                return string.Format(CultureInfo.CurrentCulture, message, args);
+            }
+            catch (FormatException)
+            {
+                return message;
+            }
+        }
+
         private static string ResolveMessage(string? key, string fallbackKey, params object[] args)
         {
             string resolvedKey = string.IsNullOrWhiteSpace(key) ? fallbackKey : key;
-            return args.Length == 0
+            string localizedMessage = args.Length == 0
                 ? WebLocalizer.GetDataAnnotation(resolvedKey)
                 : WebLocalizer.GetDataAnnotation(resolvedKey, args);
+            return FormatUnresolvedPlaceholders(localizedMessage, args);
         }
 
         private static string ResolveRequiredMessage(RequiredAttribute required, string label)
         {
             if (!string.IsNullOrWhiteSpace(required.ErrorMessage))
             {
-                return WebLocalizer.GetDataAnnotation(required.ErrorMessage, label);
+                string localizedMessage = WebLocalizer.GetDataAnnotation(required.ErrorMessage, label);
+                return FormatUnresolvedPlaceholders(localizedMessage, label);
             }
 
             return WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Required));
