@@ -71,4 +71,5 @@ Documentation pages, examples, tutorials, and diagrams are published through `la
 - Keep public APIs backward compatible unless explicitly requested.
 - Keep rendered form markup, validation attributes, accessibility attributes, and Razor helper behavior deterministic.
 - Document security-sensitive behavior such as password fields, token values, generated JavaScript, captcha input, and user-provided attributes.
+- `TokenFieldBuilder` must register `FormBuilder.css` and `FormBuilder.js` when rendered because its copy and visibility buttons are wired by the shared FormBuilder client script.
 - Do not run `dotnet build`, `dotnet test`, `dotnet restore`, or `dotnet format` unless explicitly requested.

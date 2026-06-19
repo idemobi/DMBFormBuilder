@@ -170,12 +170,6 @@ namespace DMBFormBuilder
             return this;
         }
 
-        /// <inheritdoc />
-        protected void OnBeginRendering()
-        {
-            EnsureValidationAssets();
-        }
-
         /// <summary>
         ///     Sets the optional description rendered as an information popover next to the field label.
         /// </summary>

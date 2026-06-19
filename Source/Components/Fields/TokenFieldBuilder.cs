@@ -25,6 +25,13 @@ namespace DMBFormBuilder
         HtmlBuilderBase<TokenFieldBuilder>,
         ICanUseCustomClasses
     {
+        #region Constants
+
+        private const string ScriptPath = "/js/formbuilder/FormBuilder.js";
+        private const string StylesheetPath = "/css/formbuilder/FormBuilder.css";
+
+        #endregion
+
         #region Static methods
 
         private static bool IsReservedInputAttribute(string key)
@@ -96,6 +103,16 @@ namespace DMBFormBuilder
         protected override TokenFieldBuilder CreateInstance()
         {
             return new TokenFieldBuilder(_textWriter, _htmlHelper);
+        }
+
+        /// <summary>
+        ///     Registers FormBuilder CSS and JavaScript assets required by token actions.
+        /// </summary>
+        private void EnsureValidationAssets()
+        {
+            PageInformation page = PageRegistry.GetOrCreatePageInformation(_htmlHelper.ViewContext.HttpContext);
+            page.SetStylesheet(StylesheetPath);
+            page.SetScriptFile(ScriptPath);
         }
 
         /// <summary>
@@ -428,6 +445,8 @@ namespace DMBFormBuilder
         /// </summary>
         protected override void WriteToCore(TextWriter writer, HtmlEncoder encoder)
         {
+            
+            EnsureValidationAssets();
             if (string.IsNullOrWhiteSpace(_requiredMessage))
             {
                 _requiredMessage = WebLocalizer.GetDataAnnotation(nameof(DMBFormBuilderDataAnnotationLocalization.FormBuilder_Field_Required));
