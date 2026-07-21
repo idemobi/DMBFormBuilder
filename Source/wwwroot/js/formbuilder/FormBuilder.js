@@ -1,4 +1,7 @@
 (function () {
+    const formInitialStates = new WeakMap();
+    const initializedSubmitForms = new WeakSet();
+
     function findFieldByName(form, name) {
         if (!form || !name) {
             return null;
@@ -139,6 +142,89 @@
         return Array.prototype.slice.call(form.querySelectorAll(".dmb-form-field input, .dmb-form-field textarea, .dmb-form-field select"));
     }
 
+    function isFieldChangeCandidate(input) {
+        return input
+            && !input.disabled
+            && input.name !== "__RequestVerificationToken"
+            && input.type !== "button"
+            && input.type !== "submit"
+            && input.type !== "reset"
+            && !input.getAttribute("data-formbuilder-ignore-change")
+            && !input.closest("fieldset[disabled]");
+    }
+
+    function getFormChangeFields(form) {
+        if (!form) {
+            return [];
+        }
+
+        return Array.prototype.slice.call(form.elements).filter(function (element) {
+            return element && /^(INPUT|TEXTAREA|SELECT)$/i.test(element.tagName || "");
+        });
+    }
+
+    function getFieldChangeValue(input) {
+        if (!input) {
+            return "";
+        }
+
+        if (input.type === "checkbox" || input.type === "radio") {
+            return {
+                checked: input.checked,
+                value: input.value || ""
+            };
+        }
+
+        if (input.tagName === "SELECT" && input.multiple) {
+            return Array.prototype.slice.call(input.selectedOptions).map(function (option) {
+                return option.value;
+            });
+        }
+
+        if (input.type === "file") {
+            return Array.prototype.slice.call(input.files || []).map(function (file) {
+                return {
+                    name: file.name,
+                    size: file.size,
+                    lastModified: file.lastModified
+                };
+            });
+        }
+
+        return input.value || "";
+    }
+
+    function getFormChangeState(form) {
+        return JSON.stringify(getFormChangeFields(form)
+            .filter(isFieldChangeCandidate)
+            .map(function (field, index) {
+                return {
+                    index: index,
+                    name: field.name || "",
+                    id: field.id || "",
+                    type: field.type || field.tagName || "",
+                    value: getFieldChangeValue(field)
+                };
+            }));
+    }
+
+    function ensureInitialFormState(form) {
+        if (!form || formInitialStates.has(form)) {
+            return;
+        }
+
+        formInitialStates.set(form, getFormChangeState(form));
+    }
+
+    function isFormChanged(form) {
+        if (!form) {
+            return false;
+        }
+
+        ensureInitialFormState(form);
+        return formInitialStates.get(form) !== getFormChangeState(form);
+    }
+
     function isFormCurrentlyValid(form) {
         return getFormFields(form).every(function (field) {
             return getFieldValidationState(field).isValid;
@@ -149,28 +235,70 @@
         return form && form.getAttribute("data-submit-when-valid") === "true";
     }
 
+    function isSubmitChangeLockEnabled(form) {
+        return form && form.getAttribute("data-submit-when-changed") === "true";
+    }
+
     function updateSubmitButtons(form) {
-        if (!isSubmitLockEnabled(form)) {
+        const submitWhenValid = isSubmitLockEnabled(form);
+        const submitWhenChanged = isSubmitChangeLockEnabled(form);
+        if (!submitWhenValid && !submitWhenChanged) {
             return;
         }
 
-        const isValid = isFormCurrentlyValid(form);
-        const buttons = form.querySelectorAll("button[type='submit'], button:not([type]), input[type='submit']");
+        const isValid = !submitWhenValid || isFormCurrentlyValid(form);
+        const isChanged = !submitWhenChanged || isFormChanged(form);
+        const canSubmit = isValid && isChanged;
+        const buttons = form.querySelectorAll("[data-formbuilder-submit-lock='true'], button[type='submit'], button:not([type]), input[type='submit']");
+        const resetButtons = submitWhenChanged
+            ? form.querySelectorAll("[data-formbuilder-reset='true'], [data-formbuilder-reset-lock='true']")
+            : [];
 
         buttons.forEach(function (button) {
             if (button.hasAttribute("formnovalidate") || button.getAttribute("data-formbuilder-submit-lock-ignore") === "true") {
                 return;
             }
 
-            button.disabled = !isValid;
-            button.classList.toggle("disabled", !isValid);
-            button.setAttribute("aria-disabled", isValid ? "false" : "true");
+            button.disabled = !canSubmit;
+            button.classList.toggle("disabled", !canSubmit);
+            button.setAttribute("aria-disabled", canSubmit ? "false" : "true");
         });
+
+        resetButtons.forEach(function (button) {
+            button.disabled = !isChanged;
+            button.classList.toggle("disabled", !isChanged);
+            button.setAttribute("aria-disabled", isChanged ? "false" : "true");
+        });
+    }
+
+    function initializeSubmitForm(form) {
+        if (!form || (!isSubmitLockEnabled(form) && !isSubmitChangeLockEnabled(form))) {
+            return;
+        }
+
+        ensureInitialFormState(form);
+
+        if (!initializedSubmitForms.has(form)) {
+            form.addEventListener("input", function () {
+                updateSubmitButtons(form);
+            });
+            form.addEventListener("change", function () {
+                updateSubmitButtons(form);
+            });
+            form.addEventListener("reset", function () {
+                window.setTimeout(function () {
+                    updateSubmitButtons(form);
+                }, 0);
+            });
+            initializedSubmitForms.add(form);
+        }
+
+        updateSubmitButtons(form);
     }
 
     function refreshForm(form) {
         initializeDescriptionPopovers(form);
-        updateSubmitButtons(form);
+        initializeSubmitForm(form);
     }
 
     function initializeDescriptionPopovers(root) {
@@ -394,7 +522,12 @@
     });
 
     document.addEventListener("input", function (event) {
-        const input = event.target.closest(".dmb-form-field input, .dmb-form-field textarea, .dmb-form-field select");
+        const input = event.target && event.target.closest
+            ? event.target.closest(".dmb-form-field input, .dmb-form-field textarea, .dmb-form-field select")
+            : null;
+        const changedForm = event.target && event.target.closest
+            ? event.target.closest("form.dmb-form-builder[data-submit-when-changed='true']")
+            : null;
 
         if (input) {
             cleanInputValue(input);
@@ -410,14 +543,25 @@
             }
         }
 
-        const flagControl = event.target.closest("[data-dmb-flag-for]");
+        if (changedForm) {
+            updateSubmitButtons(changedForm);
+        }
+
+        const flagControl = event.target && event.target.closest
+            ? event.target.closest("[data-dmb-flag-for]")
+            : null;
         if (flagControl) {
             updateFlagField(flagControl.getAttribute("data-dmb-flag-for"));
         }
     });
 
     document.addEventListener("change", function (event) {
-        const input = event.target.closest(".dmb-form-field input, .dmb-form-field textarea, .dmb-form-field select");
+        const input = event.target && event.target.closest
+            ? event.target.closest(".dmb-form-field input, .dmb-form-field textarea, .dmb-form-field select")
+            : null;
+        const changedForm = event.target && event.target.closest
+            ? event.target.closest("form.dmb-form-builder[data-submit-when-changed='true']")
+            : null;
 
         if (input) {
             syncSliderCompanion(input);
@@ -425,7 +569,13 @@
             updateSubmitButtons(input.form);
         }
 
-        const flagControl = event.target.closest("[data-dmb-flag-for]");
+        if (changedForm) {
+            updateSubmitButtons(changedForm);
+        }
+
+        const flagControl = event.target && event.target.closest
+            ? event.target.closest("[data-dmb-flag-for]")
+            : null;
         if (flagControl) {
             updateFlagField(flagControl.getAttribute("data-dmb-flag-for"));
         }
@@ -456,6 +606,17 @@
         updateSubmitButtons(form);
     }, true);
 
+    document.addEventListener("reset", function (event) {
+        const form = event.target;
+        if (!form || !form.matches(".dmb-form-builder")) {
+            return;
+        }
+
+        window.setTimeout(function () {
+            updateSubmitButtons(form);
+        }, 0);
+    }, true);
+
     document.addEventListener("dmb-formbuilder-refresh", function (event) {
         const form = event.target && event.target.matches && event.target.matches("form")
             ? event.target
@@ -468,7 +629,7 @@
         }
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
+    function initializePage() {
         initializeDescriptionPopovers(document);
         document.querySelectorAll("[data-dmb-password-input]").forEach(updatePasswordStrength);
         document.querySelectorAll("[data-dmb-flag-hidden]").forEach(function (hidden) {
@@ -478,11 +639,25 @@
             const input = document.getElementById(badge.getAttribute("data-dmb-counter-for"));
             updateFieldCounters(input);
         });
-        document.querySelectorAll("form.dmb-form-builder[data-submit-when-valid='true']").forEach(updateSubmitButtons);
-    });
+        document.querySelectorAll("form.dmb-form-builder[data-submit-when-valid='true'], form.dmb-form-builder[data-submit-when-changed='true']").forEach(initializeSubmitForm);
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initializePage);
+    } else {
+        initializePage();
+    }
 
     window.DMBFormBuilder = window.DMBFormBuilder || {};
     window.DMBFormBuilder.refreshForm = refreshForm;
     window.DMBFormBuilder.initializeDescriptionPopovers = initializeDescriptionPopovers;
     window.DMBFormBuilder.updateSubmitButtons = updateSubmitButtons;
+    window.DMBFormBuilder.resetInitialState = function (form) {
+        if (!form) {
+            return;
+        }
+
+        formInitialStates.set(form, getFormChangeState(form));
+        updateSubmitButtons(form);
+    };
 })();

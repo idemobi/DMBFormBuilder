@@ -114,6 +114,18 @@ namespace DMBFormBuilder
         }
 
         /// <summary>
+        ///     Toggles the client-side marker used to enable submit buttons only when at least one form field has
+        ///     changed from its initial rendered value.
+        /// </summary>
+        /// <param name="value"><see langword="true" /> to set the marker; <see langword="false" /> to remove it.</param>
+        /// <returns>The current <see cref="FormBuilder" /> instance for fluent chaining.</returns>
+        public FormBuilder EnableSubmitWhenChanged(bool value = true)
+        {
+            SetData("submit-when-changed", value ? "true" : null);
+            return this;
+        }
+
+        /// <summary>
         ///     Writes the required-field legend, when enabled, and closes the rendered form element.
         /// </summary>
         public override void End()

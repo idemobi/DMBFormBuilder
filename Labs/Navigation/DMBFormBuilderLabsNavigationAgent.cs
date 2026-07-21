@@ -69,7 +69,8 @@ public static class DMBFormBuilderLabsNavigationAgent
                     ),
                 ActionItemFactory.Group("Usage", IconStruct.Bootstrap("bi-terminal"))
                     .AddItems(
-                        CreateAction("CSHtml", "Using in Razor (cshtml)", "bi-file-earmark-code")
+                        CreateAction("CSHtml", "Using in Razor (cshtml)", "bi-file-earmark-code"),
+                        CreateAction("SubmitLocks", "Submit locks", "bi-save")
                     ),
                 ActionItemFactory.Group("Fields", IconStruct.Bootstrap("bi-ui-checks-grid"))
                     .AddItems(
@@ -145,7 +146,8 @@ public static class DMBFormBuilderLabsNavigationAgent
                     ),
                 ActionItemFactory.Group("Usage", IconStruct.Bootstrap("bi-terminal"))
                     .AddItems(
-                        CreateAction("CSHtml", "Using in Razor (cshtml)", "bi-file-earmark-code", currentController, currentAction)
+                        CreateAction("CSHtml", "Using in Razor (cshtml)", "bi-file-earmark-code", currentController, currentAction),
+                        CreateAction("SubmitLocks", "Submit locks", "bi-save", currentController, currentAction)
                     ),
                 ActionItemFactory.Group("Fields", IconStruct.Bootstrap("bi-ui-checks-grid"))
                     .AddItems(
@@ -189,6 +191,7 @@ public static class DMBFormBuilderLabsNavigationAgent
             "GettingStarted" => IconStruct.Bootstrap("bi-play-circle"),
             "Architecture" => IconStruct.Bootstrap("bi-diagram-3"),
             "CSHtml" => IconStruct.Bootstrap("bi-file-earmark-code"),
+            "SubmitLocks" => IconStruct.Bootstrap("bi-save"),
             "Examples" or "ExamplesNormal" or "ExamplesFloating" or "ExamplesInline" or "ExamplesGrouped" or "ExamplesLocked" => IconStruct.Bootstrap("bi-code-square"),
             "TextFields" => IconStruct.Bootstrap("bi-input-cursor"),
             "EmailFields" => IconStruct.Bootstrap("bi-envelope-at"),
@@ -222,6 +225,7 @@ public static class DMBFormBuilderLabsNavigationAgent
             "GettingStarted" => "Getting Started",
             "Architecture" => "Architecture",
             "CSHtml" => "Using in Razor (cshtml)",
+            "SubmitLocks" => "Submit locks",
             "Examples" => "Examples",
             "ExamplesNormal" => "Normal label + field",
             "ExamplesFloating" => "Floating label",

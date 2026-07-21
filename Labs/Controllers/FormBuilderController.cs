@@ -520,6 +520,44 @@ namespace DMBFormBuilderLabs.Controllers
             return RedirectToAction(nameof(DateInputFields));
         }
 
+        /// <summary>
+        ///     Displays the submit button lock demonstration page.
+        /// </summary>
+        /// <returns>The submit lock view with a populated example model.</returns>
+        [HttpGet]
+        public IActionResult SubmitLocks()
+        {
+            SetTitle("FormBuilder - Submit locks");
+            SetDescription("FormBuilder submit button locking behaviors");
+            SetKeywords("FormBuilder", "DMBFormBuilder", "Submit", "Changed", "Forms");
+            return View(FormBuilderSubmitLockExampleModel.CreateDemo());
+        }
+
+        /// <summary>
+        ///     Processes the submit button lock demonstration form.
+        /// </summary>
+        /// <param name="model">The posted submit lock example model.</param>
+        /// <returns>The submit lock view with validation feedback.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SubmitLocks(FormBuilderSubmitLockExampleModel model)
+        {
+            SetTitle("FormBuilder - Submit locks");
+            SetDescription("FormBuilder submit button locking behaviors");
+            SetKeywords("FormBuilder", "DMBFormBuilder", "Submit", "Changed", "Forms");
+
+            if (ModelState.IsValid)
+            {
+                Page.AddSuccess("Submit lock model valid", "The sample form was submitted after a detected change.");
+            }
+            else
+            {
+                Page.AddInvalidModelAlert(ModelState);
+            }
+
+            return View(model);
+        }
+
         [HttpGet]
         public IActionResult TextAreaFields()
         {

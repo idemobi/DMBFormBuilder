@@ -48,6 +48,21 @@ This project is not:
 - Razor helper extension methods create builders directly from `IHtmlHelper` or model expressions.
 - `FormBuilderConfiguration` provides default label presentation and validation behavior.
 - Captcha rendering depends on `DMBServerWebHelper`.
+- `FormActionItemFactory` provides the standard form command actions:
+  - `Cancel(controller, action, title, area?, icon?)` creates a route action for leaving a form without submitting it.
+  - `Reset(title?, icon?)` creates a native reset button for restoring rendered field values.
+  - `Sent(title?, icon?, lockUntilChanged?)` creates a native submit button.
+- `FormBuilder.EnableSubmitWhenChanged()` tracks rendered form values. Use `FormActionItemFactory.Sent(..., lockUntilChanged: true)` when the submit button must remain inactive until the user changes the form.
+- `FormActionItemFactory.Reset()` participates in the same change tracking: reset is inactive while unchanged, active after a change, and inactive again after reset.
+- Form action buttons must remain inside the `<form>` output. Avoid `FooterBuilder` or panel/card footer builders inside a form when they render the footer outside the form element.
+
+## Builder-first UI policy
+
+- FormBuilder Labs pages and examples must use the DMB builder stack for layout, titles, actions, tables, forms, fields,
+  alerts, separators, and code samples whenever a builder exists.
+- Do not use raw `<input>`, `<button>`, Bootstrap utility markup, or local CSS in examples just because it is faster.
+- Raw markup is acceptable only when the example is explicitly about unsupported browser/model-binding behavior. Keep it
+  minimal, and prefer adding or extending a builder when the behavior is reusable.
 
 ## Change strategy
 

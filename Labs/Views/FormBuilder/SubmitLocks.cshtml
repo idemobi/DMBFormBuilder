@@ -1,0 +1,132 @@
+﻿@model DMBFormBuilderLabs.Models.FormBuilderSubmitLockExampleModel
+@{
+    Layout = "_Layout";
+
+    IActionItem cancelAction = FormActionItemFactory.Cancel("FormBuilder", "Examples", "Cancel");
+    IActionItem resetAction = FormActionItemFactory.Reset();
+    IActionItem sentAction = FormActionItemFactory.Sent("Save preferences", IconStruct.Bootstrap("bi-save"), lockUntilChanged: true);
+
+    SelectFieldBuilder languageField = Html.SelectFieldBuilder()
+        .SetInput(nameof(Model.Language), nameof(Model.Language))
+        .SetValue(Model.Language)
+        .SetLabel("Language")
+        .SetLabelIcon(IconStruct.Bootstrap("bi-translate"))
+        .AddOption("fr", "French")
+        .AddOption("en", "English");
+}
+
+@using (Html.FlexBlockBuilder().SetJustifyContentBetween().SetAlignItemsCenter().WithWrap().WithGap(Old_Gap.Gap2).SetMargin(SpacingSide.Bottom, SpacingSize.Three).Begin())
+{
+    @Html.TitleBuilder().SetTitle("Submit Locks", TitleLevel.One).SetIcon(IconStruct.Bootstrap("bi-save")).Render()
+    @Html.Button(ActionItemFactory.Url("FormBuilder documentation", Url.Action("Show", "Documentation", new { groupName = "NuGet", packageId = "DMBFormBuilder", version = "0.9", namespaceName = "DMBFormBuilder", objectName = "FormBuilder" })).SetIcon(IconStruct.Bootstrap("bi-journal-code")).SetVariant(VariantStyle.Primary).SetOutlined()).Render()
+}
+
+@using (Html.PB_P().AsMuted().AddClass("mb-4").Begin())
+{
+    @:EnableSubmitWhenChanged keeps submit buttons inactive until a rendered value changes from the initial form state. The example uses FormBuilder fields and DMB-rendered action buttons.
+}
+
+@using (Html.RowBuilder().SetGap(Gap.G3).Begin())
+{
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col7, ResponsiveBreakpoint.Xl).Begin())
+    {
+        @using (Html.FormBuilder()
+                    .SetAction(Url.Action("SubmitLocks", "FormBuilder"))
+                    .SetValidationMode(FormValidationMode.ClientAndServer)
+                    .DisableBrowserValidation()
+                    .SetAriaLabel("Submit lock example")
+                    .ShowRequiredLegend(false)
+                    .EnableSubmitWhenChanged()
+                    .Begin())
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.TextFieldBuilderFor(m => m.Title).SetLabelIcon(IconStruct.Bootstrap("bi-card-text")).Render()
+            @languageField.Render()
+
+            @Html.TitleBuilder().SetTitle("BooleanFieldBuilder channels", TitleLevel.Three).SetIcon(IconStruct.Bootstrap("bi-ui-checks")).Render()
+
+            @using (Html.TableBuilder().SetResponsiveAlways().SetHover().Begin())
+            {
+                @using (Html.TableSectionBuilder(TableSectionKind.Header).Begin())
+                {
+                    @using (Html.TableRowBuilder().Begin())
+                    {
+                        Html.TableCellBuilder(true).Render("Channel");
+                        Html.TableCellBuilder(true).SetTextAlign(TextAlign.Center).Render("Enabled");
+                    }
+                }
+
+                @using (Html.TableSectionBuilder(TableSectionKind.Body).Begin())
+                {
+                    @using (Html.TableRowBuilder().Begin())
+                    {
+                        Html.TableCellBuilder().Render("Notification center");
+                        @using (Html.TableCellBuilder().SetTextAlign(TextAlign.Center).Begin())
+                        {
+                            @Html.CheckboxFieldBuilderFor(m => m.NotificationCenterEnabled).HideLabel().SetValue(Model.NotificationCenterEnabled).AddClass("d-inline-block").AddClass("mb-0").Render()
+                        }
+                    }
+                    @using (Html.TableRowBuilder().Begin())
+                    {
+                        Html.TableCellBuilder().Render("Email");
+                        @using (Html.TableCellBuilder().SetTextAlign(TextAlign.Center).Begin())
+                        {
+                            @Html.CheckboxFieldBuilderFor(m => m.EmailEnabled).HideLabel().SetValue(Model.EmailEnabled).AddClass("d-inline-block").AddClass("mb-0").Render()
+                        }
+                    }
+                    @using (Html.TableRowBuilder().Begin())
+                    {
+                        Html.TableCellBuilder().Render("Browser push");
+                        @using (Html.TableCellBuilder().SetTextAlign(TextAlign.Center).Begin())
+                        {
+                            @Html.CheckboxFieldBuilderFor(m => m.BrowserPushEnabled).HideLabel().SetValue(Model.BrowserPushEnabled).AddClass("d-inline-block").AddClass("mb-0").Render()
+                        }
+                    }
+                }
+            }
+
+            @using (Html.BlockBuilder().AddClass("d-flex justify-content-between flex-wrap mt-3").Begin())
+            {
+                @Html.Button(cancelAction)
+                @using (Html.BlockBuilder().AddClass("d-flex flex-wrap gap-2").Begin())
+                {
+                    @Html.Button(resetAction)
+                    @Html.Button(sentAction)
+                }
+            }
+        }
+    }
+
+    @using (Html.ColBuilder().SetCol(ColSize.Col12).SetCol(ColSize.Col5, ResponsiveBreakpoint.Xl).Begin())
+    {
+        @Html.TitleBuilder().SetTitle("Expected states", TitleLevel.Three).SetIcon(IconStruct.Bootstrap("bi-check2-square")).Render()
+        @using (Html.TableBuilder().SetSmall().SetResponsiveAlways().Begin())
+        {
+            @using (Html.TableBodyBuilder().Begin())
+            {
+                @using (Html.TableRowBuilder().Begin())
+                {
+                    Html.TableCellBuilder(true).Render("Initial");
+                    Html.TableCellBuilder().Render("Save button disabled");
+                }
+                @using (Html.TableRowBuilder().Begin())
+                {
+                    Html.TableCellBuilder(true).Render("Changed");
+                    Html.TableCellBuilder().Render("Save button enabled");
+                }
+                @using (Html.TableRowBuilder().Begin())
+                {
+                    Html.TableCellBuilder(true).Render("Reset");
+                    Html.TableCellBuilder().Render("Save button disabled again");
+                }
+            }
+        }
+    }
+}
+
+@Html.TitleBuilder().SetTitle("Code Example", TitleLevel.Three).Render()
+@(Html.CodeBlock("@{\n    IActionItem cancelAction = FormActionItemFactory.Cancel(\"FormBuilder\", \"Examples\", \"Cancel\");\n    IActionItem resetAction = FormActionItemFactory.Reset();\n    IActionItem sentAction = FormActionItemFactory.Sent(\"Save preferences\", IconStruct.Bootstrap(\"bi-save\"), lockUntilChanged: true);\n}\n\n@using (Html.FormBuilder()\n    .SetAction(Url.Action(\"SubmitLocks\", \"FormBuilder\"))\n    .EnableSubmitWhenChanged()\n    .Begin())\n{\n    @Html.TextFieldBuilderFor(m => m.Title).Render()\n    @Html.CheckboxFieldBuilderFor(m => m.EmailEnabled).HideLabel().Render()\n    @Html.Button(cancelAction)\n    @Html.Button(resetAction)\n    @Html.Button(sentAction)\n}", CodeLanguage.CSharp)
+    .SetTitle("SubmitLocks.cshtml")
+    .SetCopyButton()
+    .Render())

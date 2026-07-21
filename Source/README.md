@@ -46,6 +46,7 @@ This package does not define low-level HTML primitives, Bootstrap layout primiti
 - `FlagFieldBuilder`
 - `TokenFieldBuilder`
 - `CaptchaBuilder`
+- `FormActionItemFactory`
 - `FormBuilderConfiguration`
 - Razor helper extension classes in `Components/Fields`, `Components/Form`, and `Components/Captcha`
 
@@ -72,4 +73,9 @@ Documentation pages, examples, tutorials, and diagrams are published through `la
 - Keep rendered form markup, validation attributes, accessibility attributes, and Razor helper behavior deterministic.
 - Document security-sensitive behavior such as password fields, token values, generated JavaScript, captcha input, and user-provided attributes.
 - `TokenFieldBuilder` must register `FormBuilder.css` and `FormBuilder.js` when rendered because its copy and visibility buttons are wired by the shared FormBuilder client script.
+- `FormBuilder.EnableSubmitWhenValid()` locks submit buttons until fields are valid.
+- `FormBuilder.EnableSubmitWhenChanged()` locks submit buttons until at least one rendered form field differs from its initial value. It can be combined with `EnableSubmitWhenValid()`. Submit buttons rendered through `@Html.Button(...)` may use `data-formbuilder-submit-lock="true"` to make the lock target explicit.
+- `FormActionItemFactory.Cancel(controller, action, title)` creates a Bootstrap route action item for leaving a form without submitting it.
+- `FormActionItemFactory.Reset()` creates a native `type="reset"` Bootstrap action item for use inside `FormBuilder` forms. Reset actions restore the rendered field values and the shared client script refreshes submit locks afterward.
+- `FormActionItemFactory.Sent()` creates a native `type="submit"` Bootstrap action item. Use `lockUntilChanged: true` with `EnableSubmitWhenChanged()` when the submit button should stay inactive until the form changes.
 - Do not run `dotnet build`, `dotnet test`, `dotnet restore`, or `dotnet format` unless explicitly requested.

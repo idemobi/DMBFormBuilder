@@ -29,6 +29,7 @@ public sealed class FormBuilderTests
             .SetMultipart()
             .DisableBrowserValidation()
             .EnableSubmitWhenValid()
+            .EnableSubmitWhenChanged()
             .SetAriaLabel("Account form");
 
         string attributes = builder.BuildAttributes();
@@ -46,6 +47,7 @@ public sealed class FormBuilderTests
             Assert.That(attributes, Does.Contain("data-form-builder=\"true\""));
             Assert.That(attributes, Does.Contain("data-validation-mode=\"client\""));
             Assert.That(attributes, Does.Contain("data-submit-when-valid=\"true\""));
+            Assert.That(attributes, Does.Contain("data-submit-when-changed=\"true\""));
         });
     }
 }

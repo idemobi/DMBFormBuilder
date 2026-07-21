@@ -22,6 +22,22 @@ When copying this file to another PageBuilder ecosystem project, update this sec
 - Provide reusable, fluent form and field builders for the PageBuilder ecosystem.
 - Keep Razor helper discovery, model binding names, generated HTML, validation attributes, accessibility attributes, Bootstrap classes, and field behavior stable for consumers.
 - Avoid mixing low-level HTML primitives, Bootstrap layout primitives, or ASP.NET middleware responsibilities into this package.
+- Labs, examples, and package views must demonstrate the DMB builder stack first: `DMBPageBuilder`,
+  `DMBBootstrapBuilder`, `DMBComponentBuilder`, and `DMBFormBuilder`. Raw HTML is allowed only for behavior that no
+  builder currently supports; if the pattern is reusable, add or extend a builder.
+
+## Form Actions
+
+- Use `FormActionItemFactory` for standard form command buttons instead of hand-building JavaScript action items:
+  - `FormActionItemFactory.Cancel(controller, action, title, area?, icon?)` for leaving the form through a controller/action route without posting.
+  - `FormActionItemFactory.Reset(title?, icon?)` for a native `type="reset"` button that restores the form's rendered values.
+  - `FormActionItemFactory.Sent(title?, icon?, lockUntilChanged?)` for a native `type="submit"` button.
+- When a form uses `FormBuilder.EnableSubmitWhenChanged()`, use `FormActionItemFactory.Sent(..., lockUntilChanged: true)`
+  for the submit action so the button stays inactive until a rendered field changes.
+- Reset actions marked by `FormActionItemFactory.Reset()` are controlled by the shared `FormBuilder.js` change tracking:
+  they are inactive while the form is unchanged, active after a change, and inactive again after reset.
+- Keep these actions inside the `<form>` rendered by `FormBuilder`. Do not place form action buttons in `FooterBuilder`
+  or another panel/card footer that renders outside the form.
 
 ## Key constraints
 
@@ -42,6 +58,7 @@ When copying this file to another PageBuilder ecosystem project, update this sec
 
 ## Local rule sources
 
+- Use [AI_CONTEXT.md](AI_CONTEXT.md) for the project summary, safe-change strategy, and builder-first UI policy.
 - Use [DOCUMENTATION_RULES.md](DOCUMENTATION_RULES.md) for XML HeaderDoc, README/reference documentation, and DocumentationBuilder-ready documentation.
 - Use [EXAMPLES_AND_TUTORIALS_RULES.md](EXAMPLES_AND_TUTORIALS_RULES.md) only when creating or updating example, demo, information, instruction, concept, or tutorial pages.
 - Use [DRAWIO_DIAGRAM_RULES.md](DRAWIO_DIAGRAM_RULES.md) when adding editable Draw.io diagrams to information, instruction, concept, architecture, form lifecycle, validation, example, or tutorial pages.
